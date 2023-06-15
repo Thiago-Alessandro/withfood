@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { warn } from "console";
+
 
 interface Cliente{
     nome:string,
