@@ -1,0 +1,40 @@
+<h1>cadastro</h1>
+
+<p style="font-size: 48px; color: orangered;">Criar conta</p>
+
+<div id="corpoDoFormulario">
+    <div id="cabecalhoDoFormulario" style="display: flex;">
+        <div id="CabecalhoEmpresa">
+            <p >
+                Empresa
+            </p>
+        </div>
+        <div id="CabecalhoCliente" style="width: 50%;height: 57px; display: flex; justify-content: center;">
+            <p>
+                Cliente
+            </p>
+        </div>
+    </div>
+    <div id="corpoDoFormularioCliente" NgIf="CadastrandoCliente">
+
+        <input type="text" placeholder="Nome" [(ngModel)]="nomeCliente">
+        <input type="text" placeholder="Email" [(ngModel)]="emailCliente">
+
+        <br>
+
+        <input type="text" placeholder="telefone" [(ngModel)]="telefoneCliente">
+        <input type="text" placeholder="Cpf" [(ngModel)]="cpfCliente">
+
+        <br>
+
+        <input type="text" placeholder="Senha" [(ngModel)]="senhaCliente">
+        <input type="text" placeholder="Confirmar Senha" [(ngModel)]="confirmacaoSenhaCliente">
+
+        <br>
+
+        <input type="text" placeholder="Endereco" [(ngModel)]="EnderecoCliente">
+
+    </div>
+
+    <button id="botaoCadastrarCliente" (click)="cadastrarCliente()" style="background-color: orangered;color: white">Confirmar</button>
+</div>

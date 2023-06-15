@@ -1,1 +1,56 @@
 /* You can add global styles to this file, and also import other style files */
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+body{
+    width: 100%;
+}
+.main{
+    display: flex;
+    flex-direction: row;
+}
+.leftMain{
+    border: solid 1px black;
+    display: flex;
+width:50%;
+flex-direction: column;
+align-items: end;
+padding: 40px;
+
+
+}
+.rightMain{
+    border: solid 1px black;
+    display: flex;
+width:50%;
+flex-direction: column;
+align-items: left;
+padding: 40px;
+}
+.imageLeft{
+    width: 50%;
+    margin-bottom: 10px;
+}
+.imageRight{
+    width: 50%;
+    margin-top: 10px;
+}
+.textLeft{
+    width: 50%
+}
+.textRight{
+    width: 50%
+}
+.header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+a{
+    display: flex;
+    justify-content: space-around;
+}
