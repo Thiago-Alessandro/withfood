@@ -3,38 +3,70 @@
 <p style="font-size: 48px; color: orangered;">Criar conta</p>
 
 <div id="corpoDoFormulario">
+
     <div id="cabecalhoDoFormulario" style="display: flex;">
-        <div id="CabecalhoEmpresa">
+        <div (click)="cadastrandoCliente=false" id="CabecalhoEmpresa">
             <p >
                 Empresa
             </p>
         </div>
-        <div id="CabecalhoCliente" style="width: 50%;height: 57px; display: flex; justify-content: center;">
+        <div (click)="cadastrandoCliente=true" id="CabecalhoCliente" style="width: 50%;height: 57px; display: flex; justify-content: center;">
             <p>
                 Cliente
             </p>
         </div>
     </div>
-    <div id="corpoDoFormularioCliente" NgIf="CadastrandoCliente">
 
-        <input type="text" placeholder="Nome" [(ngModel)]="nomeCliente">
-        <input type="text" placeholder="Email" [(ngModel)]="emailCliente">
+    <div id="corpoDoFormularioCliente" *ngIf="cadastrandoCliente">
+        <div id="grid">
+            <input type="text" placeholder="Nome" [(ngModel)]="nome" style="">
+            <input type="text" placeholder="Email" [(ngModel)]="email">
+
+            
+
+            <input type="text" placeholder="telefone" [(ngModel)]="telefone">
+            <input type="text" placeholder="Cpf" [(ngModel)]="cpf">
+
+          
+
+            <input type="text" placeholder="Senha" [(ngModel)]="senha">
+            <input type="text" placeholder="Confirmar Senha" [(ngModel)]="confirmacaoSenha">
+            
+            </div>
+            <input type="text" placeholder="Endereco" [(ngModel)]="Endereco" style="width: 80%;">
+            <br>
+            <button id="botaoCadastrarEmpresa" (click)="cadastrarEmpresa()" style="background-color: orangered;color: white">Confirmar</button>
+            
+    </div>
+    
+    
+    <div id="corpoDoFormularioEmpresa" *ngIf="!cadastrandoCliente">
+
+        <input type="text" placeholder="Nome" [(ngModel)]="nome">
+        <input type="text" placeholder="Email" [(ngModel)]="email">
 
         <br>
 
-        <input type="text" placeholder="telefone" [(ngModel)]="telefoneCliente">
-        <input type="text" placeholder="Cpf" [(ngModel)]="cpfCliente">
+        <input type="text" placeholder="telefone" [(ngModel)]="telefone">
+        <input type="text" placeholder="Cnpj" [(ngModel)]="cnpj">
 
         <br>
 
-        <input type="text" placeholder="Senha" [(ngModel)]="senhaCliente">
-        <input type="text" placeholder="Confirmar Senha" [(ngModel)]="confirmacaoSenhaCliente">
+        <input type="text" placeholder="Senha" [(ngModel)]="senha">
+        <input type="text" placeholder="Confirmar Senha" [(ngModel)]="confirmacaoSenha">
 
         <br>
 
-        <input type="text" placeholder="Endereco" [(ngModel)]="EnderecoCliente">
+        <input type="text" placeholder="Numero da conta Bancária" [(ngModel)]="numeroContaBancaria">
+        <input type="text" placeholder="Agencia" [(ngModel)]="Agencia">
+
+        <br>
+
+        <input type="text" placeholder="Nome do responsável" [(ngModel)]="nomeDoResponsavelDaEmpresa">
+
+        <button id="botaoCadastrarEmpresa" (click)="cadastrarEmpresa()" style="background-color: orangered;color: white">Confirmar</button>
 
     </div>
 
-    <button id="botaoCadastrarCliente" (click)="cadastrarCliente()" style="background-color: orangered;color: white">Confirmar</button>
+    
 </div>
