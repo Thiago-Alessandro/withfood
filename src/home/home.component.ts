@@ -8,8 +8,10 @@ import { Component, OnInit } from "@angular/core";
 export class HomeComponent implements OnInit{
     logoBranca:string;
     logoLaranja:string;
+    garfoFaca: string;
     ngOnInit(): void {
         this.logoBranca = './assets/imagens/logoBranca.png'
         this.logoLaranja =  './assets/imagens/logoLaranja.png'
+        this.garfoFaca = "./assets/imagens/garfoFaca.svg"
     }
 }

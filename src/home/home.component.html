@@ -1,12 +1,13 @@
 <!-- /*tamanho da tela do pc do senai 1366*/ -->
-
 <nav class="header">
-    <img [src]="logoLaranja" alt="" style="height: 75px;">
+    <img [src]="logoLaranja" alt="" style="height: 65px;">
     <a class="a-nav" routerLink="/Empresa" href=""><strong style="background-color: #F05D23;"> Empresa </strong></a>
     <a class="a-nav" routerLink="/Cardapio" href=""><strong style="background-color: #F05D23;"> Cardápio </strong></a>
     <a class="a-nav" href=""><strong style="background-color: #F05D23;"> Logout </strong></a>
 </nav>
-<div class="main">
+
+<div style="height: 450px;">
+    <div class="main">
     <div class="leftMain">
         <img class="imageLeft" [src]="logoLaranja" alt="" style="border-radius: 10px;">
         <p class="textLeft"> Faça login na <strong class="withFood">WithFood</strong> e desbloqueie um mundo de sabores
@@ -34,5 +35,32 @@
     </div>
 </div>
 <div class="secondMain-Home">
-    
+    <div>
+        <h1 class="h1-titleSecondMain">Seja nossa empresa parceira</h1>
+    </div>
+    <div class="mainSecond">
+        <div class="leftSecondMain">
+            <p class="p-textSecondMain ">Aumente sua visibilidade, conquiste novos clientes e impulsione seu restaurante para o sucesso!
+                Cadastre agora o cardápio do seu estabelecimento no site da WithFood e desfrute de inúmeras
+                vantagens. Com uma base de usuários ávidos por descobrir novos sabores,
+                nossa plataforma oferece a oportunidade perfeita
+                para você destacar sua cozinha especializada. </p>
+
+        </div>
+        <div class="rightSecondMain">
+            <p class="p-textSecondMain"     >Não perca tempo, junte-se a nós e amplie seu alcance de maneira eficaz. Aproveite essa chance única de
+                impulsionar seu restaurante para o topo! 
+                Clique aqui para cadastrar seu cardápio hoje mesmo!</p>
+                <button class="ctaMain ctaSecondMain">Seja Parceiro</button>
+        </div>
+    </div>
+
+</div>
+
+   <img style="display: flex;  left: 1085px; bottom: -270px;
+   position: absolute;"
+   
+   
+   [src]="garfoFaca" alt="">
+
 </div>
