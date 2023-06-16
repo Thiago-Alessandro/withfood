@@ -1,6 +1,4 @@
-import { Component } from "@angular/core";
-import { RouterLink } from "@angular/router";
-
+import { Component, OnInit, ViewChild } from "@angular/core";
 
 interface Cliente{
     nome:string,
@@ -22,14 +20,13 @@ interface Empresa{
     nomeDoResponsavel:string
 }
 
-
 @Component({
     selector: "app-cadastro",
     templateUrl:'./cadastro.component.html',
     styleUrls:['./cadastro.component.css']
 })
 
-export class CadastroComponent{
+export class CadastroComponent implements OnInit{
 
     clientesLista:Cliente[]=[]
     empresasLista:Empresa[]=[]
@@ -53,33 +50,96 @@ export class CadastroComponent{
 
     cadastrandoCliente:boolean = true
 
-    cadastrarEmpresa():void{
+   //pega a div com o #cabecalhoEmpresa e coloca numa variavel de mesmo nome
+    @ViewChild('cabecalhoEmpresa') cabecalhoEmpresa;
+    //inicia uma variavel que vai ter o texto do cabecalho (o elemento 'p' do html)
+    textoCabecalhoEmpresa
 
-        let empresaCadastrada:Empresa = {
-            
-            nome:this.nome,
-            email:this.email,
-            telefone:this.telefone,
-            senha:this.senha,
-            cnpj:this.cnpj,
-            numeroContaBancaria:this.numeroContaBancaria,
-            agencia:this.agencia,
-            nomeDoResponsavel:this.nomeDoResponsavelDaEmpresa
+    @ViewChild('cabecalhoCliente') cabecalhoCliente;
+    textoCabecalhoCliente
+
+    ngOnInit():void{
+
+        this.cabecalhoEmpresa = this.cabecalhoEmpresa.nativeElement
+        this.textoCabecalhoEmpresa = this.cabecalhoEmpresa.children[0]
+        this.cabecalhoEmpresa.className = 'cabecalhoNaoSelecionado'
+        this.textoCabecalhoEmpresa.className = 'cabecalhoNaoSelecionado'
+
+        this.cabecalhoCliente = this.cabecalhoCliente.nativeElement
+        this.textoCabecalhoCliente = this.cabecalhoCliente.children[0]
+        this.cabecalhoCliente.className = 'cabecalhoSelecionado'
+        this.textoCabecalhoCliente.className = 'cabecalhoSelecionado'
+
+        let clientes = localStorage.getItem('clientes')
+        if(clientes){
+            this.clientesLista.push(JSON.parse(clientes))
         }
 
-        this.empresasLista.push(empresaCadastrada)
+        let empresas = localStorage.getItem('empresas')
+        if(empresas){
+            this.empresasLista.push(JSON.parse(empresas))
+        }
+    }
 
-        localStorage.setItem("empresas", JSON.stringify(this.empresasLista))
+    selecionarCadastroEmpresa():void{
 
-        this.nome = ""
-        this.email = ""
-        this.telefone = ""
-        this.senha = ""
-        this.cnpj = ""
-        this.numeroContaBancaria = ""
-        this.agencia = ""
-        this.nomeDoResponsavelDaEmpresa = ""
+        this.cadastrandoCliente=false
+        
+        this.cabecalhoEmpresa.className = 'cabecalhoSelecionado'
+        this.textoCabecalhoEmpresa.className = "cabecalhoSelecionado"
 
+        this.cabecalhoCliente.className = 'cabecalhoNaoSelecionado'
+        this.textoCabecalhoCliente.className = 'cabecalhoNaoSelecionado'
+    }
+
+    selecionarCadastroCliente():void{
+
+        this.cadastrandoCliente=true
+
+        this.cabecalhoCliente.className = 'cabecalhoSelecionado'
+        this.textoCabecalhoCliente.className = 'cabecalhoSelecionado'
+
+        this.cabecalhoEmpresa.className = 'cabecalhoNaoSelecionado'
+        this.textoCabecalhoEmpresa.className = 'cabecalhoNaoSelecionado'
+    }
+
+    cadastrarEmpresa():void{
+
+        if(this.verificarCamposPreenchidosCliente()){
+
+            if(this.verificarSenhaConfirmada(this.senha, this.confirmacaoSenha)){
+
+                let empresaCadastrada:Empresa = {
+                    
+                    nome:this.nome,
+                    email:this.email,
+                    telefone:this.telefone,
+                    senha:this.senha,
+                    cnpj:this.cnpj,
+                    numeroContaBancaria:this.numeroContaBancaria,
+                    agencia:this.agencia,
+                    nomeDoResponsavel:this.nomeDoResponsavelDaEmpresa
+                }
+
+                this.empresasLista.push(empresaCadastrada)
+
+                localStorage.setItem("empresas", JSON.stringify(this.empresasLista))
+
+                this.nome = ""
+                this.email = ""
+                this.telefone = ""
+                this.senha = ""
+                this.cnpj = ""
+                this.numeroContaBancaria = ""
+                this.agencia = ""
+                this.nomeDoResponsavelDaEmpresa = ""
+            }else{
+                console.log("A sua senha deve ser a mesma em ambos os inputs")
+                this.confirmacaoSenha = ""
+            }
+        }else{
+            console.log("preencha todos os campos")
+        }
     }
   
     cadastrarCliente():void{
@@ -130,6 +190,15 @@ export class CadastroComponent{
         }
         return true
     }
+    verificarCamposPreenchidosEmpresa():boolean{
+        if(this.nome == "" || this.email == "" || this.telefone == "" ||
+        this.cnpj == "" || this.senha == "" || this.confirmacaoSenha == "" ||
+        this.numeroContaBancaria == "" || this.agencia == "" || this.nomeDoResponsavelDaEmpresa == ""){
+            return false
+        }
+        return true
+    }
+
     verificarSenhaConfirmada(senha:string, confirmacao:string):boolean{//talve receber parametro
         if(senha === confirmacao){
             return true

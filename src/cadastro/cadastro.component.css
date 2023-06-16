@@ -3,7 +3,9 @@
     height: 60px;display: flex; 
     justify-content: center;
 }
-
+#cabecalhoDoFormulario{
+    background-color: rgb(219, 218, 218);;
+}
 #corpoDoFormularioEmpresa{
     background-color: rgb(219, 218, 218);
     padding: 50px;
@@ -31,4 +33,25 @@ input{
 
 #botaoCadastrarEmpresa{
 
+}
+
+.cabecalhoSelecionado{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(219, 218, 218);
+    color: orangered;
+    width: 50%;
+    height: 40px;
+    cursor: pointer;
+}
+
+.cabecalhoNaoSelecionado{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: orangered;
+    color: white;
+    width: 50%;
+    height: 40px;
 }
