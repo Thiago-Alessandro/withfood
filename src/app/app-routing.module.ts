@@ -3,6 +3,8 @@ import { Route, RouterModule } from "@angular/router";
 import { CadastroComponent } from "src/cadastro/cadastro.component";
 import { HomeComponent } from "../home/home.component";
 import { LoginComponent } from "src/login/login.component";
+import { CardapioComponent } from "src/Cardapio/cardapio.component";
+import { EmpresaComponent } from "src/Empresa/empresa.component";
 
 const rotas:Route[] = [
     {
@@ -16,6 +18,14 @@ const rotas:Route[] = [
     {
         path:'Cadastro',
         component: CadastroComponent
+    },
+    {
+        path:'Cardapio',
+        component: CardapioComponent
+    },
+    {
+        path:'Empresa',
+        component: EmpresaComponent
     },
     {
         path:'',

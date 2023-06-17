@@ -6,6 +6,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { HomeModule } from 'src/home/home.module';
 import { CadastroModule } from 'src/cadastro/cadastro.module';
 import { LoginModule } from 'src/login/login.module';
+import { CardapioModule } from 'src/Cardapio/cardapio.module';
+import { EmpresaModule } from 'src/Empresa/empresa.module';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,8 @@ import { LoginModule } from 'src/login/login.module';
     HomeModule,
     CadastroModule,
     LoginModule,
-    // empresaModule e clienteModule
+    CardapioModule,
+    EmpresaModule
 
   ],
   providers: [],

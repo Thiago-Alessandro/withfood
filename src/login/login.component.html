@@ -1,2 +1,16 @@
 
-    <h1>Login</h1>
+<h1>Login</h1>
+
+<div>
+    <input type="text" placeholder="Email" [(ngModel)]="email">
+    <input type="password" placeholder="Senha" [(ngModel)]="senha">
+    <button (click) = "verificarLogin()">Confirmar</button>
+
+    <p>
+        Não tem uma conta?
+    </p>
+    <p routerLink="/Cadastro" (click)="redirecionarParaCadastro()">
+        Cadastre-se
+    </p>
+    
+</div>
