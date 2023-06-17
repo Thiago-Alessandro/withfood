@@ -64,6 +64,7 @@ p {
     display: flex;
     align-items: center;
     justify-content: space-around;
+
 }
 
 .withFood {
@@ -206,4 +207,55 @@ input{
     font-size: 48px; 
     color: #F05D23;
     font-weight: bold;
+}
+
+/* Cadastro */
+
+/* Login */
+
+.allContent{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    background-color: #EFEFE9;
+}
+.contentLogin{
+    width: 60%;
+}
+.space{
+    width: 40%;
+    height: 1000px;
+    background-color: #F05D23;
+    -webkit-box-shadow: -5px 20px 30px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: -5px 20px 30px 0px rgba(0,0,0,0.75);
+box-shadow: -5px 20px 30px 0px rgba(0,0,0,0.75);
+}
+.titleLogin{
+    color: #F05D23;
+    font-weight: bold;
+    padding: 25px;
+    margin-left: 100px;
+}
+.cta{
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    margin-left: 100px;
+}
+.inputs{
+    display: flex;
+    padding: 25px;
+    flex-direction: column;
+    margin-left: 75px;
+}
+.ctaLogin{
+    width: 230px;
+    background-color: #F05D23;
+    color: #F2F2F2; 
+    font-weight: bold;
+    height: 40px;
+    border: none;
+    margin: 25px;
+    border-radius: 5px;
+    margin-left: 100px;
 }

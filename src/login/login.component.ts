@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 
 
 @Component({
@@ -6,6 +6,11 @@ import { Component } from "@angular/core";
     templateUrl:'./login.component.html'
 })
 
-export class LoginComponent {
-    
+export class LoginComponent implements OnInit{
+    logoLaranja: string;
+
+
+    ngOnInit(): void {
+        this.logoLaranja = "./assets/imagens/logoLaranja.png    "
+    }
 }
