@@ -107,7 +107,7 @@ export class CadastroComponent implements OnInit{
 
     cadastrarEmpresa():void{
 
-        if(this.verificarCamposPreenchidosCliente()){
+        if(this.verificarCamposPreenchidosEmpresa()){
 
             if(this.verificarSenhaConfirmada(this.senha, this.confirmacaoSenha)){
 
@@ -135,6 +135,9 @@ export class CadastroComponent implements OnInit{
                 this.numeroContaBancaria = ""
                 this.agencia = ""
                 this.nomeDoResponsavelDaEmpresa = ""
+
+                window.location.replace("http://localhost:4200/Login")
+
             }else{
                 console.log("A sua senha deve ser a mesma em ambos os inputs")
                 this.confirmacaoSenha = ""
@@ -160,7 +163,7 @@ export class CadastroComponent implements OnInit{
 
                 this.clientesLista.push(clienteCadastrado)
 
-                localStorage.setItem("Cliente",JSON.stringify(this.clientesLista))
+                localStorage.setItem("clientes",JSON.stringify(this.clientesLista))
 
                 this.nome = ""
                 this.email = ""

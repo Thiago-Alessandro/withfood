@@ -8,18 +8,16 @@
     <div class="contentLogin" style="margin-left: 30px;">
         <h1 class="titleLogin" style="margin-top: 70px;">Login</h1>
         <div class="inputs">
-            <input id="email" placeholder="Email" type="text">
-            <input id="senha" placeholder="Senha" type="password">
+            <input id="email" placeholder="Email" type="text" [(ngModel)]="email">
+            <input id="senha" placeholder="Senha" type="password"  [(ngModel)]="senha">
         </div>
-
-        <button class="ctaLogin">Logar</button>
+        <button class="ctaLogin" (click)="verificarLogin()">Logar</button>
 
         <div class="cta">
             <p class="textAccount" style="font-weight: bold;">Não tem uma conta?</p>
-            <a class="ctaCadastro" href="" routerLink="/Cadastro"
+            <a class="ctaCadastro" routerLink="/Cadastro" (click)="redirecionarParaCadastro()"
                 style="text-decoration: none; font-weight: bold; color: #F05D23;">Cadastre-se</a>
         </div>
     </div>
     <div class="space" style="background-color: #F05D23;">
     </div>
-</div>
