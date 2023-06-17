@@ -1,7 +1,13 @@
-<h1>cadastro</h1>
+<nav class="header">
+    <img [src]="logoLaranja" alt="" style="height: 65px;">
+    <a class="a-nav" routerLink="/Empresa" href=""><strong style="background-color: #F05D23;"> Empresa </strong></a>
+    <a class="a-nav" routerLink="/Cardapio" href=""><strong style="background-color: #F05D23;"> Cardápio </strong></a>
+    <a class="a-nav" href=""><strong style="background-color: #F05D23;"> Logout </strong></a>
+</nav>
 
-<p style="font-size: 48px; color: orangered;">Criar conta</p>
-
+<div>
+<h1 class="titleCadastro">Criar conta</h1>
+</div>
 <div id="corpoDoFormulario">
 
     <div class="cabecalhoDoFormulario" style="display: flex;">
@@ -64,7 +70,7 @@
       
 
         <input type="text" placeholder="Nome do responsável" [(ngModel)]="nomeDoResponsavelDaEmpresa">
-        <button id="botaoCadastrarEmpresa" (click)="cadastrarEmpresa()" style="background-color: orangered;color: white">Confirmar</button>
+        <button class="botaoCadastrarEmpresa" (click)="cadastrarEmpresa()" style="background-color: orangered;color: white">Confirmar</button>
 
         </div>
     </div>
