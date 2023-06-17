@@ -1,5 +1,7 @@
+
 import { JsonPipe } from "@angular/common";
 import { Component, Input, OnInit } from "@angular/core";
+
 
 interface Cliente{
     nome:string,
@@ -30,14 +32,14 @@ export class LoginComponent implements OnInit{
 
     senha:string = ""
     email:string = ""
-
+ logoLaranja: string;
     clientesLista:Cliente[]=[]
     empresasLista:Empresa[]=[]
     
     @Input() logado:Empresa|Cliente = null
 
     ngOnInit():void{
-
+ this.logoLaranja = "./assets/imagens/logoLaranja.png"
         let clientes = localStorage.getItem('clientes')
         if(clientes){
             this.clientesLista.push(JSON.parse(clientes))
@@ -84,5 +86,4 @@ export class LoginComponent implements OnInit{
     redirecionarParaCadastro(){
         window.location.replace('http://localhost:4200/Cadastro')
     }
-
 }

@@ -1,16 +1,23 @@
+<nav class="header">
+    <img [src]="logoLaranja" alt="" style="height: 65px;">
+    <a class="a-nav" routerLink="/Empresa" href=""><strong style="background-color: #F05D23;"> Empresa </strong></a>
+    <a class="a-nav" routerLink="/Cardapio" href=""><strong style="background-color: #F05D23;"> Cardápio </strong></a>
+    <a class="a-nav" href=""><strong style="background-color: #F05D23;"> Logout </strong></a>
+</nav>
+<div class="allContent">
+    <div class="contentLogin" style="margin-left: 30px;">
+        <h1 class="titleLogin" style="margin-top: 70px;">Login</h1>
+        <div class="inputs">
+            <input id="email" placeholder="Email" type="text" [(ngModel)]="email">
+            <input id="senha" placeholder="Senha" type="password"  [(ngModel)]="senha">
+        </div>
+        <button class="ctaLogin" (click)="verificarLogin()">Logar</button>
 
-<h1>Login</h1>
-
-<div>
-    <input type="text" placeholder="Email" [(ngModel)]="email">
-    <input type="password" placeholder="Senha" [(ngModel)]="senha">
-    <button (click) = "verificarLogin()">Confirmar</button>
-
-    <p>
-        Não tem uma conta?
-    </p>
-    <p routerLink="/Cadastro" (click)="redirecionarParaCadastro()">
-        Cadastre-se
-    </p>
-    
-</div>
+        <div class="cta">
+            <p class="textAccount" style="font-weight: bold;">Não tem uma conta?</p>
+            <a class="ctaCadastro" routerLink="/Cadastro" (click)="redirecionarParaCadastro()"
+                style="text-decoration: none; font-weight: bold; color: #F05D23;">Cadastre-se</a>
+        </div>
+    </div>
+    <div class="space" style="background-color: #F05D23;">
+    </div>
