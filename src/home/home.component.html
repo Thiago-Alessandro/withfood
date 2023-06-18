@@ -1,9 +1,9 @@
 <!-- /*tamanho da tela do pc do senai 1366*/ -->
 <nav class="header">
     <img [src]="logoLaranja" alt="" style="height: 65px;">
-    <a class="a-nav" routerLink="/Empresa" href=""><strong style="background-color: #F05D23;"> Empresa </strong></a>
-    <a class="a-nav" routerLink="/Cardapio" href=""><strong style="background-color: #F05D23;"> Cardápio </strong></a>
-    <a class="a-nav" href=""><strong style="background-color: #F05D23;"> Logout </strong></a>
+    <a class="a-nav"  (click)="redirecionarParaEmpresa()"><strong style="background-color: #F05D23;"> Empresa </strong></a>
+    <a class="a-nav" (click)="redirecionarParaCardapio()"><strong style="background-color: #F05D23;"> Cardápio </strong></a>
+    <a class="a-nav" (click)="redirecionarParaLogin()"><strong style="background-color: #F05D23;"> Logout </strong></a>
 </nav>
 
 <div style="height: 450px;">
@@ -18,7 +18,7 @@
             Não perca mais tempo, faça login e embarque nessa jornada culinária conosco!
 
         </p>
-        <button class="ctaMain ctaLeft">Faça Login</button>
+        <button class="ctaMain ctaLeft" (click)="redirecionarParaLogin()">Faça Login</button>
     </div>
     <div class="rightMain">
         <p class="textRight"> Bem-vindo à <strong class="withFood">WithFood!</strong> Descubra uma nova forma de
@@ -30,7 +30,7 @@
             hoje mesmo!
 
         </p>
-        <button class="ctaMain">Ver cardápios</button>
+        <button class="ctaMain" (click)="redirecionarParaCardapio()">Ver cardápios</button>
         <img class="imageRight" [src]="logoBranca" alt="" style="border-radius: 10px;">
     </div>
 </div>

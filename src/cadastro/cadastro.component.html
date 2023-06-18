@@ -1,14 +1,16 @@
 <nav class="header">
     <img [src]="logoLaranja" alt="" style="height: 65px;">
-    <a class="a-nav" routerLink="/Empresa" href=""><strong style="background-color: #F05D23;"> Empresa </strong></a>
-    <a class="a-nav" routerLink="/Cardapio" href=""><strong style="background-color: #F05D23;"> Cardápio </strong></a>
-    <a class="a-nav" href=""><strong style="background-color: #F05D23;"> Logout </strong></a>
+    <a class="a-nav" (click)="redirecionarParaEmpresa()"><strong style="background-color: #F05D23;"> Empresa
+        </strong></a>
+    <a class="a-nav" (click)="redirecionarParaCardapio()"><strong style="background-color: #F05D23;"> Cardápio
+        </strong></a>
+    <a class="a-nav" (click)="redirecionarParaLogin()"><strong style="background-color: #F05D23;"> Logout </strong></a>
 </nav>
 
 <div>
-<h1 class="titleCadastro">Criar conta</h1>
+    <h1 class="titleCadastro">Criar conta</h1>
 </div>
-<div id="corpoDoFormulario">
+<div id="bodyCadastro">
 
     <div class="cabecalhoDoFormulario" style="display: flex;">
         <div (click)="selecionarCadastroEmpresa()" #cabecalhoEmpresa>
@@ -28,52 +30,41 @@
             <input type="text" placeholder="Nome" [(ngModel)]="nome">
             <input type="text" placeholder="Email" [(ngModel)]="email">
 
-            
-
             <input type="text" placeholder="telefone" [(ngModel)]="telefone">
             <input type="text" placeholder="Cpf" [(ngModel)]="cpf">
 
-          
+            <input type="text" placeholder="Senha" [(ngModel)]="senha">
+            <input type="text" placeholder="Confirmar Senha" [(ngModel)]="confirmacaoSenha">
+
+        </div>
+
+        <input type="text" placeholder="Endereco" [(ngModel)]="Endereco" style="width: 80%;">
+        <br>
+        <button id="botaoCadastrarCliente" (click)="cadastrarCliente()"
+            style="background-color: orangered;color: white">Confirmar</button>
+
+    </div>
+
+
+    <div id="corpoDoFormularioEmpresa" *ngIf="!cadastrandoCliente">
+        <div id="grid">
+            <input type="text" placeholder="Nome" [(ngModel)]="nome">
+            <input type="text" placeholder="Email" [(ngModel)]="email">
+
+            <input type="text" placeholder="telefone" [(ngModel)]="telefone">
+            <input type="text" placeholder="Cnpj" [(ngModel)]="cnpj">
 
             <input type="text" placeholder="Senha" [(ngModel)]="senha">
             <input type="text" placeholder="Confirmar Senha" [(ngModel)]="confirmacaoSenha">
-            
-        </div>
 
-            <input type="text" placeholder="Endereco" [(ngModel)]="Endereco" style="width: 80%;">
-            <br>
-            <button id="botaoCadastrarCliente" (click)="cadastrarCliente()" style="background-color: orangered;color: white">Confirmar</button>
-            
-    </div>
-    
-    
-    <div id="corpoDoFormularioEmpresa" *ngIf="!cadastrandoCliente">
-        <div id="grid">
-        <input type="text" placeholder="Nome" [(ngModel)]="nome">
-        <input type="text" placeholder="Email" [(ngModel)]="email">
+            <input type="text" placeholder="Numero da conta Bancária" [(ngModel)]="numeroContaBancaria">
+            <input type="text" placeholder="Agencia" [(ngModel)]="Agencia">
 
-      
 
-        <input type="text" placeholder="telefone" [(ngModel)]="telefone">
-        <input type="text" placeholder="Cnpj" [(ngModel)]="cnpj">
-
-     
-
-        <input type="text" placeholder="Senha" [(ngModel)]="senha">
-        <input type="text" placeholder="Confirmar Senha" [(ngModel)]="confirmacaoSenha">
-
-     
-
-        <input type="text" placeholder="Numero da conta Bancária" [(ngModel)]="numeroContaBancaria">
-        <input type="text" placeholder="Agencia" [(ngModel)]="Agencia">
-
-      
-
-        <input type="text" placeholder="Nome do responsável" [(ngModel)]="nomeDoResponsavelDaEmpresa">
-        <button class="botaoCadastrarEmpresa" (click)="cadastrarEmpresa()" style="background-color: orangered;color: white">Confirmar</button>
+            <input type="text" placeholder="Nome do responsável" [(ngModel)]="nomeDoResponsavelDaEmpresa">
+            <button class="botaoCadastrarEmpresa" (click)="cadastrarEmpresa()"
+                style="background-color: orangered;color: white">Confirmar</button>
 
         </div>
     </div>
-
-    
 </div>

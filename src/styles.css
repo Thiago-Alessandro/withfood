@@ -75,6 +75,7 @@ p {
     color: #F2F2F2;
     text-decoration: none;
     background-color: #F05D23;
+    cursor: pointer;
 }
 
 .ctaMain {
@@ -143,11 +144,22 @@ width: 50%;
 }
 /* Home */
 
+
+
 /* Cadastro */
+
+.titleCadastro{
+    font-size: 40px; 
+    color: #F05D23;
+    font-weight: bold;
+    padding: 25px;
+    margin-left: 40px;
+}
 
 #CabecalhoEmpresa{
     width: 50%;
-    height: 60px;display: flex; 
+    height: 60px;
+    display: flex; 
     justify-content: center;
 }
 #cabecalhoDoFormulario{
@@ -187,7 +199,7 @@ input{
     align-items: center;
     justify-content: center;
     background-color: rgb(219, 218, 218);
-    color: orangered;
+    color: #F05D23;
     width: 50%;
     height: 40px;
     cursor: pointer;
@@ -197,19 +209,17 @@ input{
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: orangered;
+    background-color: #F05D23;
     color: white;
     width: 50%;
     height: 40px;
 }
 
-.titleCadastro{
-    font-size: 48px; 
-    color: #F05D23;
-    font-weight: bold;
-}
+
 
 /* Cadastro */
+
+
 
 /* Login */
 

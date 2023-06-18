@@ -211,4 +211,15 @@ export class CadastroComponent implements OnInit{
         return false
     }
     
+
+
+    redirecionarParaLogin(){
+        window.location.replace('http://localhost:4200/Login')
+    }
+    redirecionarParaCardapio(){
+        window.location.replace('http://localhost:4200/Cardapio')
+    }
+    redirecionarParaEmpresa(){
+        window.location.replace('http://localhost:4200/Empresa')
+    }
 }
