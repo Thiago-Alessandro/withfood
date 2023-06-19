@@ -4,3 +4,23 @@
     <a class="a-nav" (click)="redirecionarParaCardapio()"><strong style="background-color: #F05D23;"> Cardápio </strong></a>
     <a class="a-nav" (click)="redirecionarParaLogin()"><strong style="background-color: #F05D23;"> Logout </strong></a>
 </nav>
+<div>
+    <div (click)="exibirCardapio()">
+        Cardapio
+    </div>
+    <div *ngIf="exibindoCardapio">
+        <div *ngfor>
+
+        </div>
+    </div>
+    <div #cabecalhoPedidos>
+        Pedidos
+    </div>
+    <div #corpoPedidos>
+        <div #corpoPedido *ngFor="let pedidos of pedidosLista">
+            <!-- vai dar um trabalhinho -->
+        </div>
+    </div>
+    
+
+</div>

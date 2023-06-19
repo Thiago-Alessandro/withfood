@@ -8,12 +8,11 @@ import { Component, OnInit } from "@angular/core";
 
 export class EmpresaComponent implements OnInit{
     logoLaranja:string;
+    exibindoCardapio:boolean
 
     ngOnInit(): void {
         this.logoLaranja = "./assets/imagens/logoLaranja.png"
     }
-
-
 
     redirecionarParaLogin(){
         window.location.replace('http://localhost:4200/Login')
@@ -23,5 +22,9 @@ export class EmpresaComponent implements OnInit{
     }
     redirecionarParaEmpresa(){
         window.location.replace('http://localhost:4200/Empresa')
+    }
+
+    exibirCardapio(){
+        this.exibindoCardapio = !this.exibindoCardapio;
     }
 }

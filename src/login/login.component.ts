@@ -39,42 +39,33 @@ export class LoginComponent implements OnInit{
     @Input() logado:Empresa|Cliente = null
 
     ngOnInit():void{
- this.logoLaranja = "./assets/imagens/logoLaranja.png"
+        this.logoLaranja = "./assets/imagens/logoLaranja.png"
         let clientes = localStorage.getItem('clientes')
         if(clientes){
-            this.clientesLista.push(JSON.parse(clientes))
+            this.clientesLista = JSON.parse(clientes)
         }
 
         let empresas = localStorage.getItem('empresas')
         if(empresas){
-            this.empresasLista.push(JSON.parse(empresas))
+            this.empresasLista = JSON.parse(empresas)
         }
     }
 
     verificarLogin(){
         if(this.email != "" && this.senha != ""){
 
-            this.empresasLista.forEach(empresa => {
-                
-                if(JSON.stringify(empresa).includes('"email":"' + this.email + '"') &&
-                 JSON.stringify(empresa).includes('"senha":"' + this.senha + '"')){
-
+            for(let empresa of this.empresasLista){
+                if(empresa.email == this.email && empresa.senha == this.senha){
                     this.logado = empresa
                     window.location.replace("http://localhost:4200/Empresa")
                 }
-            });
-            this.clientesLista.forEach((cliente) => {
-                // console.log('objeto inteiro: ' + JSON.stringify(cliente))
-                // console.log('so o email ' + JSON.stringify(cliente.email))
-                // console.log('so o email sem o stringify ' + cliente.email)
-                // console.log("sem o stringify " + cliente)
-                // console.log('email e senha dos inputs' + this.email + " " + this.senha)
-                if(JSON.stringify(cliente).includes('"email":"' + this.email+'"' ) &&
-                 JSON.stringify(cliente).includes('"senha":"' + this.senha + '"')){
+            }
+            for(let cliente of this.clientesLista){
+                if(cliente.email == this.email && cliente.senha == this.senha){
                     this.logado = cliente
                     window.location.replace("http://localhost:4200/Cardapio")
-                }
-            });
+                }      
+            }
             if(this.logado == null){
                 console.log('email ou senha incorretos')
             }
