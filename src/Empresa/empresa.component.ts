@@ -8,7 +8,16 @@ import { Component, OnInit } from "@angular/core";
 
 export class EmpresaComponent implements OnInit{
     logoLaranja:string;
-
+    opa: string[];
+    aberto: Boolean;
+    saiTeia(){
+        if (this.aberto=true){
+        this.aberto = false;
+    }
+    }
+    mudaTela(){
+        this.aberto = true;
+    }
     ngOnInit(): void {
         this.logoLaranja = "./assets/imagens/logoLaranja.png"
     }
