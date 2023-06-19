@@ -12,12 +12,16 @@ export class HomeComponent implements OnInit{
     logoBranca:string;
     logoLaranja:string;
     garfoFaca: string;
+    logoPequena: string
+    email: string
 
 
     ngOnInit(): void {
+        this.logoPequena = './assets/imagens/logoPequena.svg'
         this.logoBranca = './assets/imagens/logoBranca.png'
         this.logoLaranja =  './assets/imagens/logoLaranja.png'
         this.garfoFaca = "./assets/imagens/garfoFaca.svg"
+        this.email = "./assets/imagens/email.svg"
     }
 
 

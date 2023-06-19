@@ -66,15 +66,40 @@
    position: absolute;" [src]="garfoFaca" alt="">
 
 
-<div class="footer" style="display: flex;">
-    <nav class="footer-nav">
-        <!-- <img [src]="logoLaranja" alt="" style="height: 65px;"> -->
-        <a class="a-nav" (click)="redirecionarParaEmpresa()"><strong style="background-color: #EFEFE9;"> Empresa
-            </strong></a>
-        <a class="a-nav" (click)="redirecionarParaCardapio()"><strong style="background-color: #EFEFE9;"> Cardápio
-            </strong></a>
-        <a class="a-nav" (click)="redirecionarParaLogin()"><strong style="background-color: #EFEFE9;"> Logout </strong></a>
-    </nav>
-</div>  
+    <div class="footer" style="display: flex; height: 150px;">
+        <div class="navFooter" style="display: flex; align-items: center;">
+            <nav class="footer-nav" style="margin-top: 10px; margin-left: 30px; gap: 20px;">
+                <!-- <img [src]="logoLaranja" alt="" style="height: 65px;"> -->
+                <div >
+                <a class="a-navFooter" (click)="redirecionarParaEmpresa()"><strong style="background-color: #EFEFE9;"> Empresa
+                    </strong></a>
+                <a class="a-navFooter" (click)="redirecionarParaCardapio()"><strong style="background-color: #EFEFE9; ">
+                        Cardápio
+                    </strong></a>
+                    </div>
+                    <div>
+                <a class="a-navFooter" (click)="redirecionarParaLogin()"><strong style="background-color: #EFEFE9; margin-right: 27px;"> Login
+                    </strong></a>
+                <a class="a-navFooter" (click)="redirecionarParaLogin()"><strong style="background-color: #EFEFE9;"> Home
+                    </strong></a>
+                </div>
+            </nav>
+        </div>
+        <div class="tellUsFooter">
+            <p style="margin-top: 30px;"> <strong> Entre em contato </strong></p>
+            <p><strong>Telefone:</strong>  (47)80029922</p>
+            <p style="text-align: center;"><strong>Email:</strong>  withfood@gmail.com</p>
+        </div>
+        <div class="emailFooter">
+            <p style="color: #F05D23; font-weight: bold; margin-top: 30px;">Para receber as novidades </p>
+            <div>
+                <input type="text" placeholder="Envie seu Email" style="width: 70%;  margin-top: 20px;">
+                <img [src]="email" alt="" style="width: 35px; height: 35px;">
+            </div>
+        </div>
+        <div class="logoFooter">
+            <img [src]="logoPequena" alt="" style="border-radius: 10px;width: 150px; height: 150px; ">
+        </div>
+    </div>
 
 </div>
