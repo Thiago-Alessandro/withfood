@@ -74,12 +74,12 @@ export class CadastroComponent implements OnInit{
 
         let clientes = localStorage.getItem('clientes')
         if(clientes){
-            this.clientesLista.push(JSON.parse(clientes))
+            this.clientesLista =JSON.parse(clientes)
         }
 
         let empresas = localStorage.getItem('empresas')
         if(empresas){
-            this.empresasLista.push(JSON.parse(empresas))
+            this.empresasLista = JSON.parse(empresas)
         }
     }
 
