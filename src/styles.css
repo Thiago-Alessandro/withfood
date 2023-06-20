@@ -384,3 +384,47 @@ background: linear-gradient(180deg, rgba(240,93,35,1) 70%, rgba(229,86,29,1) 78%
     border-radius: 5px;
     margin-left: 100px;
 }
+
+/*CARDÁPIO*/
+
+.openPedido{
+    position: absolute; top:0; left: 0; width : 28%;
+    height: 100%; background-color: #F2F2F2;display: flex; flex-direction: column;
+    -webkit-box-shadow: 3px 4px 20px 0px rgba(0,0,0,0.75);
+   -moz-box-shadow: 3px 4px 20px 0px rgba(0,0,0,0.75);
+   box-shadow: 3px 4px 20px 0px rgba(0,0,0,0.75);
+   backdrop-filter: blur(5px);
+}
+
+.escondePedido{
+    display: flex; margin: 20px; position: absolute; 
+background-color: #F2F2F2; border-radius: 5px; color: #F05D23; border: none;font-size: 20px;
+}
+
+.quadradoCardapio{
+    background-color: #F05D23; color: #F2F2F2; width: 400px; height: 40px;
+        border-radius: 5px 5px 5px 5px; padding: 5px;
+}
+.mainCardapio{
+    display: flex; flex-direction: row; width: 100%; background-color: #EFEFE9; height: 800px;
+}
+.leftMainCardapio, .rightMainCardapio{
+    width: 50%;display: flex;  justify-content: right; margin-top: 30px;margin-right: 10px;
+}
+.rightMainCardapio{
+margin-left: 10px;
+justify-content: left;
+}
+.abreCardapio{
+    background-color: #a5a5a5; height: max-content; border-radius: 5px; align-items: center;
+}
+.escritaItem{
+    color: #121212;
+}
+.inicioCardapio{
+    display: flex;
+    justify-content: center;
+    background-color: #EFEFE9;
+    padding-top: 20px;
+}
+/*CARDÁPIO*/

@@ -1,12 +1,8 @@
-<button (click)="mostraPedido()">Mostrar Carrinho</button>
-<div *ngIf="aberto" style="position: absolute; top:0; left: 0; width : 28%;
- height: 100%; background-color: #F2F2F2;display: flex; flex-direction: column;
- -webkit-box-shadow: 3px 4px 20px 0px rgba(0,0,0,0.75);
--moz-box-shadow: 3px 4px 20px 0px rgba(0,0,0,0.75);
-box-shadow: 3px 4px 20px 0px rgba(0,0,0,0.75);">
+<body >
+ 
+<div class="openPedido"*ngIf="aberto">
     <div style="display: flex;justify-content: end;">
-        <button style="display: flex; margin: 20px; position: absolute; 
-background-color: #F2F2F2; border-radius: 5px; color: #F05D23; border: none;font-size: 20px;"
+        <button class="escondePedido"
             (click)="escondePedido()">X</button>
     </div>
     <div style="display: flex;justify-content: center; margin-top: 30px;">
@@ -17,27 +13,45 @@ background-color: #F2F2F2; border-radius: 5px; color: #F05D23; border: none;font
         <p style="margin-right: 100px; color: #F05D23;"><strong>PRODUTO</strong> </p>
         <p style="color: #F05D23;"><strong>R$</strong></p>
     </div>
-    <button (click)="cadastraPedido()">Se pingar o pix, mantem o pique</button>
+    <button (click)="cadastraPedido()">Cadastrar Pedido</button>
 </div>
-<div style="display: flex; flex-direction: row; width: 100%; background-color: #EFEFE9; height: 800px;">
-    <div style="width: 50%;display: flex;  justify-content: right; margin-top: 30px; margin-right: 10px;">
+<div class="inicioCardapio">
+    <div style="display: flex;align-items: center;">
+           <h6 style="margin-right: 4px;">Filtrar por</h6>
+    </div>
+    <div>
+    <select class="select" style="margin-right: 50px;">
+        <option value="Pizzas">Pizzas</option>
+        <option value="Lanches">Lanches</option>
+        <option value="Massas">Massas</option>
+        <option value="Doces">Doces</option>
+        <option value="Prato feito">Prato feito</option>    
+        <option value="Bebidas">Bebidas</option>    
+      </select>
+    </div>
+    <div>
+    <button (click)="mostraPedido()">Mostrar Carrinho</button>
+</div>
+</div>
+<div class="mainCardapio">
+    <div  *ngFor="let cardapio of cardapiosLista;index as indice" class="leftMainCardapio">
         <!-- <div *ngFor="let cardapio of cardapios"> -->
-        <details>
-            <summary style="background-color: #F05D23; color: #F2F2F2; width: 400px;
-    border-radius: 5px 5px 0 0; padding: 5px;">O que eu to fazendo aqui?</summary>
-            <!-- <p *ngFor="let item of items" style="color: aqua;">{{item}} <button (click)="add()">Add</button> {{cliques}} </p> -->
+        <details class="abreCardapio"*ngIf="indice%2==0">
+            <summary class="quadradoCardapio">O que eu to fazendo aqui?</summary>
+            <!-- <p *ngFor="let item of cardapio.itensCardapio;index as indice;" class="escritaItem">{{item.nomeItem}} R${{item.nomePreco}} <button (click)="add()">Add</button> {{cliques}} </p> -->
         </details>
         <!-- </div> -->
     </div>
-    <div style="width: 50%; display: flex; justify-content: left; margin-top: 30px; margin-left: 10px;">
+    <div class="rightMainCardapio">
         <!-- <div *ngFor="let cardapio of cardapios"> -->
-        <details style="background-color: #a5a5a5; height: max-content; border-radius: 5px">
-            <summary style="background-color: #F05D23; color: #F2F2F2; width: 400px;
-        border-radius: 5px 5px 0 0; padding: 5px;">Ta calma fofa?</summary>
+        <details class="abreCardapio" *ngIf="!indice%2==0">
+            <summary class="quadradoCardapio">Ta calma fofa?</summary>
             <!-- *ngFor="let item of itensCardapio; index as indice" {{item}} -->
-            <p style="color: rgb(0, 0, 0);">batata frita <button (click)="adicionaItens(item)">+</button> {{cliques}}
+            <p class="escritaItem">batata frita <button (click)="adicionaItens(item)">+</button> {{cliques}}
                 <button (click)="removeItens(item)">-</button> </p>
         </details>
         <!-- </div> -->
     </div>
 </div>
+   
+</body>

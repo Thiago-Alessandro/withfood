@@ -35,6 +35,7 @@ interface Empresa{
     //styleUrls: ["./empresa.component.css"]
 })
 
+
 export class EmpresaComponent implements OnInit{
     logoLaranja:string;
 
@@ -100,5 +101,5 @@ export class EmpresaComponent implements OnInit{
         }
         this.itensCardapio.push(novoItem)
     }
-    
+
 }
