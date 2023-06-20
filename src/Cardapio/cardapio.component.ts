@@ -1,5 +1,8 @@
 import { Component, OnInit } from "@angular/core";
-
+interface Cardapio {
+    nomeEmpresa:string;
+    itemsCardapio:string[];
+}
 @Component({
     selector: "app-cardapio",
     templateUrl: "./cardapio.component.html",
