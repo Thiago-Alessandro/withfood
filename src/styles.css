@@ -278,7 +278,9 @@ input {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #F05D23;
+    background: rgb(240,93,35);
+background: linear-gradient(180deg, rgba(240,93,35,1) 70%, rgba(229,86,29,1) 78%, rgba(209,73,19,1) 94%);
+
     color: white;
     width: 50%;
     height: 40px;
@@ -342,13 +344,12 @@ input {
     width: 60%;
 }
 
+
 .space {
     width: 40%;
     height: 1000px;
     background-color: #F05D23;
-    -webkit-box-shadow: -5px 20px 30px 0px rgba(0, 0, 0, 0.75);
-    -moz-box-shadow: -5px 20px 30px 0px rgba(0, 0, 0, 0.75);
-    box-shadow: -5px 20px 30px 0px rgba(0, 0, 0, 0.75);
+
 }
 
 .titleLogin {

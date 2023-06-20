@@ -1,5 +1,8 @@
 import { Component, OnInit } from "@angular/core";
-
+interface Cardapio {
+    nomeEmpresa:string;
+    itemsCardapio:string[];
+}
 @Component({
     selector: "app-cardapio",
     templateUrl: "./cardapio.component.html",
@@ -8,9 +11,24 @@ import { Component, OnInit } from "@angular/core";
 
 export class CardapioComponent implements OnInit {
 logoLaranja:string;
+tridentes :string [];
+tridente: string
+cliques:number
+
+
+
+add(){
+    if (this.cliques>=1){
+        this.cliques+=1;
+    } else {
+    this.cliques=0;
+    this.cliques+=1;
+}
+}
 
 ngOnInit(): void {
     this.logoLaranja = "./assets/imagens/logoLaranja.png"
+    this.tridente = 'Hamburguer blend bovino 250g'
 }
 
 
