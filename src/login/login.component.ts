@@ -32,14 +32,13 @@ export class LoginComponent implements OnInit{
 
     senha:string = ""
     email:string = ""
- logoLaranja: string;
+
     clientesLista:Cliente[]=[]
     empresasLista:Empresa[]=[]
     
     @Input() logado:Empresa|Cliente = null
 
     ngOnInit():void{
-        this.logoLaranja = "./assets/imagens/logoLaranja.png"
         let clientes = localStorage.getItem('clientes')
         if(clientes){
             this.clientesLista = JSON.parse(clientes)

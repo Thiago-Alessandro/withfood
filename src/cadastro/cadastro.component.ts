@@ -28,7 +28,6 @@ interface Empresa{
 
 export class CadastroComponent implements OnInit{
 
-    logoLaranja: string;
     clientesLista:Cliente[]=[]
     empresasLista:Empresa[]=[]
 
@@ -61,7 +60,6 @@ export class CadastroComponent implements OnInit{
 
     ngOnInit():void{
         
-        this.logoLaranja =  './assets/imagens/logoLaranja.png'
         this.cabecalhoEmpresa = this.cabecalhoEmpresa.nativeElement
         this.textoCabecalhoEmpresa = this.cabecalhoEmpresa.children[0]
         this.cabecalhoEmpresa.className = 'cabecalhoNaoSelecionado'
