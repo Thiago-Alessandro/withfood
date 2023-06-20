@@ -56,12 +56,14 @@ export class LoginComponent implements OnInit{
             for(let empresa of this.empresasLista){
                 if(empresa.email == this.email && empresa.senha == this.senha){
                     this.logado = empresa
+                    localStorage.setItem('logado',JSON.stringify(this.logado));
                     window.location.replace("http://localhost:4200/Empresa")
                 }
             }
             for(let cliente of this.clientesLista){
                 if(cliente.email == this.email && cliente.senha == this.senha){
                     this.logado = cliente
+                    localStorage.setItem('logado',JSON.stringify(this.logado));
                     window.location.replace("http://localhost:4200/Cardapio")
                 }      
             }

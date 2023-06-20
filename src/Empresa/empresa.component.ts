@@ -30,8 +30,6 @@ interface Empresa{
 })
 
 
-export class EmpresaComponent{
-
 export class EmpresaComponent implements OnInit{
     logoLaranja:string;
     exibindoCardapio:boolean
@@ -42,3 +40,4 @@ export class EmpresaComponent implements OnInit{
     ngOnInit(): void {
         this.logoLaranja = "./assets/imagens/logoLaranja.png"
     }
+}
