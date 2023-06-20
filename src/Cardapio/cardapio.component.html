@@ -1,30 +1,43 @@
-<nav class="header">
-    <img [src]="logoLaranja" alt="" style="height: 65px;">
-    <a class="a-nav"  (click)="redirecionarParaEmpresa()"><strong style="background-color: #F05D23;"> Empresa </strong></a>
-    <a class="a-nav" (click)="redirecionarParaCardapio()"><strong style="background-color: #F05D23;"> Cardápio </strong></a>
-    <a class="a-nav" (click)="redirecionarParaLogin()"><strong style="background-color: #F05D23;"> Logout </strong></a>
-</nav>
-<div style="display: flex; flex-direction: row; width: 100%; background-color: #242421;">
-    <div style="width: 50%;display: flex; align-items: center; justify-content: right; margin-top: 30px; margin-right: 10px;">
-<!-- <div *ngFor="let cardapio of cardapios"> -->
-    <details>
-    <summary 
-    style="background-color: #F05D23; color: #F2F2F2; width: 400px;
-    border-radius: 5px 5px 0 0; padding: 5px;"
-    >O que eu to fazendo aqui?</summary>
-    <!-- <p *ngFor="let item of items" style="color: aqua;">{{item}} <button (click)="add()">Add</button> {{cliques}} </p> -->
-</details>
-<!-- </div> -->
+<button (click)="mostraPedido()">Mostrar Carrinho</button>
+<div *ngIf="aberto" style="position: absolute; top:0; left: 0; width : 28%;
+ height: 100%; background-color: #F2F2F2;display: flex; flex-direction: column;
+ -webkit-box-shadow: 3px 4px 20px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 3px 4px 20px 0px rgba(0,0,0,0.75);
+box-shadow: 3px 4px 20px 0px rgba(0,0,0,0.75);">
+    <div style="display: flex;justify-content: end;">
+        <button style="display: flex; margin: 20px; position: absolute; 
+background-color: #F2F2F2; border-radius: 5px; color: #F05D23; border: none;font-size: 20px;"
+            (click)="escondePedido()">X</button>
+    </div>
+    <div style="display: flex;justify-content: center; margin-top: 30px;">
+        <h1 style="color: #F05D23; font-weight: bold; font-size: 30px;"><strong> Seu pedido:</strong></h1>
+    </div>
+
+    <div style="display: flex; flex-direction: row; justify-content: center;">
+        <p style="margin-right: 100px; color: #F05D23;"><strong>PRODUTO</strong> </p>
+        <p style="color: #F05D23;"><strong>R$</strong></p>
+    </div>
+    <button (click)="cadastraPedido()">Se pingar o pix, mantem o pique</button>
 </div>
-<div style="width: 50%; display: flex; align-items: center; justify-content: left; margin-top: 30px; margin-left: 10px;">
-    <!-- <div *ngFor="let cardapio of cardapios"> -->
-        <details style="background-color: #F2F2F2;">
-        <summary 
-        style="background-color: #F05D23; color: #F2F2F2; width: 400px;
-        border-radius: 5px 5px 0 0; padding: 5px;"
-        >Ta calma fofa?</summary>
-        <p  style="color: rgb(0, 0, 0);"> Batata Frita 250g <button (click)="add()">Add</button> {{cliques}} </p>
-    </details>
-    <!-- </div> -->
+<div style="display: flex; flex-direction: row; width: 100%; background-color: #EFEFE9; height: 800px;">
+    <div style="width: 50%;display: flex;  justify-content: right; margin-top: 30px; margin-right: 10px;">
+        <!-- <div *ngFor="let cardapio of cardapios"> -->
+        <details>
+            <summary style="background-color: #F05D23; color: #F2F2F2; width: 400px;
+    border-radius: 5px 5px 0 0; padding: 5px;">O que eu to fazendo aqui?</summary>
+            <!-- <p *ngFor="let item of items" style="color: aqua;">{{item}} <button (click)="add()">Add</button> {{cliques}} </p> -->
+        </details>
+        <!-- </div> -->
+    </div>
+    <div style="width: 50%; display: flex; justify-content: left; margin-top: 30px; margin-left: 10px;">
+        <!-- <div *ngFor="let cardapio of cardapios"> -->
+        <details style="background-color: #a5a5a5; height: max-content; border-radius: 5px">
+            <summary style="background-color: #F05D23; color: #F2F2F2; width: 400px;
+        border-radius: 5px 5px 0 0; padding: 5px;">Ta calma fofa?</summary>
+            <!-- *ngFor="let item of itensCardapio; index as indice" {{item}} -->
+            <p style="color: rgb(0, 0, 0);">batata frita <button (click)="adicionaItens(item)">+</button> {{cliques}}
+                <button (click)="removeItens(item)">-</button> </p>
+        </details>
+        <!-- </div> -->
     </div>
 </div>

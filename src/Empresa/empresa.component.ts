@@ -6,12 +6,7 @@ import { Component, OnInit } from "@angular/core";
     //styleUrls: ["./empresa.component.css"]
 })
 
-export class EmpresaComponent implements OnInit{
-    logoLaranja:string;
-
-    ngOnInit(): void {
-        this.logoLaranja = "./assets/imagens/logoLaranja.png"
-    }
+export class EmpresaComponent{
 
     redirecionarParaLogin(){
         window.location.replace('http://localhost:4200/Login')
@@ -23,7 +18,7 @@ export class EmpresaComponent implements OnInit{
         window.location.replace('http://localhost:4200/Empresa')
     }
 
-    exibirCardapio(){
-        this.exibindoCardapio = !this.exibindoCardapio;
-    }
+    // exibirCardapio(){
+    //     this.exibindoCardapio = !this.exibindoCardapio;
+    // }
 }

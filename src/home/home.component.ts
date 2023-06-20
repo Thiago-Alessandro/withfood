@@ -15,7 +15,6 @@ export class HomeComponent implements OnInit{
     logoPequena: string
     email: string
 
-
     ngOnInit(): void {
         this.logoPequena = './assets/imagens/logoPequena.svg'
         this.logoBranca = './assets/imagens/logoBranca.png'
