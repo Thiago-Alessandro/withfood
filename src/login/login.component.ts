@@ -35,6 +35,8 @@ export class LoginComponent implements OnInit{
 
     clientesLista:Cliente[]=[]
     empresasLista:Empresa[]=[]
+    recusado:boolean = false;
+    preenchido:boolean = true;
     
     @Input() logado:Empresa|Cliente = null
 
@@ -68,10 +70,16 @@ export class LoginComponent implements OnInit{
                 }      
             }
             if(this.logado == null){
-                console.log('email ou senha incorretos')
+                this.recusado=true;
+                this.preenchido = true;
+                console.log('Email ou senha incorretos.')
             }
         } else {
-            console.log('todos os campos devem ser preenchidos')
+            this.preenchido = false;
+            this.recusado = false;
+            this.email = '';
+            this.senha = '';
+            console.log('Todos os campos devem ser preenchidos.')
         }
     }
 

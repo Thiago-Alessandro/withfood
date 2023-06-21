@@ -6,7 +6,14 @@
             <input id="email" placeholder="Email" type="text" [(ngModel)]="email">
             <input id="senha" placeholder="Senha" type="password"  [(ngModel)]="senha">
         </div>
+        <div *ngIf="recusado">
+            <p>Email ou senha incorretos, tente novamente</p>
+                    </div>
+        <div *ngIf="!preenchido">
+            <p>Todos os campos devem ser preenchidos</p>
+                    </div>
         <button class="ctaLogin" (click)="verificarLogin()">Logar</button>
+
 
         <div class="cta">
             <p class="textAccount" style="font-weight: bold;">Não tem uma conta?</p>

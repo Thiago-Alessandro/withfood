@@ -14,6 +14,7 @@ export class HomeComponent implements OnInit{
     garfoFaca: string;
     logoPequena: string
     email: string
+    booleanEmpresa: boolean;
 
     ngOnInit(): void {
         this.logoPequena = './assets/imagens/logoPequena.svg'
@@ -26,6 +27,15 @@ export class HomeComponent implements OnInit{
 
     redirecionarParaLogin(){
         window.location.replace('http://localhost:4200/Login')
+    }
+    redirecionarParaCadastro(numero:number){
+        if(numero==1){
+            this.booleanEmpresa = true;
+        localStorage.setItem('booleanAba', JSON.stringify(this.booleanEmpresa));
+        window.location.replace('http://localhost:4200/Cadastro')
+    } else {
+        window.location.replace('http://localhost:4200/Cadastro')
+    }
     }
     redirecionarParaCardapio(){
         window.location.replace('http://localhost:4200/Cardapio')

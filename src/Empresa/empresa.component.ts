@@ -13,6 +13,7 @@ interface Pedido {
     nomeEmpresa:string
     status:string
     precoTotal:number
+    horaAtual: Date;
 
     //ta faltando a data ai
 }
@@ -43,6 +44,7 @@ interface Empresa{
 
 export class EmpresaComponent implements OnInit{
     logoLaranja:string;
+    editar:boolean;
 
     empresaLogada:Empresa
 
@@ -56,6 +58,10 @@ export class EmpresaComponent implements OnInit{
     novoItemNome:string
     novoItemPreco:number
 
+    itemMudanca: Item =  {
+        nomeItem: '',
+        precoItem:0
+    }
     ngOnInit(): void {
         this.logoLaranja = "./assets/imagens/logoLaranja.png"
         //console.log(this.recuperarCardapio())
@@ -111,13 +117,16 @@ export class EmpresaComponent implements OnInit{
         }
         return null
     }
-
-    alterarExibicaoCardapio(){
-        if (this.exibindoCardapio == true){
-        this.exibindoCardapio = false;
-    } else {
+    atualizarAtributos(indice){
+        this.cardapioEmpresa.itensCardapio.splice(indice,1);
+        this.cardapioEmpresa.itensCardapio.push(this.itemMudanca);
+        this.editar=false;
+    }
+    mostraCardapio(){
         this.exibindoCardapio = true;
     }
+    mostraPedido(){
+        this.exibindoCardapio = false;
     }
 
     adicionarNovoItemAoCardapio(){

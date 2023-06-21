@@ -21,6 +21,7 @@ interface Pedido {
     nomeEmpresa: string;
     status:string;
     precoTotal:number;
+    horaAtual:Date;
 }
 interface Item {
     nomeItem:string;
@@ -57,7 +58,8 @@ pedido: Pedido = {
     nomeCliente: '',
     nomeEmpresa: '',
     status: 'A fazer',
-    precoTotal:0
+    precoTotal:0,
+    horaAtual: new Date()
   }
 item: Item = {
     nomeItem: '',
@@ -91,9 +93,8 @@ cadastraPedido(){
         nomeCliente: this.clienteLogado.nome,
         nomeEmpresa: this.nomeDaEmpresa,
         status: 'A fazer',
-        precoTotal: this.calculaPreco()
-
-    
+        precoTotal: this.calculaPreco(),
+        horaAtual: new Date()
       }
       this.pedidosLista.push(pedido);
       localStorage.setItem("pedidos", JSON.stringify(this.pedidosLista));

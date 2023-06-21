@@ -19,6 +19,15 @@
     </div>
 
     <div class="mainCadastroCliente" *ngIf="cadastrandoCliente">
+        <div *ngIf="incadastravelCliente">
+<p>CPF ou Email já foram cadastrados.</p>
+        </div>
+        <div *ngIf="!preenchido">
+<p>Por favor preencha todos os campos.</p>
+        </div>
+        <div *ngIf="!confirmaSenha">
+<p>Sua confirmação de senha não confere.</p>
+        </div>
         <div class="leftInputs">
             <input class="inputCliente" type="text" placeholder="Nome" [(ngModel)]="nome">
             <input class="inputCliente" type="text" placeholder="telefone" [(ngModel)]="telefone">
@@ -38,7 +47,15 @@
         </div>
     </div>
     <div class="mainCadastroEmpresa" *ngIf="!cadastrandoCliente">
-
+        <div *ngIf="incadastravelEmpresa">
+            <p>CPF ou Email já foram cadastrados.</p>
+                    </div>
+                    <div *ngIf="!preenchido">
+            <p>Por favor preencha todos os campos.</p>
+                    </div>
+                    <div *ngIf="!confirmaSenha">
+            <p>Sua confirmação de senha não confere.</p>
+                    </div>
         <div class="leftInputs">
 
             <input class="inputEmpresa" type="text" placeholder="Nome" [(ngModel)]="nome">
