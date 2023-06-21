@@ -5,6 +5,7 @@ interface Cardapio{
     itensCardapio:Item[]
     categoria:string
 }
+
 interface Pedido {
     itens: Item[];
     endereco:string
@@ -26,7 +27,7 @@ interface Empresa{
     numeroContaBancaria:string,
     agencia:string,
     nomeDoResponsavel:string
-    cardapio?:Cardapio
+    //cardapio    :Cardapio
 }
 
 @Component({
@@ -43,28 +44,40 @@ export class EmpresaComponent implements OnInit{
 
     exibindoCardapio:boolean
 
-    cardapiosLista:Cardapio[]
-    itensCardapio:Item[]
-    pedidosLista:Pedido[]
+    cardapiosLista:Cardapio[] = [];
+    //itensCardapio:Item[] = [];
+    pedidosLista:Pedido[] = [];
+    cardapioEmpresa:Cardapio
 
     novoItemNome:string
     novoItemPreco:number
 
     ngOnInit(): void {
         this.logoLaranja = "./assets/imagens/logoLaranja.png"
-
+        //console.log(this.recuperarCardapio())
         let cardapios = JSON.parse(localStorage.getItem('cardapios'))
         if(cardapios){
             this.cardapiosLista = cardapios
-
-            if(JSON.parse(localStorage.getItem('logado'))){
-                this.empresaLogada = JSON.parse(localStorage.getItem('logado'))
-            
-                this.empresaLogada.cardapio = this.recuperarCardapio()
-            
-                this.itensCardapio = this.empresaLogada.cardapio.itensCardapio
-            }
         }
+        if(JSON.parse(localStorage.getItem('logado'))){
+            this.empresaLogada = JSON.parse(localStorage.getItem('logado'))
+
+            this.cardapioEmpresa = {
+                nomeEmpresa: this.empresaLogada.nome,
+                itensCardapio:[],
+                categoria:""
+            }
+
+            
+            console.log(this.cardapioEmpresa)
+            if(this.recuperarCardapio()){
+                this.cardapioEmpresa = this.recuperarCardapio()
+            }
+            // if(this.empresaLogada.cardapio){
+            // this.itensCardapio = this.empresaLogada.cardapio.itensCardapio
+            // }
+        }
+        
         this.pedidosLista = null // setar p n duplicar qnd roda dnv
         let pedidos = JSON.parse(localStorage.getItem('pedidos'))
         if(pedidos){//verifica se n ta nulo
@@ -95,11 +108,21 @@ export class EmpresaComponent implements OnInit{
     }
 
     adicionarNovoItemAoCardapio(){
+        //console.log(this.novoItemPreco)
         let novoItem:Item = {
             nomeItem: this.novoItemNome,
             precoItem: this.novoItemPreco
         }
-        this.itensCardapio.push(novoItem)
+
+        console.log(this.cardapioEmpresa)
+
+        this.cardapioEmpresa.itensCardapio.push(novoItem)
+        // if(this.cardapioEmpresa.itensCardapio){
+        //     this.empresaLogada.cardapio.itensCardapio = this.itensCardapio
+        // }
+        this.cardapiosLista.push(this.cardapioEmpresa)
+
+        localStorage.setItem('cardapios',JSON.stringify(this.cardapiosLista))
     }
 
 }
