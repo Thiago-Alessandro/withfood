@@ -17,6 +17,10 @@ interface Cliente{
 interface Pedido {
     itens: Item[];
     endereco: string;
+    nomeCliente: string;
+    nomeEmpresa: string;
+    status:string;
+    precoTotal:number;
 }
 interface Item {
     nomeItem:string;
@@ -35,6 +39,8 @@ pedidosLista: Pedido[] = [];
 itensPedido: Item[] = [];
 clienteLogado: Cliente
 cardapiosLista:Cardapio[];
+nomeDaEmpresa: string;
+preco:number = 0;
 
 
 ngOnInit(): void {
@@ -47,7 +53,11 @@ ngOnInit(): void {
 
 pedido: Pedido = {
     itens: null,
-    endereco: ''
+    endereco: '',
+    nomeCliente: '',
+    nomeEmpresa: '',
+    status: 'A fazer',
+    precoTotal:0
   }
 item: Item = {
     nomeItem: '',
@@ -61,19 +71,12 @@ escondePedido(){
     this.aberto = false
 }
 
-adicionaItens(item:Item){
-    // const item: Item = {
-    //     nomeItem:this.item.nomeItem,
-    //     precoItem:this.item.precoItem
-    // }
-    console.log(item)
+adicionaItens(item:Item, nomeEmpresaCardapio: string){
+    console.log("mostrando o cardapio todo")
+    console.log(nomeEmpresaCardapio)
+    this.nomeDaEmpresa = nomeEmpresaCardapio;
     this.itensPedido.push(item)
-//     if (this.cliques>=1){
-//         this.cliques+=1;
-//     } else {
-//     this.cliques=0;
-//     this.cliques+=1;
-// }
+
 }
 removeItens(item: Item){
 this.itensPedido.splice(this.itensPedido.indexOf(item),1);
@@ -84,10 +87,27 @@ this.itensPedido.splice(this.itensPedido.indexOf(item),1);
 cadastraPedido(){
     const pedido: Pedido = {
         itens: this.itensPedido,
-        endereco: this.clienteLogado.endereco
+        endereco: this.clienteLogado.endereco,
+        nomeCliente: this.clienteLogado.nome,
+        nomeEmpresa: this.nomeDaEmpresa,
+        status: 'A fazer',
+        precoTotal: this.calculaPreco()
+
+    
       }
-      this.pedidosLista.push(this.pedido);
+      this.pedidosLista.push(pedido);
       localStorage.setItem("pedidos", JSON.stringify(this.pedidosLista));
       this.itensPedido = null;
+      this.preco=0;
+}
+calculaPreco() : number{
+    this.preco=0;
+if(this.itensPedido){
+    for(let i = 0; i <this.itensPedido.length;i++){
+        console.log(this.itensPedido[i].precoItem)
+        this.preco += this.itensPedido[i].precoItem;
+    }
+}
+    return this.preco;
 }
 }

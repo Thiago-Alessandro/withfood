@@ -9,7 +9,11 @@ interface Cardapio{
 interface Pedido {
     itens: Item[];
     endereco:string
+    nomeCliente:string
     nomeEmpresa:string
+    status:string
+    precoTotal:number
+
     //ta faltando a data ai
 }
 
@@ -42,7 +46,7 @@ export class EmpresaComponent implements OnInit{
 
     empresaLogada:Empresa
 
-    exibindoCardapio:boolean
+    exibindoCardapio:boolean = true;
 
     cardapiosLista:Cardapio[] = [];
     //itensCardapio:Item[] = [];
@@ -78,11 +82,16 @@ export class EmpresaComponent implements OnInit{
             // }
         }
         
-        this.pedidosLista = null // setar p n duplicar qnd roda dnv
+        this.pedidosLista = []; // setar p n duplicar qnd roda dnv
         let pedidos = JSON.parse(localStorage.getItem('pedidos'))
         if(pedidos){//verifica se n ta nulo
+            console.log("entrei no if")
             for(let pedido of pedidos){//passa por cada um
+                console.log("entrei no for")
+                console.log(pedido.nomeEmpresa)
                 if(pedido.nomeEmpresa == this.empresaLogada.nome){//verifica se o pedido é dessa empresa logada msm
+                    console.log("entrei no if da empresa")
+                    console.log(pedido)
                     this.pedidosLista.push(pedido)  //adiciona na lista
                 }
             }
@@ -104,7 +113,11 @@ export class EmpresaComponent implements OnInit{
     }
 
     alterarExibicaoCardapio(){
-        this.exibindoCardapio = !this.exibindoCardapio
+        if (this.exibindoCardapio == true){
+        this.exibindoCardapio = false;
+    } else {
+        this.exibindoCardapio = true;
+    }
     }
 
     adicionarNovoItemAoCardapio(){
