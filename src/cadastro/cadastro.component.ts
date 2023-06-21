@@ -30,6 +30,11 @@ export class CadastroComponent implements OnInit{
 
     clientesLista:Cliente[]=[]
     empresasLista:Empresa[]=[]
+    incadastravelEmpresa: boolean = false;
+    incadastravelCliente: boolean = false;
+    preenchido:boolean = true;
+    confirmaSenha: boolean = true;
+    // abaEmpresa: boolean;
 
     //variaveis em comum Empresa  e Cliente
     nome:string = ""
@@ -53,13 +58,19 @@ export class CadastroComponent implements OnInit{
    //pega a div com o #cabecalhoEmpresa e coloca numa variavel de mesmo nome
     @ViewChild('cabecalhoEmpresa') cabecalhoEmpresa;
     //inicia uma variavel que vai ter o texto do cabecalho (o elemento 'p' do html)
-    textoCabecalhoEmpresa
+    textoCabecalhoEmpresa;
 
     @ViewChild('cabecalhoCliente') cabecalhoCliente;
-    textoCabecalhoCliente
+    textoCabecalhoCliente;
 
     ngOnInit():void{
-        
+        // let aba = localStorage.getItem('booleanAba');
+        // this.abaEmpresa =JSON.parse(aba);
+        // if(this.abaEmpresa ==  true){
+        //     console.log("entrei")
+        //     this.selecionarCadastroEmpresa()
+        // }
+        // console.log(this.abaEmpresa)
         this.cabecalhoEmpresa = this.cabecalhoEmpresa.nativeElement
         this.textoCabecalhoEmpresa = this.cabecalhoEmpresa.children[0]
         this.cabecalhoEmpresa.className = 'cabecalhoNaoSelecionado'
@@ -80,6 +91,13 @@ export class CadastroComponent implements OnInit{
             this.empresasLista = JSON.parse(empresas)
         }
     }
+
+    // mostraCliente(){
+    //     this.abaEmpresa = false;
+    // }
+    // mostraEmpresa(){
+    //     this.abaEmpresa = true;
+    // }
 
     selecionarCadastroEmpresa():void{
 
@@ -105,9 +123,28 @@ export class CadastroComponent implements OnInit{
 
     cadastrarEmpresa():void{
 
+        for (let i=0; i<this.empresasLista.length;i++){
+            if (this.empresasLista.length>=1){
+            if (this.empresasLista[i].cnpj == this.cnpj){
+                this.incadastravelEmpresa = true;
+            }
+            if (this.empresasLista[i].email == this.email){
+                this.incadastravelEmpresa = true;
+            }
+        }
+        if (this.clientesLista.length>=1){
+        if ( this.clientesLista[i].email == this.email){
+            this.incadastravelEmpresa = true;
+        }
+    }
+        }
+
+        if (this.incadastravelEmpresa==false){
         if(this.verificarCamposPreenchidosEmpresa()){
 
             if(this.verificarSenhaConfirmada(this.senha, this.confirmacaoSenha)){
+
+
 
                 let empresaCadastrada:Empresa = {
                     
@@ -133,22 +170,54 @@ export class CadastroComponent implements OnInit{
                 this.numeroContaBancaria = ""
                 this.agencia = ""
                 this.nomeDoResponsavelDaEmpresa = ""
-
+                this.incadastravelCliente = false;
+                this.confirmaSenha = true;
+                this.preenchido = true;
                 window.location.replace("http://localhost:4200/Login")
 
             }else{
-                console.log("A sua senha deve ser a mesma em ambos os inputs")
+                this.preenchido = true;
+                this.confirmaSenha = false;
                 this.confirmacaoSenha = ""
             }
         }else{
-            console.log("preencha todos os campos")
+            this.incadastravelEmpresa = false;
+           this.preenchido = false;
         }
+    } else {
+        this.cnpj = ''
+        this.email = ''
     }
+}
   
     cadastrarCliente():void{
+        for (let i=0; i<this.clientesLista.length;i++){
+            console.log("entrei no for")
+           if (this.clientesLista.length>=1){
+            console.log("entrei no if length")
+            if (this.clientesLista[i].cpf == this.cpf){
+                console.log("entrei no if cpf")
+                this.incadastravelCliente = true;
+            }
+            console.log(this.clientesLista[i].email)
+            if (this.clientesLista[i].email == this.email){
+                console.log("entrei no if email clientes")
 
+                this.incadastravelCliente = true;
+            }
+        } 
+        if (this.empresasLista.length>=1){
+            if (this.empresasLista[i].email == this.email){
+                this.incadastravelCliente == true;
+            }
+        }
+        }
+
+        if (this.incadastravelCliente==false){
         if(this.verificarCamposPreenchidosCliente()){
             if(this.verificarSenhaConfirmada(this.senha,this.confirmacaoSenha)){
+
+                
                 let clienteCadastrado:Cliente = {
 
                     nome:this.nome,
@@ -170,17 +239,25 @@ export class CadastroComponent implements OnInit{
                 this.senha = ""
                 this.confirmacaoSenha = ""
                 this.Endereco = ""
-
+                this.incadastravelCliente = false;
+                this.confirmaSenha = true;
+                this.preenchido = true;
                 window.location.replace("http://localhost:4200/Login")
 
             }else{
-                console.log("A sua senha deve ser a mesma em ambos os inputs")
+                this.preenchido = true;
+                this.confirmaSenha = false;
                 this.confirmacaoSenha = ""
             }
         }else{
-            console.log("preencha todos os campos")
+            this.incadastravelCliente = false;
+            this.preenchido = false;
         }
-        
+    } else {
+        this.cpf = ''
+        this.email = ''
+    }
+
     }
     
     verificarCamposPreenchidosCliente():boolean{
