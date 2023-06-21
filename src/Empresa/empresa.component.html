@@ -10,7 +10,8 @@
         Pedidos
     </div>
 </div>
-
+<div>
+ 
 <div *ngIf="!exibindoCardapio" style="background-color: orangered;">
     <div *ngFor="let pedido of pedidosLista">
 
@@ -29,6 +30,15 @@
         <input placeholder="novo item" type="text" [(ngModel)]="novoItemNome" style="width:100px;height: 25px;">
         <input placeholder="preço" type="number" [(ngModel)]="novoItemPreco" style="width:100px; height: 25px;">
         <button (click)="adicionarNovoItemAoCardapio()">adicionar</button>
+    </div>
+    <select [(ngModel)]="cardapioEmpresa.categoria" class="select" style="margin-right: 50px;">
+        <option value="Pizzas">Pizzas</option>
+        <option value="Lanches">Lanches</option>
+        <option value="Massas">Massas</option>
+        <option value="Doces">Doces</option>
+        <option value="Prato feito">Prato feito</option>    
+        <option value="Bebidas">Bebidas</option>    
+      </select>
     </div>
     
 </div>

@@ -31,8 +31,8 @@ interface Item {
 export class CardapioComponent implements OnInit  {
     aberto:boolean = false;
 cliques:number
-pedidosLista: Pedido[];
-itensPedido: Item[];
+pedidosLista: Pedido[] = [];
+itensPedido: Item[] = [];
 clienteLogado: Cliente
 cardapiosLista:Cardapio[];
 
@@ -61,18 +61,19 @@ escondePedido(){
     this.aberto = false
 }
 
-adicionaItens(){
-    const item: Item = {
-        nomeItem:this.item.nomeItem,
-        precoItem:this.item.precoItem
-    }
+adicionaItens(item:Item){
+    // const item: Item = {
+    //     nomeItem:this.item.nomeItem,
+    //     precoItem:this.item.precoItem
+    // }
+    console.log(item)
     this.itensPedido.push(item)
-    if (this.cliques>=1){
-        this.cliques+=1;
-    } else {
-    this.cliques=0;
-    this.cliques+=1;
-}
+//     if (this.cliques>=1){
+//         this.cliques+=1;
+//     } else {
+//     this.cliques=0;
+//     this.cliques+=1;
+// }
 }
 removeItens(item: Item){
 this.itensPedido.splice(this.itensPedido.indexOf(item),1);

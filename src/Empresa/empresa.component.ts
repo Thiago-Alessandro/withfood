@@ -121,7 +121,7 @@ export class EmpresaComponent implements OnInit{
         //     this.empresaLogada.cardapio.itensCardapio = this.itensCardapio
         // }
         this.cardapiosLista.push(this.cardapioEmpresa)
-
+        localStorage.removeItem('cardapios')
         localStorage.setItem('cardapios',JSON.stringify(this.cardapiosLista))
     }
 
