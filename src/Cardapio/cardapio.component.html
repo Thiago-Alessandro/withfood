@@ -44,7 +44,9 @@
         <!-- <div *ngFor="let cardapio of cardapios"> -->
         <details class="abreCardapio"*ngIf="indice%2==0 && categoriaFiltro == cardapio.categoria || categoriaFiltro=='Tudo'">
             <summary class="quadradoCardapio">{{cardapio.nomeEmpresa}}</summary>
-            <p *ngFor="let item of cardapio.itensCardapio;index as indice;" class="escritaItem">{{item.nomeItem}} R$ {{item.precoItem}} <button (click)="adicionaItens(item, cardapio.nomeEmpresa)">Add</button></p>
+            <p *ngFor="let item of cardapio.itensCardapio;index as indice;" class="escritaItem">{{item.nomeItem}} R$ {{item.precoItem}}
+                 <button (click)="adicionaItens(item, cardapio.nomeEmpresa)">Add</button>
+                 <button (click)="removeItens(item)">Remove</button></p>
         </details>
         <!-- </div> -->
     </div>

@@ -1,65 +1,72 @@
-<div *ngIf="empresaLogada!=undefined || empresaLogada != null">
+<div *ngIf="empresaLogada!=undefined && empresaLogada != null && empresaLogada.cnpj">
     <h1>{{empresaLogada.nome}}</h1>
-</div>
 
-<div style="display: flex;justify-content: center;">
-    <div (click)="mostraCardapio()" style="background-color:white; width:100%;display: flex;justify-content: center;">
-        Cardapio da empresa
-    </div>
-    <div (click)="mostraPedido()" style="background-color:orangered; width:100%;display: flex;justify-content: center;">
-        Pedidos
-    </div>
-</div>
-<div>
-
-    <div *ngIf="!exibindoCardapio" style="background-color: orangered;">
-        <p>to nos pedidos</p>
-        <div *ngFor="let pedido of pedidosLista">
-            <h3>entrei aqui</h3>
-            <div>
-                <h6>Produtos</h6>
-                <div *ngFor="let item of pedido.itens">
-                    <p>{{item.nomeItem}}</p>
-                </div>
-                <p> <strong>Endereço:</strong> {{pedido.endereco}}</p>
-                <p><strong>Nome do cliente:</strong> {{pedido.nomeCliente}}</p>
-                <p><strong>Hora do pedido</strong> {{ pedido.horaAtual | date:'HH:mm:ss' }}</p>
-            </div>
+    <div style="display: flex;justify-content: center;">
+        <div (click)="mostraCardapio()"
+            style="background-color:white; width:100%;display: flex;justify-content: center;">
+            Cardapio da empresa
         </div>
-
-    </div>
-
-    <div *ngIf="exibindoCardapio">
-
-        <div>
-            <input placeholder="novo item" type="text" [(ngModel)]="novoItemNome" style="width:100px;height: 25px;">
-            <input placeholder="preço" type="number" [(ngModel)]="novoItemPreco" style="width:100px; height: 25px;">
-            <button (click)="adicionarNovoItemAoCardapio()">adicionar</button>
+        <div (click)="mostraPedido()"
+            style="background-color:orangered; width:100%;display: flex;justify-content: center;">
+            Pedidos
         </div>
-        <select [(ngModel)]="cardapioEmpresa.categoria" class="select" style="margin-right: 50px;">
-            <option value="Pizzas">Pizzas</option>
-            <option value="Lanches">Lanches</option>
-            <option value="Massas">Massas</option>
-            <option value="Doces">Doces</option>
-            <option value="Prato feito">Prato feito</option>
-            <option value="Bebidas">Bebidas</option>
-            <option value="Tudo" selected>Sem definição de categorias</option>
-        </select>
-        <div *ngFor="let item of cardapioEmpresa.itensCardapio;index as indice" style="display: flex; flex-direction: row;">
-            <div style="margin-right: 30px;">
-                <p>Nome do item: {{item.nomeItem}}</p>
-            </div>
-            <div>
-                <p>Preço do item: {{item.precoItem}}</p>
-            </div>
-            <div>
-                <button (click)="editar=true;">Editar atributos</button>
-                <div *ngIf="editar" style="display: flex; flex-direction: row;">
-                <input [(ngModel)]="itemMudanca.nomeItem" type="text" placeholder="Edite o nome">
-                <input [(ngModel)]="itemMudanca.precoItem" type="number" placeholder="Edite o preço">
-                <button (click)="atualizarAtributos(indice)">Confirmar alterações</button>
+    </div>
+    <div>
+
+        <div *ngIf="!exibindoCardapio" style="background-color: orangered;">
+            <p>to nos pedidos</p>
+            <div *ngFor="let pedido of pedidosLista">
+                <h3>entrei aqui</h3>
+                <div>
+                    <h6>Produtos</h6>
+                    <div *ngFor="let item of pedido.itens">
+                        <p>{{item.nomeItem}}</p>
+                    </div>
+                    <p> <strong>Endereço:</strong> {{pedido.endereco}}</p>
+                    <p><strong>Nome do cliente:</strong> {{pedido.nomeCliente}}</p>
+                    <p><strong>Hora do pedido</strong> {{ pedido.horaAtual | date:'HH:mm:ss' }}</p>
                 </div>
             </div>
+
         </div>
 
+        <div *ngIf="exibindoCardapio">
+
+            <div>
+                <input placeholder="novo item" type="text" [(ngModel)]="novoItemNome" style="width:100px;height: 25px;">
+                <input placeholder="preço" type="number" [(ngModel)]="novoItemPreco" style="width:100px; height: 25px;">
+                <button (click)="adicionarNovoItemAoCardapio()">adicionar</button>
+            </div>
+            <select [(ngModel)]="cardapioEmpresa.categoria" class="select" style="margin-right: 50px;">
+                <option value="Pizzas">Pizzas</option>
+                <option value="Lanches">Lanches</option>
+                <option value="Massas">Massas</option>
+                <option value="Doces">Doces</option>
+                <option value="Prato feito">Prato feito</option>
+                <option value="Bebidas">Bebidas</option>
+                <option value="Tudo" selected>Sem definição de categorias</option>
+            </select>
+            <div *ngFor="let item of cardapioEmpresa.itensCardapio;index as indice"
+                style="display: flex; flex-direction: row;">
+                <div style="margin-right: 30px;">
+                    <p>Nome do item: {{item.nomeItem}}</p>
+                </div>
+                <div>
+                    <p>Preço do item: {{item.precoItem}}</p>
+                </div>
+                <div>
+                    <button (click)="editarAtributos(indice);">Editar atributos</button>
+                    <button (click)="removerAtributos(indice);">Remover atributos</button>
+                    <div *ngIf="editar && itemEditando==item" style="display: flex; flex-direction: row;">
+                        <input [(ngModel)]="nomeItemAMudar" type="text" placeholder="Edite o nome">
+                        <input [(ngModel)]="precoItemAMudar" type="number" placeholder="Edite o preço">
+                        <button (click)="atualizarAtributos()">Confirmar alterações</button>
+                        <div *ngIf="!preenchido">
+                            <p>Preencha todos os campos</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+</div>

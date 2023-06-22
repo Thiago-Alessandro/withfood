@@ -78,6 +78,7 @@ adicionaItens(item:Item, nomeEmpresaCardapio: string){
     console.log(nomeEmpresaCardapio)
     this.nomeDaEmpresa = nomeEmpresaCardapio;
     this.itensPedido.push(item)
+    
 
 }
 removeItens(item: Item){
