@@ -19,9 +19,9 @@
     </div>
 
     <div class="mainCadastroCliente" *ngIf="cadastrandoCliente">
-        <div *ngIf="incadastravelCliente">
-<p>CPF ou Email já foram cadastrados.</p>
-        </div>
+        <!-- <div *ngIf="incadastravelCliente">
+<p>CPF ou Email já foram cadastrados.</p> -->
+        <!-- </div> -->
         <div *ngIf="!preenchido">
 <p>Por favor preencha todos os campos.</p>
         </div>
@@ -70,7 +70,7 @@
             <input class="inputEmpresa" type="text" placeholder="Email" [(ngModel)]="email">
             <input class="inputEmpresa" type="text" placeholder="Cnpj" [(ngModel)]="cnpj">
             <input class="inputEmpresa" type="text" placeholder="Confirmar Senha" [(ngModel)]="confirmacaoSenha">
-            <input class="inputEmpresa agenciaInput" type="text" placeholder="Agencia" [(ngModel)]="Agencia">
+            <input class="inputEmpresa agenciaInput" type="text" placeholder="Agencia" [(ngModel)]="agencia">
             <br>
             <button class="buttonCadastro" (click)="cadastrarEmpresa()">Confirmar</button>
         </div>

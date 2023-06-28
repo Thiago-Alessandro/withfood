@@ -12,6 +12,7 @@
         <p>{{item.nomeItem}}</p>
         <p>{{item.precoItem}}</p>
     </div>
+    
     <div style="display: flex; flex-direction: row; justify-content: center;">
         <p style="margin-right: 100px; color: #F05D23;"><strong>PRODUTO</strong> </p>
         <p style="color: #F05D23;"><strong>R$</strong></p>
@@ -47,6 +48,15 @@
             <p *ngFor="let item of cardapio.itensCardapio;index as indice;" class="escritaItem">{{item.nomeItem}} R$ {{item.precoItem}}
                  <button (click)="adicionaItens(item, cardapio.nomeEmpresa)">Add</button>
                  <button (click)="removeItens(item)">Remove</button></p>
+                 <p>Avalie o cardápio: </p> 
+    <select class="select" [(ngModel)]="cardapio.avaliacao">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+    </select>
+    <button (click)="avaliar(cardapio)">Enviar avaliação</button>
         </details>
         <!-- </div> -->
     </div>

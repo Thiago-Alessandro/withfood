@@ -1,7 +1,21 @@
 
 import { JsonPipe } from "@angular/common";
 import { Component, Input, OnInit } from "@angular/core";
+interface Pedido {
+    itens: Item[];
+    endereco: string
+    nomeCliente: string
+    nomeEmpresa: string
+    status: string
+    precoTotal: number
+    horaAtual: Date;
+}
 
+
+interface Item {
+    nomeItem: string;
+    precoItem: number;
+}
 
 interface Cliente{
     nome:string,
@@ -10,6 +24,7 @@ interface Cliente{
     cpf:string,
     senha:string,
     endereco:string,
+    historico: Pedido[];
 }
 
 interface Empresa{

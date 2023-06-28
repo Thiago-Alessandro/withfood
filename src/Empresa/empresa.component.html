@@ -25,6 +25,13 @@
                     <p> <strong>Endereço:</strong> {{pedido.endereco}}</p>
                     <p><strong>Nome do cliente:</strong> {{pedido.nomeCliente}}</p>
                     <p><strong>Hora do pedido</strong> {{ pedido.horaAtual | date:'HH:mm:ss' }}</p>
+                    <select [(ngModel)]="pedido.status" class="select" style="margin-right: 50px;">
+                        <option value="Em espera">Em espera</option>
+                        <option value="Em andamento">Em andamento</option>
+                        <option value="Entregando">Pedido enviado para Entrega</option>
+                        <option value="Concluido">Concluído</option> 
+                    </select>
+                    <button (click)="alterarStatus(pedido)">Alterar status</button>
                 </div>
             </div>
 

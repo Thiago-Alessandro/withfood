@@ -5,6 +5,8 @@ interface Cardapio {
     nomeEmpresa: string;
     itensCardapio:string[];
     categoria: string;
+    avaliacao:number;
+    listaAvaliacao: number[];
 }
 interface Cliente{
     nome:string,
@@ -12,7 +14,8 @@ interface Cliente{
     telefone:string,
     cpf:string,
     senha:string,
-    endereco:string
+    endereco:string,
+    historico: Pedido[];
 }
 interface Pedido {
     itens: Item[];
@@ -44,6 +47,8 @@ nomeDaEmpresa: string;
 preco:number = 0;
 
 
+
+
 ngOnInit(): void {
     const logado = localStorage.getItem('logado');
     this.clienteLogado = JSON.parse(logado);
@@ -52,12 +57,19 @@ ngOnInit(): void {
 
 }
 
+// avaliar(cardapioAv : Cardapio){
+//     cardapioAv.listaAvaliacao.push(cardapioAv.avaliacao)
+// }
+
+
+
+
 pedido: Pedido = {
     itens: null,
     endereco: '',
     nomeCliente: '',
     nomeEmpresa: '',
-    status: 'A fazer',
+    status: 'Em espera',
     precoTotal:0,
     horaAtual: new Date()
   }
@@ -78,8 +90,7 @@ adicionaItens(item:Item, nomeEmpresaCardapio: string){
     console.log(nomeEmpresaCardapio)
     this.nomeDaEmpresa = nomeEmpresaCardapio;
     this.itensPedido.push(item)
-    
-
+   
 }
 removeItens(item: Item){
 this.itensPedido.splice(this.itensPedido.indexOf(item),1);
@@ -99,7 +110,7 @@ cadastraPedido(){
       }
       this.pedidosLista.push(pedido);
       localStorage.setItem("pedidos", JSON.stringify(this.pedidosLista));
-      this.itensPedido = null;
+      this.itensPedido = [];
       this.preco=0;
 }
 calculaPreco() : number{

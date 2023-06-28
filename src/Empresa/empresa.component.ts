@@ -4,6 +4,7 @@ interface Cardapio {
     nomeEmpresa: string
     itensCardapio: Item[]
     categoria: string
+    avaliacao:number;
 }
 
 interface Pedido {
@@ -14,8 +15,6 @@ interface Pedido {
     status: string
     precoTotal: number
     horaAtual: Date;
-
-    //ta faltando a data ai
 }
 
 
@@ -59,6 +58,8 @@ export class EmpresaComponent implements OnInit {
     novoItemNome: string
     novoItemPreco: number
     indiceMudancaAtributo: number;
+    pedidosConcluidos: Pedido[] = [];
+    // statusPedido = '';
 
     // itemMudanca: Item =  {
     //     nomeItem: '',
@@ -79,7 +80,9 @@ export class EmpresaComponent implements OnInit {
             this.cardapioEmpresa = {
                 nomeEmpresa: this.empresaLogada.nome,
                 itensCardapio: [],
-                categoria: ""
+                categoria: "",
+                avaliacao: null
+                // CUIDADO COM O NULL
             }
 
 
@@ -113,6 +116,23 @@ export class EmpresaComponent implements OnInit {
 
         // this.itensCardapio = this.logado.cardapio.itensCardapio
     }
+
+    
+    alterarStatus(pedidoMuda:Pedido){
+        // this.pedidosLista.splice(this.pedidosLista.indexOf(pedidoMuda),1)
+        // this.pedidosLista.push(pedidoMuda)
+        if (pedidoMuda.status=='Concluido'){
+            if (this.pedidosConcluidos.length==3){
+                this.pedidosConcluidos.splice(0,1)
+            }
+            this.pedidosConcluidos.push(pedidoMuda)
+            localStorage.setItem("pedidosConcluidos", JSON.stringify(this.pedidosConcluidos))
+     this.pedidosLista.splice(this.pedidosLista.indexOf(pedidoMuda),1)
+        }
+        localStorage.setItem('pedidos', JSON.stringify(this.pedidosLista))
+    }
+
+
     recuperarCardapio(): Cardapio {
         for (let cardapio of this.cardapiosLista) {
             if (cardapio.nomeEmpresa == this.empresaLogada.nome) {
