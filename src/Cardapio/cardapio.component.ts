@@ -52,6 +52,7 @@ nomeDaEmpresa: string;
 preco:number = 0;
 pesquisa: string;
 modoPesquisa: boolean  = false;
+categoriaFiltro: string = 'Tudo'
 
 pesquisar(){
 this.modoPesquisa = true
