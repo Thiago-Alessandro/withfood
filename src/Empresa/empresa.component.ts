@@ -203,10 +203,10 @@ verificarEmpresa(){
         this.nomeItemAMudar = itemDoFor.nomeItem;
         this.precoItemAMudar = itemDoFor.precoItem;
         console.log("itemMudança")
-        // console.log(this.itemMudanca)
+        
     }
     adicionarNovoItemAoCardapio() {
-        //console.log(this.novoItemPreco)
+
         let novoItem: Item = {
             nomeItem: this.novoItemNome,
             precoItem: this.novoItemPreco
@@ -215,13 +215,25 @@ verificarEmpresa(){
         console.log(this.cardapioEmpresa)
 
         this.cardapioEmpresa.itensCardapio.push(novoItem)
-        // if(this.cardapioEmpresa.itensCardapio){
-        //     this.empresaLogada.cardapio.itensCardapio = this.itensCardapio
-        // }
-        console.log(this.cardapiosLista.indexOf(this.cardapioEmpresa))
-        this.cardapiosLista.splice(this.cardapiosLista.indexOf(this.cardapioEmpresa), 1)
-        this.cardapiosLista.push(this.cardapioEmpresa)
-        localStorage.removeItem('cardapios')
+
+        let empresaComCardapioRegistrado:boolean = false
+        if(this.cardapiosLista.length == 0){
+            this.cardapiosLista.push(this.cardapioEmpresa)
+            empresaComCardapioRegistrado = true
+        } else {
+            for(let cardapio of this.cardapiosLista){
+                if(cardapio.nomeEmpresa === this.empresaLogada.nome){
+                    empresaComCardapioRegistrado = true
+                }
+            }
+        }
+        if(!empresaComCardapioRegistrado){
+            this.cardapiosLista.push(this.cardapioEmpresa)
+            console.log('foi eee')
+        }
+        
+        console.log("this.cardapiosLista")
+        console.log(this.cardapiosLista)
         localStorage.setItem('cardapios', JSON.stringify(this.cardapiosLista))
 
         this.novoItemNome = ""

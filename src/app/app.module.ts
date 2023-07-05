@@ -8,6 +8,7 @@ import { CadastroModule } from 'src/cadastro/cadastro.module';
 import { LoginModule } from 'src/login/login.module';
 import { CardapioModule } from 'src/Cardapio/cardapio.module';
 import { EmpresaModule } from 'src/Empresa/empresa.module';
+import { AuthguardService } from 'src/services/auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,7 @@ import { EmpresaModule } from 'src/Empresa/empresa.module';
     EmpresaModule
 
   ],
-  providers: [],
+  providers: [AuthguardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

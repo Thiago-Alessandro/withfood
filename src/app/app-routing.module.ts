@@ -5,6 +5,20 @@ import { HomeComponent } from "../home/home.component";
 import { LoginComponent } from "src/login/login.component";
 import { CardapioComponent } from "src/Cardapio/cardapio.component";
 import { EmpresaComponent } from "src/Empresa/empresa.component";
+import { AuthguardService } from "src/services/auth-guard.service";
+
+interface Empresa {
+    nome: string,
+    email: string,
+    telefone: string,
+    cnpj: string,
+    senha: string,
+    numeroContaBancaria: string,
+    agencia: string,
+    nomeDoResponsavel: string
+    //cardapio    :Cardapio
+}
+
 
 const rotas:Route[] = [
     {
@@ -25,7 +39,10 @@ const rotas:Route[] = [
     },
     {
         path:'Empresa',
-        component: EmpresaComponent
+        component: EmpresaComponent,
+        canActivate: [AuthguardService]
+        
+        
     },
     {
         path:'',
