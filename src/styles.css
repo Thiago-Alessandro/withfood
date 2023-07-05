@@ -8,7 +8,9 @@
     box-sizing: border-box;
     font-family: 'Montserrat', sans-serif;
 }
-
+.cursor-pointer{
+    cursor: pointer;
+}
 body {
     width: 100%;
 }
@@ -404,6 +406,7 @@ background-color: #F2F2F2; border-radius: 5px; color: #F05D23; border: none;font
 .quadradoCardapio{
     background-color: #F05D23; color: #F2F2F2; width: 400px; height: 40px;
         border-radius: 5px 5px 5px 5px; padding: 5px;
+
 }
 .mainCardapio{
     display: flex; flex-direction: row; width: 100%; background-color: #EFEFE9; height: 800px;
@@ -416,15 +419,128 @@ margin-left: 10px;
 justify-content: left;
 }
 .abreCardapio{
-    background-color: #a5a5a5; height: max-content; border-radius: 5px; align-items: center;
+
+    background-color: #F05D23; height: max-content; border-radius: 5px; align-items: center;
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
 }
 .escritaItem{
-    color: #121212;
+    color: #F2F2F2;
+    margin-bottom: 10px;
+    align-content: center;
 }
 .inicioCardapio{
     display: flex;
+    flex-direction: row;
     justify-content: center;
+    align-items: center;
     background-color: #EFEFE9;
     padding-top: 20px;
 }
+.btn-pedido{
+    background-color: #F05D23;
+    color: #F2F2F2;
+    width: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    height: 30px;
+    border-radius: 5px;
+}
+.btn-search{
+    background-color: #F05D23;
+    color: #F2F2F2;
+    border: none;
+    width: 150px;
+    height: 25px;
+    border-radius: 5px;
+    padding: 2px;
+}
+.opt-item{
+    height: 20px;
+    background-color: #F2F2F2;
+    color: #F05D23;
+    font-weight: bold;
+    width: 70px;
+    border: none;
+    border-radius: 3px;
+}
+.selectCardapio{
+    border: none;
+    height: 20px;
+    background-color: #F2F2F2;
+    margin-right:10px ;
+    border-radius: 2px;
+}
 /*CARDÁPIO*/
+
+.empresa-tela{
+height: 100vh;
+background-color: #EFEFE9;
+}
+.title-empresa{
+    color: #F05D23;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+.header-empresa{
+    display: flex;
+    justify-content: center;
+    height: 40px;
+}
+.pedidos-empresa{
+    background-color: #F05D23;
+    height: 100vh;
+}
+.empresa-adicionarItem{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 30px;
+    flex-direction: column;
+}
+.addItem{
+    width: 150px;
+    height: 20px;
+    border-radius: 3px;
+}
+.addItemGroup{
+display: flex;
+justify-content: center;
+align-items: center;
+gap: 15px;
+}
+.button-add{
+    height: 40px;
+    width: 90px;
+    background-color: #F05D23;
+    color: #f2f2f2;
+    border: none;
+    border-radius: 3px;
+}
+.mainCadastroItem{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.btnAlterar{
+    background-color: #F05D23;
+    color: #f2f2f2;
+    font-weight: bold;
+    border: none;
+    width: 200px;
+    height: 22px;
+    border-radius: 3px;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.coisasPedido{
+    color: #F2F2F2;
+
+}
