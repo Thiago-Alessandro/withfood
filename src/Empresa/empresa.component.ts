@@ -1,10 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 
 interface Cardapio {
-    nomeEmpresa: string
-    itensCardapio: Item[]
-    categoria: string
-    avaliacao:number;
+    nomeEmpresa: string;
+    itensCardapio:Item[];
+    categoria: string;
+    mediaAvaliacao:number;
+    listaAvaliacao: number[];
 }
 
 interface Pedido {
@@ -68,6 +69,11 @@ export class EmpresaComponent implements OnInit {
     nomeItemAMudar: string;
     precoItemAMudar: number;
     ngOnInit(): void {
+        let pedidosConc = JSON.parse(localStorage.getItem('pedidosConcluidos'))
+        if(pedidosConc){
+            this.pedidosConcluidos = pedidosConc
+        }
+        
         this.logoLaranja = "./assets/imagens/logoLaranja.png"
         //console.log(this.recuperarCardapio())
         let cardapios = JSON.parse(localStorage.getItem('cardapios'))
@@ -81,7 +87,8 @@ export class EmpresaComponent implements OnInit {
                 nomeEmpresa: this.empresaLogada.nome,
                 itensCardapio: [],
                 categoria: "",
-                avaliacao: null
+                mediaAvaliacao: null,
+                listaAvaliacao: []
                 // CUIDADO COM O NULL
             }
 
@@ -211,10 +218,15 @@ verificarEmpresa(){
         // if(this.cardapioEmpresa.itensCardapio){
         //     this.empresaLogada.cardapio.itensCardapio = this.itensCardapio
         // }
+        console.log(this.cardapiosLista.indexOf(this.cardapioEmpresa))
         this.cardapiosLista.splice(this.cardapiosLista.indexOf(this.cardapioEmpresa), 1)
         this.cardapiosLista.push(this.cardapioEmpresa)
         localStorage.removeItem('cardapios')
         localStorage.setItem('cardapios', JSON.stringify(this.cardapiosLista))
+
+        this.novoItemNome = ""
+        this.novoItemPreco = null
+
     }
     removerAtributos(indice:number){
         this.cardapioEmpresa.itensCardapio.splice(indice,1)

@@ -1,12 +1,17 @@
 import { Component, OnInit } from "@angular/core";
 import { NgModel } from "@angular/forms";
+import { concat } from "rxjs";
 
 interface Cardapio {
     nomeEmpresa: string;
-    itensCardapio:string[];
+    itensCardapio:Item[];
     categoria: string;
-    avaliacao:number;
-    listaAvaliacao: number[];
+    mediaAvaliacao:number;
+    listaAvaliacao: Avaliacao[];
+}
+interface Avaliacao{
+    valor:number,
+    avaliador:Cliente
 }
 interface Cliente{
     nome:string,
@@ -45,8 +50,12 @@ clienteLogado: Cliente
 cardapiosLista:Cardapio[];
 nomeDaEmpresa: string;
 preco:number = 0;
+pesquisa: string;
+modoPesquisa: boolean  = false;
 
-
+pesquisar(){
+this.modoPesquisa = true
+}
 
 
 ngOnInit(): void {
@@ -76,6 +85,36 @@ pedido: Pedido = {
 item: Item = {
     nomeItem: '',
     precoItem: 0  
+  }
+
+  novaAvaliacaoValor:string = '';
+
+  avaliar(cardapio:Cardapio){
+    if(this.novaAvaliacaoValor){
+        let novaAvaliacao:Avaliacao = {
+            valor: (JSON.parse(this.novaAvaliacaoValor)),
+            avaliador:this.clienteLogado
+        }
+        let totalAvaliacao:number = 0;
+        let jaAvaliou:boolean = false
+
+        for(let avaliacao of cardapio.listaAvaliacao){
+           if(avaliacao.avaliador === this.clienteLogado && !jaAvaliou){
+                avaliacao.valor = novaAvaliacao.valor
+                jaAvaliou = true
+           }
+           totalAvaliacao += avaliacao.valor
+        }
+        if(!jaAvaliou){
+            cardapio.listaAvaliacao.push(novaAvaliacao)
+            totalAvaliacao+=novaAvaliacao.valor
+        }
+        cardapio.mediaAvaliacao = totalAvaliacao/cardapio.listaAvaliacao.length
+        this.novaAvaliacaoValor = ''
+
+        localStorage.setItem('cardapios', JSON.stringify(this.cardapiosLista))
+
+    }
   }
 
 mostraPedido(){

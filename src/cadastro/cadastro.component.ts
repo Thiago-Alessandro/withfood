@@ -109,6 +109,10 @@ export class CadastroComponent implements OnInit{
 
     selecionarCadastroEmpresa():void{
 
+        if(this.cadastrandoCliente){
+            this.limparCampos()
+        }
+
         this.cadastrandoCliente=false
         
         this.cabecalhoEmpresa.className = 'cabecalhoSelecionado'
@@ -116,12 +120,13 @@ export class CadastroComponent implements OnInit{
 
         this.cabecalhoCliente.className = 'cabecalhoNaoSelecionado'
         this.textoCabecalhoCliente.className = 'cabecalhoNaoSelecionado'
-
-        this.limparCampos()
     }
 
     selecionarCadastroCliente():void{
 
+        if(!this.cadastrandoCliente){
+            this.limparCampos()
+        }
         this.cadastrandoCliente=true
 
         this.cabecalhoCliente.className = 'cabecalhoSelecionado'
@@ -129,8 +134,6 @@ export class CadastroComponent implements OnInit{
 
         this.cabecalhoEmpresa.className = 'cabecalhoNaoSelecionado'
         this.textoCabecalhoEmpresa.className = 'cabecalhoNaoSelecionado'
-
-        this.limparCampos()
     }
 
     verificarEmpresaCadastravel():boolean{

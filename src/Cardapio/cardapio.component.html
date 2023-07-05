@@ -1,75 +1,116 @@
-<body >
- 
-<div class="openPedido"*ngIf="aberto">
-    <div style="display: flex;justify-content: end;">
-        <button class="escondePedido"
-            (click)="escondePedido()">X</button>
-    </div>
-    <div style="display: flex;justify-content: center; margin-top: 30px;">
-        <h1 style="color: #F05D23; font-weight: bold; font-size: 30px;"><strong> Seu pedido:</strong></h1>
-    </div>
-    <div *ngFor="let item of itensPedido;index as indice">
-        <p>{{item.nomeItem}}</p>
-        <p>{{item.precoItem}}</p>
-    </div>
-    
-    <div style="display: flex; flex-direction: row; justify-content: center;">
-        <p style="margin-right: 100px; color: #F05D23;"><strong>PRODUTO</strong> </p>
-        <p style="color: #F05D23;"><strong>R$</strong></p>
-    </div>
-    <button (click)="cadastraPedido()">Confirmar pedido</button>
-    <h5>{{calculaPreco()}}</h5>
-</div>
-<div class="inicioCardapio">
-    <div style="display: flex;align-items: center;">
-           <h6 style="margin-right: 4px;">Filtrar por</h6>
-    </div>
-    <div>
-    <select [(ngModel)]="categoriaFiltro" class="select" style="margin-right: 50px;">
-        <option value="Pizzas">Pizzas</option>
-        <option value="Lanches">Lanches</option>
-        <option value="Massas">Massas</option>
-        <option value="Doces">Doces</option>
-        <option value="Prato feito">Prato feito</option>    
-        <option value="Bebidas">Bebidas</option>    
-        <option value="Tudo" selected >Sem filtro</option>    
-      </select>
-    </div>
-    <div>
-    <button (click)="mostraPedido()">Mostrar Carrinho</button>
+<body>
 
-</div>
-</div>
-<div class="mainCardapio">
-    <div  *ngFor="let cardapio of cardapiosLista;index as indice" class="leftMainCardapio">
-        <!-- <div *ngFor="let cardapio of cardapios"> -->
-        <details class="abreCardapio"*ngIf="indice%2==0 && categoriaFiltro == cardapio.categoria || categoriaFiltro=='Tudo'">
-            <summary class="quadradoCardapio">{{cardapio.nomeEmpresa}}</summary>
-            <p *ngFor="let item of cardapio.itensCardapio;index as indice;" class="escritaItem">{{item.nomeItem}} R$ {{item.precoItem}}
-                 <button (click)="adicionaItens(item, cardapio.nomeEmpresa)">Add</button>
-                 <button (click)="removeItens(item)">Remove</button></p>
-                 <p>Avalie o cardápio: </p> 
-    <select class="select" [(ngModel)]="cardapio.avaliacao">
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-    </select>
-    <button (click)="avaliar(cardapio)">Enviar avaliação</button>
-        </details>
-        <!-- </div> -->
+    <div class="openPedido" *ngIf="aberto">
+        <div style="display: flex;justify-content: end;">
+            <button class="escondePedido" (click)="escondePedido()">X</button>
+        </div>
+        <div style="display: flex;justify-content: center; margin-top: 30px;">
+            <h1 style="color: #F05D23; font-weight: bold; font-size: 30px;"><strong> Seu pedido:</strong></h1>
+        </div>
+        <div *ngFor="let item of itensPedido;index as indice">
+            <p>{{item.nomeItem}}</p>
+            <p>{{item.precoItem}}</p>
+        </div>
+
+        <div style="display: flex; flex-direction: row; justify-content: center;">
+            <p style="margin-right: 100px; color: #F05D23;"><strong>PRODUTO</strong> </p>
+            <p style="color: #F05D23;"><strong>R$</strong></p>
+        </div>
+        <button (click)="cadastraPedido()">Confirmar pedido</button>
+        <h5>{{calculaPreco()}}</h5>
     </div>
-    <div class="rightMainCardapio">
-        <div *ngFor="let cardapio of cardapiosLista;index as indice">
-        <details class="abreCardapio" *ngIf="indice%2!=0 && categoriaFiltro == cardapio.categoria || categoriaFiltro=='Tudo'">
-            <summary class="quadradoCardapio">Ta calma fofa?</summary>
-            <!-- *ngFor="let item of itensCardapio; index as indice" {{item}} -->
-            <p class="escritaItem">batata frita <button (click)="adicionaItens(item, cardapio)">+</button>
-                <button (click)="removeItens(item)">-</button> </p>
-        </details>
+    <div class="inicioCardapio">
+        <div style="display: flex;align-items: center;">
+            <h6 style="margin-right: 4px;">Filtrar por</h6>
+            <input type="text" [(ngModel)]="pesquisa">
+            <button (click)="pesquisar()">Pesquisar</button>
+        </div>
+        <div>
+            <select [(ngModel)]="categoriaFiltro" (click)="modoPesquisa=false"class="select" style="margin-right: 50px;">
+                <option value="Pizzas">Pizzas</option>
+                <option value="Lanches">Lanches</option>
+                <option value="Massas">Massas</option>
+                <option value="Doces">Doces</option>
+                <option value="Prato feito">Prato feito</option>
+                <option value="Bebidas">Bebidas</option>
+                <option value="Tudo" selected>Sem filtro</option>
+            </select>
+        </div>
+        <div>
+            <button (click)="mostraPedido()">Mostrar Carrinho</button>
+
         </div>
     </div>
+    <div class="mainCardapio" *ngIf="!modoPesquisa">
+        <div *ngFor="let cardapio of cardapiosLista;index as indice" class="leftMainCardapio">
+            <!-- <div *ngFor="let cardapio of cardapios"> -->
+            <details class="abreCardapio"
+                *ngIf="indice%2==0 && categoriaFiltro == cardapio.categoria || indice%2==0 &&  categoriaFiltro=='Tudo'">
+                <summary class="quadradoCardapio">{{cardapio.nomeEmpresa}}</summary>
+                <p *ngFor="let item of cardapio.itensCardapio;index as indice;" class="escritaItem">{{item.nomeItem}} R$
+                    {{item.precoItem}}
+                    <button (click)="adicionaItens(item, cardapio.nomeEmpresa)">Add</button>
+                    <button (click)="removeItens(item)">Remove</button>
+                </p>
+                <p>Avalie o cardápio: </p>
+                <select class="select" [(ngModel)]="novaAvaliacaoValor">
+                    <option value=1>1</option>
+                    <option value=2>2</option>
+                    <option value=3>3</option>
+                    <option value=4>4</option>
+                    <option value=5>5</option>
+                </select>
+                <button (click)="avaliar(cardapio)">Enviar avaliação</button>
+                <p>{{cardapio.mediaAvaliacao}}</p>
+            </details>
+            <!-- </div> -->
+        </div>
+        <div class="rightMainCardapio">
+            <div *ngFor="let cardapio of cardapiosLista;index as indice">
+                <details class="abreCardapio"
+                    *ngIf="indice%2!=0 && categoriaFiltro == cardapio.categoria || indice%2!=0 && categoriaFiltro=='Tudo'">
+                    <summary class="quadradoCardapio">{{cardapio.nomeEmpresa}}</summary>
+                    <p *ngFor="let item of cardapio.itensCardapio;index as indice;" class="escritaItem">{{item.nomeItem}} R$
+                        {{item.precoItem}}
+                        <button (click)="adicionaItens(item, cardapio.nomeEmpresa)">Add</button>
+                        <button (click)="removeItens(item)">Remove</button>
+                    </p>
+                    <p>Avalie o cardápio: </p>
+                    <select class="select" [(ngModel)]="novaAvaliacaoValor">
+                        <option value=1>1</option>
+                        <option value=2>2</option>
+                        <option value=3>3</option>
+                        <option value=4>4</option>
+                        <option value=5>5</option>
+                    </select>
+                    <button (click)="avaliar(cardapio)">Enviar avaliação</button>
+                    <p>{{cardapio.mediaAvaliacao}}</p>
+                </details>
+            </div>
+        </div>
+    </div>
+<div *ngIf="modoPesquisa">
+    <div *ngFor="let cardapio of cardapiosLista;index as indice">
+        <div *ngIf="cardapio.nomeEmpresa == pesquisa">
+            <details class="abreCardapio">
+            <summary class="quadradoCardapio">{{cardapio.nomeEmpresa}}</summary>
+            <p *ngFor="let item of cardapio.itensCardapio;index as indice;" class="escritaItem">{{item.nomeItem}} R$
+                {{item.precoItem}}
+                <button (click)="adicionaItens(item, cardapio.nomeEmpresa)">Add</button>
+                <button (click)="removeItens(item)">Remove</button>
+            </p>
+            <p>Avalie o cardápio: </p>
+            <select class="select" [(ngModel)]="novaAvaliacaoValor">
+                <option value=1>1</option>
+                <option value=2>2</option>
+                <option value=3>3</option>
+                <option value=4>4</option>
+                <option value=5>5</option>
+            </select>
+            <button (click)="avaliar(cardapio)">Enviar avaliação</button>
+            <p>{{cardapio.mediaAvaliacao}}</p>
+        </details>
+    </div>
 </div>
-   
+</div>
 </body>
