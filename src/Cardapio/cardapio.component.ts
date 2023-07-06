@@ -27,7 +27,7 @@ interface Pedido {
     itens: Item[];
     endereco: string;
     nomeCliente: string;
-    nomeEmpresa: string;
+    //nomeEmpresa: string;
     status:string;
     precoTotal:number;
     horaAtual:Date;
@@ -35,6 +35,7 @@ interface Pedido {
 interface Item {
     nomeItem:string;
     precoItem:number;
+    nomeEmpresa:string
 }
 @Component({
     selector: "app-cardapio",
@@ -65,14 +66,16 @@ constructor(
 ){}
 
 ngOnInit(): void {
-    const logado = this.criptografiaService.descriptografar(localStorage.getItem('logado'));
+    const logado = JSON.parse(this.criptografiaService.descriptografar(localStorage.getItem('logado')));
     if(logado){
-        this.clienteLogado = JSON.parse(logado);
-        this.usuarioLogadoCliente = true
+        this.clienteLogado = logado;
+        if(logado.cpf){
+            this.usuarioLogadoCliente = true
+        }
     }
-    const cardapios = this.criptografiaService.descriptografar(localStorage.getItem('cardapios'));
+    const cardapios = JSON.parse(this.criptografiaService.descriptografar(localStorage.getItem('cardapios')));
     if(cardapios){
-        this.cardapiosLista = JSON.parse(cardapios);
+        this.cardapiosLista = cardapios;
     }
 
 }
@@ -88,14 +91,15 @@ pedido: Pedido = {
     itens: null,
     endereco: '',
     nomeCliente: '',
-    nomeEmpresa: '',
+   // nomeEmpresa: '',
     status: 'Em espera',
     precoTotal:0,
     horaAtual: new Date()
   }
 item: Item = {
     nomeItem: '',
-    precoItem: 0  
+    precoItem: 0,
+    nomeEmpresa: ''
   }
 
   novaAvaliacaoValor:string = '';
@@ -147,7 +151,7 @@ adicionaItens(item:Item, nomeEmpresaCardapio: string){
     return
     }
     alert("faça login como um cliente para fazer pedidos")
-    location.replace('http://localhost:4200/Login')
+    // location.replace('http://localhost:4200/Login')
 }
 removeItens(item: Item){
 this.itensPedido.splice(this.itensPedido.indexOf(item),1);
@@ -160,7 +164,7 @@ cadastraPedido(){
         itens: this.itensPedido,
         endereco: this.clienteLogado.endereco,
         nomeCliente: this.clienteLogado.nome,
-        nomeEmpresa: this.nomeDaEmpresa,
+       // nomeEmpresa: this.nomeDaEmpresa,
         status: 'A fazer',
         precoTotal: this.calculaPreco(),
         horaAtual: new Date()

@@ -4,18 +4,17 @@ import { Component, Input, OnInit } from "@angular/core";
 import { CriptografiaService } from "src/services/criptografia.service";
 interface Pedido {
     itens: Item[];
-    endereco: string
-    nomeCliente: string
-    nomeEmpresa: string
-    status: string
-    precoTotal: number
-    horaAtual: Date;
+    endereco: string;
+    nomeCliente: string;
+    //nomeEmpresa: string;
+    status:string;
+    precoTotal:number;
+    horaAtual:Date;
 }
-
-
 interface Item {
-    nomeItem: string;
-    precoItem: number;
+    nomeItem:string;
+    precoItem:number;
+    nomeEmpresa:string
 }
 
 interface Cliente{

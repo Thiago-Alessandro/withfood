@@ -11,18 +11,17 @@ interface Cardapio {
 
 interface Pedido {
     itens: Item[];
-    endereco: string
-    nomeCliente: string
-    nomeEmpresa: string
-    status: string
-    precoTotal: number
-    horaAtual: Date;
+    endereco: string;
+    nomeCliente: string;
+    //nomeEmpresa: string;
+    status:string;
+    precoTotal:number;
+    horaAtual:Date;
 }
-
-
 interface Item {
-    nomeItem: string;
-    precoItem: number;
+    nomeItem:string;
+    precoItem:number;
+    nomeEmpresa:string
 }
 interface Empresa {
     nome: string,
@@ -112,17 +111,30 @@ export class EmpresaComponent implements OnInit {
         }
 
         this.pedidosLista = []; // setar p n duplicar qnd roda dnv
-        let pedidos = JSON.parse(this.criptografiaService.descriptografar(localStorage.getItem('pedidos')))
+        let pedidos:Pedido[] = JSON.parse(this.criptografiaService.descriptografar(localStorage.getItem('pedidos')))
         if (pedidos) {//verifica se n ta nulo
             console.log("entrei no if")
             for (let pedido of pedidos) {//passa por cada um
-                console.log("entrei no for")
-                console.log(pedido.nomeEmpresa)
-                if (pedido.nomeEmpresa == this.empresaLogada.nome) {//verifica se o pedido é dessa empresa logada msm
-                    console.log("entrei no if da empresa")
-                    console.log(pedido)
-                    this.pedidosLista.push(pedido)  //adiciona na lista
-                }
+                console.log("entrei no for pedido")
+               // console.log(pedido.nomeEmpresa)
+               let pedidoDessaEmpressa:Pedido={
+                   itens: [],
+                   endereco: pedido.endereco,
+                   nomeCliente: pedido.nomeCliente,
+                   status: pedido.status,
+                   precoTotal: 0,
+                   horaAtual: pedido.horaAtual
+               }
+               for(let item of pedido.itens){
+                    let valorTotalPedido:number = 0
+                   if (item.nomeEmpresa == this.empresaLogada.nome) {//verifica se o item no pedido é dessa empresa logada msm
+                       console.log("entrei no if do item da empresa")
+                       console.log(pedido)
+                       valorTotalPedido+=item.precoItem
+                       pedidoDessaEmpressa.itens.push(item)
+                   }
+               }
+               this.pedidosLista.push(pedidoDessaEmpressa)  //adiciona na lista
             }
         }
 
@@ -162,24 +174,25 @@ verificarEmpresa(){
     atualizarAtributos() {
         let itemMudanca: Item = {
             nomeItem: this.nomeItemAMudar,
-            precoItem: this.precoItemAMudar
+            precoItem: this.precoItemAMudar,
+            nomeEmpresa: this.empresaLogada.nome
         }
         if (itemMudanca.nomeItem != '' && itemMudanca.precoItem != null) {
             console.log("entrei no if ")
-            console.log("item da mudança aqui")
-            console.log(itemMudanca)
-            console.log("Mostrando itens do cardapio")
-            console.log(this.cardapioEmpresa.itensCardapio)
+            // console.log("item da mudança aqui")
+            // console.log(itemMudanca)
+            // console.log("Mostrando itens do cardapio")
+            // console.log(this.cardapioEmpresa.itensCardapio)
             this.cardapioEmpresa.itensCardapio.splice(this.indiceMudancaAtributo, 1);
             this.cardapioEmpresa.itensCardapio.push(itemMudanca);
-            console.log("Mostrando itens do cardapio depois de colocar de novo")
-            console.log(this.cardapioEmpresa.itensCardapio)
-            console.log("Mostrando lista de cardapios antes de tirar")
-            console.log(this.cardapiosLista)
+            // console.log("Mostrando itens do cardapio depois de colocar de novo")
+            // console.log(this.cardapioEmpresa.itensCardapio)
+            // console.log("Mostrando lista de cardapios antes de tirar")
+            // console.log(this.cardapiosLista)
             this.cardapiosLista.splice(this.cardapiosLista.indexOf(this.cardapioEmpresa), 1)
             this.cardapiosLista.push(this.cardapioEmpresa)
-            console.log("Mostrando lista de cardapios depois de tirar e colocar de novo")
-            console.log(this.cardapiosLista)
+            // console.log("Mostrando lista de cardapios depois de tirar e colocar de novo")
+            // console.log(this.cardapiosLista)
             localStorage.removeItem('cardapios')
             // p remover n precisa (des)criptografar né?
             localStorage.setItem('cardapios', this.criptografiaService.criptografar(JSON.stringify(this.cardapiosLista)))
@@ -219,7 +232,8 @@ verificarEmpresa(){
 
         let novoItem: Item = {
             nomeItem: this.novoItemNome,
-            precoItem: this.novoItemPreco
+            precoItem: this.novoItemPreco,
+            nomeEmpresa: this.empresaLogada.nome
         }
 
         console.log(this.cardapioEmpresa)

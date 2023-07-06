@@ -3,18 +3,17 @@ import { CriptografiaService } from "src/services/criptografia.service";
 //import { Console } from "console";
 interface Pedido {
     itens: Item[];
-    endereco: string
-    nomeCliente: string
-    nomeEmpresa: string
-    status: string
-    precoTotal: number
-    horaAtual: Date;
+    endereco: string;
+    nomeCliente: string;
+    //nomeEmpresa: string;
+    status:string;
+    precoTotal:number;
+    horaAtual:Date;
 }
-
-
 interface Item {
-    nomeItem: string;
-    precoItem: number;
+    nomeItem:string;
+    precoItem:number;
+    nomeEmpresa:string
 }
 
 interface Cliente{
@@ -163,7 +162,6 @@ export class CadastroComponent implements OnInit{
     cadastrarEmpresa():void{
 
         if (this.verificarEmpresaCadastravel()){
-            alert(this.verificarCamposPreenchidosEmpresa());
             
             if(this.verificarCamposPreenchidosEmpresa()){
                 if(this.verificarSenhaConfirmada(this.senha, this.confirmacaoSenha)){
@@ -198,7 +196,7 @@ export class CadastroComponent implements OnInit{
                 }
             }else{
             this.preenchido = false;
-            alert('OS CAMPOS N TAO PREENCHIDOS AMIGAO')
+            alert('Preencha todos os campos!')
             }
     } else {
         this.cnpj = ''
