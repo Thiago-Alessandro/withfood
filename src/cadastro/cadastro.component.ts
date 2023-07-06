@@ -314,4 +314,11 @@ export class CadastroComponent implements OnInit{
     redirecionarParaEmpresa(){
         window.location.replace('http://localhost:4200/Empresa')
     }
+
+    criptografar(stringACriptografar:string){
+
+        stringACriptografar.split('')
+
+    }
+
 }
