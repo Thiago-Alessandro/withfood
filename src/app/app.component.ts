@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CriptografiaService } from 'src/services/criptografia.service';
 interface Cliente{
   nome:string,
   email:string,
@@ -33,12 +34,19 @@ export class AppComponent implements OnInit {
     logado:Empresa|Cliente = null;
     abreLogout: boolean = false;
 
+  constructor(
+    private criptografarService:CriptografiaService
+  ){}
+
   ngOnInit(): void {
       this.logoLaranja = "./assets/imagens/logoLaranja.png"
       this.logoPequena = './assets/imagens/logoPequena.svg'
       this.email = "./assets/imagens/email.svg"
-      let login = localStorage.getItem('logado');
-      this.logado = JSON.parse(login);
+      let login = this.criptografarService.descriptografar( localStorage.getItem('logado'));
+      if(login){
+        this.logado = JSON.parse(login);  
+      }
+      // this.logado = JSON.parse(login);
   }
 sair(){
   localStorage.removeItem('logado')

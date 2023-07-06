@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
+import { CriptografiaService } from "src/services/criptografia.service";
 //import { Console } from "console";
 interface Pedido {
     itens: Item[];
@@ -44,6 +45,10 @@ interface Empresa{
 })
 
 export class CadastroComponent implements OnInit{
+
+    constructor(
+        private criptografiaService:CriptografiaService
+    ){}
 
     clientesLista:Cliente[]=[]
     empresasLista:Empresa[]=[]
@@ -96,12 +101,12 @@ export class CadastroComponent implements OnInit{
         this.cabecalhoCliente.className = 'cabecalhoSelecionado'
         this.textoCabecalhoCliente.className = 'cabecalhoSelecionado'
 
-        let clientes = localStorage.getItem('clientes')
+        let clientes = this.criptografiaService.descriptografar(localStorage.getItem('clientes'))
         if(clientes){
             this.clientesLista =JSON.parse(clientes)
         }
 
-        let empresas = localStorage.getItem('empresas')
+        let empresas = this.criptografiaService.descriptografar(localStorage.getItem('empresas'))
         if(empresas){
             this.empresasLista = JSON.parse(empresas)
         }
@@ -177,7 +182,7 @@ export class CadastroComponent implements OnInit{
 
                     this.empresasLista.push(empresaCadastrada)
 
-                    localStorage.setItem("empresas", JSON.stringify(this.empresasLista))
+                    localStorage.setItem("empresas", this.criptografiaService.criptografar(JSON.stringify(this.empresasLista)))
 
                     this.confirmaSenha = true;
                     this.preenchido = true;
@@ -221,7 +226,7 @@ export class CadastroComponent implements OnInit{
 
                     this.clientesLista.push(clienteCadastrado)
 
-                    localStorage.setItem("clientes",JSON.stringify(this.clientesLista))
+                    localStorage.setItem("clientes", this.criptografiaService.criptografar(JSON.stringify(this.clientesLista)))
 
                     this.limparCampos()
 
@@ -313,12 +318,6 @@ export class CadastroComponent implements OnInit{
     }
     redirecionarParaEmpresa(){
         window.location.replace('http://localhost:4200/Empresa')
-    }
-
-    criptografar(stringACriptografar:string){
-
-        stringACriptografar.split('')
-
     }
 
 }

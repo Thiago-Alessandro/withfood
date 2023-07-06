@@ -40,11 +40,11 @@
                 <option value="Doces">Doces</option>
                 <option value="Prato feito">Prato feito</option>
                 <option value="Bebidas">Bebidas</option>
-                <option value="Tudo" selected>Sem filtro</option>
+                <option value="Tudo" selected>Todos</option>
             </select>
         </div>
         <div>
-            <button class="btn-search cursor-pointer" (click)="mostraPedido()">Mostrar Carrinho</button>
+            <button *ngIf="usuarioLogadoCliente" class="btn-search cursor-pointer" (click)="mostraPedido()">Mostrar Carrinho</button>
         </div>
         <div style="display: flex; align-items: center;flex-direction: row; justify-content: center;">
             <input placeholder="Encontre sua empresa favorita"

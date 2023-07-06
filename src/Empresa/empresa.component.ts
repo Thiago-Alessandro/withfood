@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { CriptografiaService } from "src/services/criptografia.service";
 
 interface Cardapio {
     nomeEmpresa: string;
@@ -68,20 +69,28 @@ export class EmpresaComponent implements OnInit {
     // }
     nomeItemAMudar: string;
     precoItemAMudar: number;
+
+    constructor(
+        private criptografiaService: CriptografiaService
+    ){}
+
     ngOnInit(): void {
-        let pedidosConc = JSON.parse(localStorage.getItem('pedidosConcluidos'))
+        let pedidosConc = JSON.parse(this.criptografiaService.descriptografar(localStorage.getItem('pedidosConcluidos')))
         if(pedidosConc){
+            
             this.pedidosConcluidos = pedidosConc
         }
         
         this.logoLaranja = "./assets/imagens/logoLaranja.png"
         //console.log(this.recuperarCardapio())
-        let cardapios = JSON.parse(localStorage.getItem('cardapios'))
+        let cardapios:Cardapio[]=[]
+        console.log(localStorage.getItem('cardapios'))
+        cardapios = JSON.parse(this.criptografiaService.descriptografar(localStorage.getItem('cardapios')))
         if (cardapios) {
             this.cardapiosLista = cardapios
         }
-        if (JSON.parse(localStorage.getItem('logado'))) {
-            this.empresaLogada = JSON.parse(localStorage.getItem('logado'))
+        if (JSON.parse(this.criptografiaService.descriptografar(localStorage.getItem('logado')))) {
+            this.empresaLogada = JSON.parse(this.criptografiaService.descriptografar(localStorage.getItem('logado')))
 
             this.cardapioEmpresa = {
                 nomeEmpresa: this.empresaLogada.nome,
@@ -103,7 +112,7 @@ export class EmpresaComponent implements OnInit {
         }
 
         this.pedidosLista = []; // setar p n duplicar qnd roda dnv
-        let pedidos = JSON.parse(localStorage.getItem('pedidos'))
+        let pedidos = JSON.parse(this.criptografiaService.descriptografar(localStorage.getItem('pedidos')))
         if (pedidos) {//verifica se n ta nulo
             console.log("entrei no if")
             for (let pedido of pedidos) {//passa por cada um
@@ -133,10 +142,10 @@ export class EmpresaComponent implements OnInit {
                 this.pedidosConcluidos.splice(0,1)
             }
             this.pedidosConcluidos.push(pedidoMuda)
-            localStorage.setItem("pedidosConcluidos", JSON.stringify(this.pedidosConcluidos))
+            localStorage.setItem("pedidosConcluidos",this.criptografiaService.criptografar(JSON.stringify(this.pedidosConcluidos)))
      this.pedidosLista.splice(this.pedidosLista.indexOf(pedidoMuda),1)
         }
-        localStorage.setItem('pedidos', JSON.stringify(this.pedidosLista))
+        localStorage.setItem('pedidos', this.criptografiaService.criptografar(JSON.stringify(this.pedidosLista)))
     }
 
 
@@ -172,7 +181,8 @@ verificarEmpresa(){
             console.log("Mostrando lista de cardapios depois de tirar e colocar de novo")
             console.log(this.cardapiosLista)
             localStorage.removeItem('cardapios')
-            localStorage.setItem('cardapios', JSON.stringify(this.cardapiosLista))
+            // p remover n precisa (des)criptografar né?
+            localStorage.setItem('cardapios', this.criptografiaService.criptografar(JSON.stringify(this.cardapiosLista)))
             this.editar = false;
             this.indiceMudancaAtributo = null;
             this.itemEditando = null;
@@ -234,7 +244,7 @@ verificarEmpresa(){
         
         console.log("this.cardapiosLista")
         console.log(this.cardapiosLista)
-        localStorage.setItem('cardapios', JSON.stringify(this.cardapiosLista))
+        localStorage.setItem('cardapios', this.criptografiaService.criptografar(JSON.stringify(this.cardapiosLista)))
 
         this.novoItemNome = ""
         this.novoItemPreco = null
@@ -245,6 +255,7 @@ verificarEmpresa(){
         this.cardapiosLista.splice(this.cardapiosLista.indexOf(this.cardapioEmpresa), 1)
         this.cardapiosLista.push(this.cardapioEmpresa)
         localStorage.removeItem('cardapios')
-        localStorage.setItem('cardapios', JSON.stringify(this.cardapiosLista))
+        localStorage.setItem('cardapios', this.criptografiaService.criptografar(JSON.stringify(this.cardapiosLista)))
     }
+
 }

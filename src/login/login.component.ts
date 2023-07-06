@@ -1,6 +1,7 @@
 
 import { JsonPipe } from "@angular/common";
 import { Component, Input, OnInit } from "@angular/core";
+import { CriptografiaService } from "src/services/criptografia.service";
 interface Pedido {
     itens: Item[];
     endereco: string
@@ -55,13 +56,17 @@ export class LoginComponent implements OnInit{
     
     @Input() logado:Empresa|Cliente = null
 
+    constructor(
+        private criptografiaService: CriptografiaService
+    ){}
+
     ngOnInit():void{
-        let clientes = localStorage.getItem('clientes')
+        let clientes = this.criptografiaService.descriptografar(localStorage.getItem('clientes'))
         if(clientes){
             this.clientesLista = JSON.parse(clientes)
         }
 
-        let empresas = localStorage.getItem('empresas')
+        let empresas = this.criptografiaService.descriptografar(localStorage.getItem('empresas'))
         if(empresas){
             this.empresasLista = JSON.parse(empresas)
         }
@@ -73,14 +78,14 @@ export class LoginComponent implements OnInit{
             for(let empresa of this.empresasLista){
                 if(empresa.email == this.email && empresa.senha == this.senha){
                     this.logado = empresa
-                    localStorage.setItem('logado',JSON.stringify(this.logado));
+                    localStorage.setItem('logado', this.criptografiaService.criptografar(JSON.stringify(this.logado)));
                     window.location.replace("http://localhost:4200/Empresa")
                 }
             }
             for(let cliente of this.clientesLista){
                 if(cliente.email == this.email && cliente.senha == this.senha){
                     this.logado = cliente
-                    localStorage.setItem('logado',JSON.stringify(this.logado));
+                    localStorage.setItem('logado', this.criptografiaService.criptografar(JSON.stringify(this.logado)));
                     window.location.replace("http://localhost:4200/Cardapio")
                 }      
             }

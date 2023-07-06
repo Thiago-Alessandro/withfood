@@ -9,6 +9,7 @@ import { LoginModule } from 'src/login/login.module';
 import { CardapioModule } from 'src/Cardapio/cardapio.module';
 import { EmpresaModule } from 'src/Empresa/empresa.module';
 import { AuthguardService } from 'src/services/auth-guard.service';
+import { CriptografiaService } from 'src/services/criptografia.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,10 @@ import { AuthguardService } from 'src/services/auth-guard.service';
     EmpresaModule
 
   ],
-  providers: [AuthguardService],
+  providers: [
+    AuthguardService,
+    CriptografiaService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

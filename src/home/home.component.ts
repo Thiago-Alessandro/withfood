@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { CriptografiaService } from "src/services/criptografia.service";
 
 @Component({
     selector:"app-home",
@@ -8,13 +9,16 @@ import { Component, OnInit } from "@angular/core";
 
 export class HomeComponent implements OnInit{
 
-    
     logoBranca:string;
     logoLaranja:string;
     garfoFaca: string;
     logoPequena: string
     email: string
     booleanEmpresa: boolean;
+
+    constructor(
+        private criptografiaService:CriptografiaService
+    ){}
 
     ngOnInit(): void {
         this.logoPequena = './assets/imagens/logoPequena.svg'
@@ -31,7 +35,7 @@ export class HomeComponent implements OnInit{
     redirecionarParaCadastro(numero:number){
         if(numero==1){
             this.booleanEmpresa = true;
-        localStorage.setItem('booleanAba', JSON.stringify(this.booleanEmpresa));
+        localStorage.setItem('booleanAba',this.criptografiaService.criptografar(JSON.stringify(this.booleanEmpresa)));
         window.location.replace('http://localhost:4200/Cadastro')
     } else {
         window.location.replace('http://localhost:4200/Cadastro')
@@ -42,5 +46,6 @@ export class HomeComponent implements OnInit{
     }
     redirecionarParaEmpresa(){
         window.location.replace('http://localhost:4200/Empresa')
-    }
+    }    
+
 }
