@@ -5,23 +5,27 @@
             <button class="escondePedido" (click)="escondePedido()">X</button>
         </div>
         <div style="display: flex;justify-content: center; margin-top: 30px;">
-            <h1 style="color: #F05D23; font-weight: bold; font-size: 30px; margin-bottom: 20px;"><strong> Seu pedido:</strong></h1>
+            <h1 style="color: #F05D23; font-weight: bold; font-size: 30px; margin-bottom: 20px;"><strong> Seu
+                    pedido:</strong></h1>
         </div>
         <div style="display: flex; flex-direction: row; justify-content: space-evenly;">
             <p style="color: #F05D23;"><strong>PRODUTO</strong> </p>
             <p style="color: #F05D23;"><strong>R$</strong></p>
         </div>
-        <div *ngFor="let item of itensPedido;index as indice" style="display: flex; flex-direction: column; padding-top: 10px;">
-            <div style="display: flex; flex-direction: row;; justify-content: space-evenly; border-bottom: solid 1px  #F05D23;">
-            <p style=" color: #F05D23;">{{item.nomeItem}}</p>
-            <p style="color: #F05D23;" >{{item.precoItem}}</p>
+        <div *ngFor="let item of itensPedido;index as indice"
+            style="display: flex; flex-direction: column; padding-top: 10px;">
+            <div
+                style="display: flex; flex-direction: row;; justify-content: space-evenly; border-bottom: solid 1px  #F05D23;">
+                <p style=" color: #F05D23;">{{item.nomeItem}}</p>
+                <p style="color: #F05D23;">{{item.precoItem}}</p>
+            </div>
         </div>
-        </div>
-        <p style="display: flex; align-items: center; justify-content: center; margin: 10px; color: #F05D23;"><b> Total: R$ {{calculaPreco()}} </b></p>
+        <p style="display: flex; align-items: center; justify-content: center; margin: 10px; color: #F05D23;"><b> Total:
+                R$ {{calculaPreco()}} </b></p>
 
         <div style="display: flex; justify-content: center;">
-        <button class="btn-pedido cursor-pointer" (click)="cadastraPedido()"><b>Confirmar pedido</b></button>
-    </div>
+            <button class="btn-pedido cursor-pointer" (click)="cadastraPedido()"><b>Confirmar pedido</b></button>
+        </div>
     </div>
     <div class="inicioCardapio">
         <div style="display: flex;align-items: center;">
@@ -43,7 +47,9 @@
             <button class="btn-search cursor-pointer" (click)="mostraPedido()">Mostrar Carrinho</button>
         </div>
         <div style="display: flex; align-items: center;flex-direction: row; justify-content: center;">
-            <input placeholder="Encontre sua empresa favorita" style="padding: 10px; margin-top: 22px;margin-left: 20px;margin-right: 5px;   border-radius: 3px; width: 225px; height: 30px;" type="text" [(ngModel)]="pesquisa">
+            <input placeholder="Encontre sua empresa favorita"
+                style="padding: 10px; margin-top: 22px;margin-left: 20px;margin-right: 5px;   border-radius: 3px; width: 225px; height: 30px;"
+                type="text" [(ngModel)]="pesquisa">
             <button class="btn-search cursor-pointer" (click)="pesquisar()">Pesquisar</button>
         </div>
 
@@ -55,13 +61,16 @@
                 *ngIf="indice%2==0 && categoriaFiltro == cardapio.categoria || indice%2==0 &&  categoriaFiltro=='Tudo'">
                 <summary class="quadradoCardapio cursor-pointer">{{cardapio.nomeEmpresa}}</summary>
                 <p *ngFor="let item of cardapio.itensCardapio;index as indice;" class="escritaItem">{{item.nomeItem}}
-                   -  R$ {{item.precoItem}}
-                    <button class="opt-item cursor-pointer" (click)="adicionaItens(item, cardapio.nomeEmpresa)" style="margin-right: 15px;">Add</button>
+                    - R$ {{item.precoItem}}
+                    <button class="opt-item cursor-pointer" (click)="adicionaItens(item, cardapio.nomeEmpresa)"
+                        style="margin-right: 15px;">Add</button>
                     <button class="opt-item cursor-pointer" (click)="removeItens(item)">Remove</button>
                 </p>
-                <p  style="color: #F2F2F2;display: flex; justify-content: center;padding: 5px;"><b>Avalie o cardápio: </b> </p>
-               
-                <div style="display: flex; justify-content: center; align-items: center; flex-direction: row; padding: 5px">
+                <p style="color: #F2F2F2;display: flex; justify-content: center;padding: 5px;"><b>Avalie o cardápio:
+                    </b> </p>
+
+                <div
+                    style="display: flex; justify-content: center; align-items: center; flex-direction: row; padding: 5px">
                     <select class="selectCardapio cursor-pointer" [(ngModel)]="novaAvaliacaoValor">
                         <option value=1>1</option>
                         <option value=2>2</option>
@@ -69,9 +78,11 @@
                         <option value=4>4</option>
                         <option value=5>5</option>
                     </select>
-                <button class="opt-item cursor-pointer" (click)="avaliar(cardapio)" style="width: 150px; ">Enviar avaliação</button>
-            </div>
-            <p style="color: #F2F2F2; display: flex; justify-content: center; padding: 5px;"><b>Nota média: {{cardapio.mediaAvaliacao}}</b></p>
+                    <button class="opt-item cursor-pointer" (click)="avaliar(cardapio)" style="width: 150px; ">Enviar
+                        avaliação</button>
+                </div>
+                <p style="color: #F2F2F2; display: flex; justify-content: center; padding: 5px;"><b>Nota média:
+                        {{cardapio.mediaAvaliacao}}</b></p>
             </details>
             <!-- </div> -->
         </div>
@@ -80,14 +91,18 @@
                 <details class="abreCardapio"
                     *ngIf="!indice%2==0 && categoriaFiltro == cardapio.categoria || !indice%2==0 && categoriaFiltro=='Tudo'">
                     <summary class="quadradoCardapio cursor-pointer">{{cardapio.nomeEmpresa}}</summary>
-                    <p *ngFor="let item of cardapio.itensCardapio;index as indice;" class="escritaItem">{{item.nomeItem}}
-                       -  R$ {{item.precoItem}}
-                        <button class="opt-item cursor-pointer" (click)="adicionaItens(item, cardapio.nomeEmpresa)" style="margin-right: 15px;">Add</button>
+                    <p *ngFor="let item of cardapio.itensCardapio;index as indice;" class="escritaItem">
+                        {{item.nomeItem}}
+                        - R$ {{item.precoItem}}
+                        <button class="opt-item cursor-pointer" (click)="adicionaItens(item, cardapio.nomeEmpresa)"
+                            style="margin-right: 15px;">Add</button>
                         <button class="opt-item cursor-pointer" (click)="removeItens(item)">Remove</button>
                     </p>
-                    <p  style="color: #F2F2F2;display: flex; justify-content: center;padding: 5px;"><b>Avalie o cardápio: </b> </p>
-                   
-                    <div style="display: flex; justify-content: center; align-items: center; flex-direction: row; padding: 5px">
+                    <p style="color: #F2F2F2;display: flex; justify-content: center;padding: 5px;"><b>Avalie o cardápio:
+                        </b> </p>
+
+                    <div
+                        style="display: flex; justify-content: center; align-items: center; flex-direction: row; padding: 5px">
                         <select class="selectCardapio cursor-pointer" [(ngModel)]="novaAvaliacaoValor">
                             <option value=1>1</option>
                             <option value=2>2</option>
@@ -95,27 +110,33 @@
                             <option value=4>4</option>
                             <option value=5>5</option>
                         </select>
-                    <button class="opt-item cursor-pointer" (click)="avaliar(cardapio)" style="width: 150px; ">Enviar avaliação</button>
-                </div>
-                <p style="color: #F2F2F2; display: flex; justify-content: center; padding: 5px;"><b>Nota média: {{cardapio.mediaAvaliacao}}</b></p>
+                        <button class="opt-item cursor-pointer" (click)="avaliar(cardapio)"
+                            style="width: 150px; ">Enviar avaliação</button>
+                    </div>
+                    <p style="color: #F2F2F2; display: flex; justify-content: center; padding: 5px;"><b>Nota média:
+                            {{cardapio.mediaAvaliacao}}</b></p>
                 </details>
             </div>
         </div>
     </div>
-    <div *ngIf="modoPesquisa" style="background-color: #EFEFE9; height: 100vh;" >
+    <div *ngIf="modoPesquisa" style="background-color: #EFEFE9; height: 100vh;">
         <div *ngFor="let cardapio of cardapiosLista;index as indice">
             <div *ngIf="cardapio.nomeEmpresa == pesquisa"
                 style="display: flex; align-items: center;justify-content: center;">
                 <details class="abreCardapio">
                     <summary class="quadradoCardapio cursor-pointer">{{cardapio.nomeEmpresa}}</summary>
-                    <p *ngFor="let item of cardapio.itensCardapio;index as indice;" class="escritaItem">{{item.nomeItem}}
-                       -  R$ {{item.precoItem}}
-                        <button class="opt-item cursor-pointer" (click)="adicionaItens(item, cardapio.nomeEmpresa)" style="margin-right: 15px;">Add</button>
+                    <p *ngFor="let item of cardapio.itensCardapio;index as indice;" class="escritaItem">
+                        {{item.nomeItem}}
+                        - R$ {{item.precoItem}}
+                        <button class="opt-item cursor-pointer" (click)="adicionaItens(item, cardapio.nomeEmpresa)"
+                            style="margin-right: 15px;">Add</button>
                         <button class="opt-item cursor-pointer" (click)="removeItens(item)">Remove</button>
                     </p>
-                    <p  style="color: #F2F2F2;display: flex; justify-content: center;padding: 5px;"><b>Avalie o cardápio: </b> </p>
-                   
-                    <div style="display: flex; justify-content: center; align-items: center; flex-direction: row; padding: 5px">
+                    <p style="color: #F2F2F2;display: flex; justify-content: center;padding: 5px;"><b>Avalie o cardápio:
+                        </b> </p>
+
+                    <div
+                        style="display: flex; justify-content: center; align-items: center; flex-direction: row; padding: 5px">
                         <select class="selectCardapio cursor-pointer" [(ngModel)]="novaAvaliacaoValor">
                             <option value=1>1</option>
                             <option value=2>2</option>
@@ -123,9 +144,11 @@
                             <option value=4>4</option>
                             <option value=5>5</option>
                         </select>
-                    <button class="opt-item cursor-pointer" (click)="avaliar(cardapio)" style="width: 150px; ">Enviar avaliação</button>
-                </div>
-                <p style="color: #F2F2F2; display: flex; justify-content: center; padding: 5px;"><b>Nota média: {{cardapio.mediaAvaliacao}}</b></p>
+                        <button class="opt-item cursor-pointer" (click)="avaliar(cardapio)"
+                            style="width: 150px; ">Enviar avaliação</button>
+                    </div>
+                    <p style="color: #F2F2F2; display: flex; justify-content: center; padding: 5px;"><b>Nota média:
+                            {{cardapio.mediaAvaliacao}}</b></p>
                 </details>
             </div>
         </div>

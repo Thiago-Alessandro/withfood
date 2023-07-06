@@ -15,42 +15,56 @@
 
         <div *ngIf="!exibindoCardapio" class="pedidos-empresa">
             <div class="pedidos">
-                <p style="color: #F2F2F2;"><b>Bem vindo aos seus pedidos </b> </p>
+                <p style="color: #F2F2F2; display: flex; justify-content: center;
+                padding: 10px; align-items: center; font-size: 20px;"><b>Bem vindo aos seus pedidos </b> </p>
+                <div class="pedidosDiv">
+                    <div *ngFor="let pedido of pedidosLista" class="pedidosDivpeq">
+                        <div>
+                            <h6 style="color: #F05D23; font-size: 25px;">Produtos</h6>
+                            <div *ngFor="let item of pedido.itens">
+                                <p style="color: #F05D23;">{{item.nomeItem}}</p>
+                            </div>
+                            <p class="coisasPedido"> <strong>Endereço:</strong> {{pedido.endereco}}</p>
+                            <p class="coisasPedido"><strong>Nome do cliente:</strong> {{pedido.nomeCliente}}</p>
+                            <p class="coisasPedido"><strong>Hora do pedido:</strong> {{ pedido.horaAtual |
+                                date:'HH:mm:ss'
+                                }}</p>
+                            <p class="coisasPedido"><strong>Status do pedido:</strong> </p>
+                            <select [(ngModel)]="pedido.status" class="select" style="margin-right: 50px;">
+                                <option value="Em espera">Em espera</option>
+                                <option value="Em andamento">Em andamento</option>
+                                <option value="Entregando">Pedido enviado para Entrega</option>
+                                <option value="Concluido">Concluído</option>
+                            </select>
+                            <button class="button-add" (click)="alterarStatus(pedido)"
+                                style="background-color: #F05D23; height: 25px; color: #f2f2f2; width: 100px;">Alterar</button>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <DIV style="display: flex; align-items: center; justify-content: center; background-color: #EFEFE9;">
+                    <p style="color: #F05D23; display: flex; justify-content: center;
+                padding: 10px; align-items: center; font-size: 20px;"><b>Aqui estão seus ultimos pedidos concluídos:
+                        </b> </p>
+                </DIV>
+                <div class="pedidosDiv" style="background-color: #EFEFE9;">
 
-                <div *ngFor="let pedido of pedidosLista" style="border: 1px solid #f2f2f2;">
-                    <div>
+                    <div *ngFor="let pedido of pedidosConcluidos" class="pedidosDivpeq"
+                        style="background-color: #F05D23;">
+
                         <h6 style="color: #F2F2F2; font-size: 25px;">Produtos</h6>
                         <div *ngFor="let item of pedido.itens">
                             <p style="color: #F2F2F2;">{{item.nomeItem}}</p>
                         </div>
-                        <p class="coisasPedido"> <strong>Endereço:</strong> {{pedido.endereco}}</p>
-                        <p class="coisasPedido"><strong>Nome do cliente:</strong> {{pedido.nomeCliente}}</p>
-                        <p class="coisasPedido"><strong>Hora do pedido:</strong> {{ pedido.horaAtual | date:'HH:mm:ss'
-                            }}</p>
-                        <select [(ngModel)]="pedido.status" class="select" style="margin-right: 50px;">
-                            <option value="Em espera">Em espera</option>
-                            <option value="Em andamento">Em andamento</option>
-                            <option value="Entregando">Pedido enviado para Entrega</option>
-                            <option value="Concluido">Concluído</option>
-                        </select>
-                        <button class="button-add" (click)="alterarStatus(pedido)"
-                            style="background-color: #F2F2F2; height: 25px; color: #F05D23;">Alterar status</button>
+                        <p class="coisasPedido" style="color: #F2F2F2;"> <strong>Endereço:</strong> {{pedido.endereco}}
+                        </p>
+                        <p class="coisasPedido" style="color: #F2F2F2;"><strong>Nome do cliente:</strong>
+                            {{pedido.nomeCliente}}</p>
+                        <p class="coisasPedido" style="color: #F2F2F2;"><strong>Hora do pedido:</strong> {{
+                            pedido.horaAtual
+                            | date:'HH:mm:ss' }}</p>
+                        <p class="coisasPedido" style="color: #F2F2F2;"><strong>Status:</strong> {{ pedido.status}}</p>
                     </div>
-                </div>
-                <br>
-                <div *ngFor="let pedido of pedidosConcluidos"
-                    style="background-color: #f2f2f2; border: 1px solid #F05D23;">
-                    <p style="color: #F05D23;"><b>Aqui estão seus ultimos pedidos: </b> </p>
-                    <h6 style="color: #F05D23; font-size: 25px;">Produtos</h6>
-                    <div *ngFor="let item of pedido.itens">
-                        <p style="color: #F05D23;">{{item.nomeItem}}</p>
-                    </div>
-                    <p class="coisasPedido" style="color: #F05D23;"> <strong>Endereço:</strong> {{pedido.endereco}}</p>
-                    <p class="coisasPedido" style="color: #F05D23;"><strong>Nome do cliente:</strong>
-                        {{pedido.nomeCliente}}</p>
-                    <p class="coisasPedido" style="color: #F05D23;"><strong>Hora do pedido:</strong> {{ pedido.horaAtual
-                        | date:'HH:mm:ss' }}</p>
-                    <p class="coisasPedido" style="color: #F05D23;"><strong>Status:</strong> {{ pedido.status}}</p>
                 </div>
             </div>
         </div>

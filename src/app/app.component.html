@@ -7,27 +7,30 @@
         </strong></a>
     <a class="a-nav" (click)="redirecionarParaCardapio()"><strong style="background-color: #F05D23;"> Cardápio
         </strong></a>
-    <a class="a-nav" (click)="redirecionarParaLogin()" *ngIf="!logado"><strong style="background-color: #F05D23;"> Login </strong></a>
-    <a class="a-nav" (click)="abreLogout=true;" *ngIf="logado"><strong style="background-color: #F05D23;"> logout </strong></a>
+    <a class="a-nav" (click)="redirecionarParaLogin()" *ngIf="!logado"><strong style="background-color: #F05D23;"> Login
+        </strong></a>
+    <a class="a-nav" (click)="abreLogout=true;" *ngIf="logado"><strong style="background-color: #F05D23;"> logout
+        </strong></a>
 </nav>
-<div *ngIf="abreLogout" style="width: 200px;height: 70px; background-color: #F05D23; display: flex; flex-direction: row;">
-<div>
-    <p style="color:#F2F2F2">Deseja mesmo fazer logout? </p>
-</div>
-<div>
-    <button (click)="sair()">Sim</button>
-    <button (click)="abreLogout=false;">Não</button>
-</div>
+<div *ngIf="abreLogout"
+    style="width: 200px;height: 70px; background-color: #F05D23; display: flex; flex-direction: row; width: 100%; justify-content: center; padding: 10px;">
+    <div>
+        <p style="color:#F2F2F2; margin-right: 5px;"><b>Deseja mesmo fazer logout?</b> </p>
+    </div>
+    <div>
+        <button class="btnLogout" (click)="sair()">Sim</button>
+        <button class="btnLogout" (click)="abreLogout=false;">Não</button>
+    </div>
 </div>
 
-       <router-outlet></router-outlet>
+<router-outlet></router-outlet>
 <!-- 
 <
     <div class="footer" style="display: flex; height: 150px;">
         <div class="navFooter" style="display: flex; align-items: center;">
             <nav class="footer-nav" style="margin-top: 10px; margin-left: 30px; gap: 20px;">
                 <img [src]="logoLaranja" alt="" style="height: 65px;"> -->
-                <!-- <div>
+<!-- <div>
                     <a class="a-navFooter" (click)="redirecionarParaEmpresa()"><strong
                             style="background-color: #EFEFE9;"> Empresa
                         </strong></a>
@@ -39,7 +42,7 @@
                 <div>
                     <a class="a-navFooter" (click)="redirecionarParaLogin()"><strong
                             style="background-color: #EFEFE9; margin-right: 27px;"> Login -->
-                        <!-- </strong></a>
+<!-- </strong></a>
                     <a class="a-navFooter" (click)="redirecionarParaLogin()"><strong style="background-color: #EFEFE9;">
                             Home
                         </strong></a>
@@ -54,7 +57,7 @@
         <div class="emailFooter">
             <p style="color: #F05D23; font-weight: bold; margin-top: 30px;">Para receber as novidades </p>
             <div> -->
-                <!-- <input type="text" placeholder="Envie seu Email" style="width: 70%;  margin-top: 20px;">
+<!-- <input type="text" placeholder="Envie seu Email" style="width: 70%;  margin-top: 20px;">
                 <img [src]="email" alt="" style="width: 35px; height: 35px;">
             </div>
         </div>
