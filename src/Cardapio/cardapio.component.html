@@ -21,7 +21,7 @@
             </div>
         </div>
         <p style="display: flex; align-items: center; justify-content: center; margin: 10px; color: #F05D23;"><b> Total:
-                R$ {{calculaPreco()}} </b></p>
+                R$ {{calculaPreco(itensPedido)}} </b></p>
 
         <div style="display: flex; justify-content: center;">
             <button *ngIf="itensPedido.length>0" class="btn-pedido cursor-pointer" (click)="cadastraPedido()"><b>Confirmar pedido</b></button>

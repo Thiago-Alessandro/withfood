@@ -74,11 +74,6 @@ export class EmpresaComponent implements OnInit {
     ){}
 
     ngOnInit(): void {
-        let pedidosConc = JSON.parse(this.criptografiaService.descriptografar(localStorage.getItem('pedidosConcluidos')))
-        if(pedidosConc){
-            
-            this.pedidosConcluidos = pedidosConc
-        }
         
         this.logoLaranja = "./assets/imagens/logoLaranja.png"
         //console.log(this.recuperarCardapio())
@@ -100,7 +95,6 @@ export class EmpresaComponent implements OnInit {
                 // CUIDADO COM O NULL
             }
 
-
             console.log(this.cardapioEmpresa)
             if (this.recuperarCardapio()) {
                 this.cardapioEmpresa = this.recuperarCardapio()
@@ -108,6 +102,22 @@ export class EmpresaComponent implements OnInit {
             // if(this.empresaLogada.cardapio){
             // this.itensCardapio = this.empresaLogada.cardapio.itensCardapio
             // }
+        }
+
+        let pedidosConc:Pedido[] = JSON.parse(this.criptografiaService.descriptografar(localStorage.getItem('pedidosConcluidos')))
+        if(pedidosConc){
+            for(let pedido of pedidosConc ){
+                let isCardapioDessaEmpresa:boolean = false
+                for(let item of pedido.itens){
+                    if(item.nomeEmpresa == this.empresaLogada.nome){
+                        isCardapioDessaEmpresa = true
+                    }
+                }
+                if(isCardapioDessaEmpresa){
+                    this.pedidosConcluidos.push(pedido)
+                }
+            }
+            // this.pedidosConcluidos = pedidosConc
         }
 
         this.pedidosLista = []; // setar p n duplicar qnd roda dnv
@@ -155,7 +165,7 @@ export class EmpresaComponent implements OnInit {
             }
             this.pedidosConcluidos.push(pedidoMuda)
             localStorage.setItem("pedidosConcluidos",this.criptografiaService.criptografar(JSON.stringify(this.pedidosConcluidos)))
-     this.pedidosLista.splice(this.pedidosLista.indexOf(pedidoMuda),1)
+            this.pedidosLista.splice(this.pedidosLista.indexOf(pedidoMuda),1)
         }
         localStorage.setItem('pedidos', this.criptografiaService.criptografar(JSON.stringify(this.pedidosLista)))
     }

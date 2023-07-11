@@ -37,6 +37,19 @@ interface Item {
     precoItem:number;
     nomeEmpresa:string
 }
+
+interface Empresa {
+    nome: string,
+    email: string,
+    telefone: string,
+    cnpj: string,
+    senha: string,
+    numeroContaBancaria: string,
+    agencia: string,
+    nomeDoResponsavel: string
+    //cardapio    :Cardapio
+}
+
 @Component({
     selector: "app-cardapio",
     templateUrl: "./cardapio.component.html",
@@ -56,6 +69,8 @@ pesquisa: string;
 modoPesquisa: boolean  = false;
 categoriaFiltro: string = 'Tudo'
 usuarioLogadoCliente:boolean=false
+empresasLista:Empresa[]=[]
+
 
 pesquisar(){
 this.modoPesquisa = true
@@ -66,6 +81,10 @@ constructor(
 ){}
 
 ngOnInit(): void {
+    const empresas = JSON.parse(this.criptografiaService.descriptografar(localStorage.getItem('empresas')))
+    if(empresas){
+        this.empresasLista = empresas;
+    }
     const logado = JSON.parse(this.criptografiaService.descriptografar(localStorage.getItem('logado')));
     if(logado){
         this.clienteLogado = logado;
@@ -160,26 +179,36 @@ this.itensPedido.splice(this.itensPedido.indexOf(item),1);
 }
 
 cadastraPedido(){
-    const pedido: Pedido = {
-        itens: this.itensPedido,
-        endereco: this.clienteLogado.endereco,
-        nomeCliente: this.clienteLogado.nome,
-       // nomeEmpresa: this.nomeDaEmpresa,
-        status: 'A fazer',
-        precoTotal: this.calculaPreco(),
-        horaAtual: new Date()
-      }
-      this.pedidosLista.push(pedido);
+    for(let empresa of this.empresasLista){
+
+        let itensDessaEmpresa:Item[]=[]
+
+          for(let item of this.itensPedido){
+            if(item.nomeEmpresa === empresa.nome){
+                itensDessaEmpresa.push(item)
+            }
+          }
+          const pedidoDaEmpresa: Pedido = {
+            itens: itensDessaEmpresa,
+            endereco: this.clienteLogado.endereco,
+            nomeCliente: this.clienteLogado.nome,
+            // nomeEmpresa: this.nomeDaEmpresa,
+            status: 'A fazer',
+            precoTotal: this.calculaPreco(itensDessaEmpresa),
+            horaAtual: new Date()
+          }
+          this.pedidosLista.push(pedidoDaEmpresa);
+    }
       localStorage.setItem("pedidos", this.criptografiaService.criptografar(JSON.stringify(this.pedidosLista)));
       this.itensPedido = [];
       this.preco=0;
 }
-calculaPreco() : number{
+calculaPreco(itensPedidoLista:Item[]) : number{
     this.preco=0;
-if(this.itensPedido){
-    for(let i = 0; i <this.itensPedido.length;i++){
-        console.log(this.itensPedido[i].precoItem)
-        this.preco += this.itensPedido[i].precoItem;
+    if(this.itensPedido){
+    for(let i = 0; i <itensPedidoLista.length;i++){
+        console.log(itensPedidoLista[i].precoItem)
+        this.preco += itensPedidoLista[i].precoItem;
     }
 }
     return this.preco;
