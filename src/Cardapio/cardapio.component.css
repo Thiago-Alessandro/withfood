@@ -1,0 +1,118 @@
+.open-order {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 28%;
+    height: 100%;
+    background-color: #F2F2F2;
+    display: flex;
+    flex-direction: column;
+    -webkit-box-shadow: 3px 4px 20px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 3px 4px 20px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 3px 4px 20px 0px rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(5px);
+}
+
+.escondePedido {
+    display: flex;
+    margin: 20px;
+    position: absolute;
+    background-color: #F2F2F2;
+    border-radius: 5px;
+    color: #F05D23;
+    border: none;
+    font-size: 20px;
+}
+
+.quadradoCardapio {
+    background-color: #F05D23;
+    color: #F2F2F2;
+    width: 400px;
+    height: 40px;
+    border-radius: 5px 5px 5px 5px;
+    padding: 5px;
+
+}
+
+.mainCardapio {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    background-color: #EFEFE9;
+    height: 800px;
+    justify-content: center;
+}
+
+.leftMainCardapio,
+.rightMainCardapio {}
+
+.rightMainCardapio {
+    margin-left: 10px;
+    justify-content: left;
+}
+
+.abreCardapio {
+
+    background-color: #F05D23;
+    height: max-content;
+    border-radius: 5px;
+    align-items: center;
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+}
+
+.escritaItem {
+    color: #F2F2F2;
+    margin-bottom: 10px;
+    align-content: center;
+}
+
+.inicioCardapio {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: #EFEFE9;
+    padding-top: 20px;
+}
+
+.btn-pedido {
+    background-color: #F05D23;
+    color: #F2F2F2;
+    width: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    height: 30px;
+    border-radius: 5px;
+}
+
+.btn-search {
+    background-color: #F05D23;
+    color: #F2F2F2;
+    border: none;
+    width: 150px;
+    height: 25px;
+    border-radius: 5px;
+    padding: 2px;
+}
+
+.opt-item {
+    height: 20px;
+    background-color: #F2F2F2;
+    color: #F05D23;
+    font-weight: bold;
+    width: 70px;
+    border: none;
+    border-radius: 3px;
+}
+
+.selectCardapio {
+    border: none;
+    height: 20px;
+    background-color: #F2F2F2;
+    margin-right: 10px;
+    border-radius: 2px;
+}

@@ -53,7 +53,7 @@ interface Empresa {
 @Component({
     selector: "app-cardapio",
     templateUrl: "./cardapio.component.html",
-    //styleUrls: ["./cardapio.component.css"]
+    styleUrls: ["./cardapio.component.css"]
 })
 
 export class CardapioComponent implements OnInit  {

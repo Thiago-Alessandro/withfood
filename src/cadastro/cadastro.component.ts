@@ -6,152 +6,146 @@ interface Pedido {
     endereco: string;
     nomeCliente: string;
     //nomeEmpresa: string;
-    status:string;
-    precoTotal:number;
-    horaAtual:Date;
+    status: string;
+    precoTotal: number;
+    horaAtual: Date;
 }
 interface Item {
-    nomeItem:string;
-    precoItem:number;
-    nomeEmpresa:string
+    nomeItem: string;
+    precoItem: number;
+    nomeEmpresa: string
 }
 
-interface Cliente{
-    nome:string,
-    email:string,
-    telefone:string,
-    cpf:string,
-    senha:string,
-    endereco:string,
+interface Cliente {
+    nome: string,
+    email: string,
+    telefone: string,
+    cpf: string,
+    senha: string,
+    endereco: string,
     historico: Pedido[];
 }
 
-interface Empresa{
-    nome:string,
-    email:string,
-    telefone:string,
-    cnpj:string,
-    senha:string,
-    numeroContaBancaria:string,
-    agencia:string,
-    nomeDoResponsavel:string
+interface Empresa {
+    nome: string,
+    email: string,
+    telefone: string,
+    cnpj: string,
+    senha: string,
+    numeroContaBancaria: string,
+    agencia: string,
+    nomeDoResponsavel: string
 }
 
 @Component({
     selector: "app-cadastro",
-    templateUrl:'./cadastro.component.html',
-    styleUrls:['./cadastro.component.css']
+    templateUrl: './cadastro.component.html',
+    styleUrls: ['./cadastro.component.css']
 })
 
-export class CadastroComponent implements OnInit{
+export class CadastroComponent implements OnInit {
 
     constructor(
-        private criptografiaService:CriptografiaService
-    ){}
+        private criptografiaService: CriptografiaService
+    ) { }
 
-    clientesLista:Cliente[]=[]
-    empresasLista:Empresa[]=[]
-    preenchido:boolean = true;
+    clientesLista: Cliente[] = []
+    empresasLista: Empresa[] = []
+    preenchido: boolean = true;
     confirmaSenha: boolean = true;
-    // abaEmpresa: boolean;
 
-    //variaveis em comum Empresa  e Cliente
-    nome:string = ""
-    email:string = ""
-    telefone:string = ""
-    senha:string = ""
-    confirmacaoSenha:string = ""
+    /* Variáveis em comum Empresa  e Cliente */
+    nome: string = ""
+    email: string = ""
+    telefone: string = ""
+    senha: string = ""
+    confirmacaoSenha: string = ""
 
-    //variaveis exclusivas Cliente
-    cpf:string = ""
-    Endereco:string = ""
+    /* Variaveis exclusivas Cliente */
+    cpf: string = ""
+    Endereco: string = ""
 
-    //variaveis exclusivas Empresa
-    cnpj:string
-    numeroContaBancaria:string
-    agencia:string
-    nomeDoResponsavelDaEmpresa:string
+    /* Variáveis exclusivas Empresa */
+    cnpj: string
+    numeroContaBancaria: string
+    agencia: string
+    nomeDoResponsavelDaEmpresa: string
 
-    cadastrandoCliente:boolean = true
+    cadastrandoCliente: boolean = true
 
-   //pega a div com o #cabecalhoEmpresa e coloca numa variavel de mesmo nome
+    /* Identifica a div com o #cabecalhoEmpresa e coloca numa variavel */
     @ViewChild('cabecalhoEmpresa') cabecalhoEmpresa;
-    //inicia uma variavel que vai ter o texto do cabecalho (o elemento 'p' do html)
+    /*Inicializa uma variável que irá possuir o texto do cabecalho (o elemento 'p' do html)*/
     textoCabecalhoEmpresa;
 
+    /* Identifica a div com o #cabecalhoCliente e coloca numa variavel */
     @ViewChild('cabecalhoCliente') cabecalhoCliente;
+    /*Inicializa uma variável que irá possuir o texto do cabecalho (o elemento 'p' do html)*/
     textoCabecalhoCliente;
 
-    ngOnInit():void{
-        // let aba = localStorage.getItem('booleanAba');
-        // this.abaEmpresa =JSON.parse(aba);
-        // if(this.abaEmpresa ==  true){
-        //     console.log("entrei")
-        //     this.selecionarCadastroEmpresa()
-        // }
-        // console.log(this.abaEmpresa)
+    ngOnInit(): void {
         this.cabecalhoEmpresa = this.cabecalhoEmpresa.nativeElement
         this.textoCabecalhoEmpresa = this.cabecalhoEmpresa.children[0]
-        this.cabecalhoEmpresa.className = 'cabecalhoNaoSelecionado'
-        this.textoCabecalhoEmpresa.className = 'cabecalhoNaoSelecionado'
+        this.cabecalhoEmpresa.className = 'unselected-header'
+        this.textoCabecalhoEmpresa.className = 'unselected-header'
 
         this.cabecalhoCliente = this.cabecalhoCliente.nativeElement
         this.textoCabecalhoCliente = this.cabecalhoCliente.children[0]
-        this.cabecalhoCliente.className = 'cabecalhoSelecionado'
-        this.textoCabecalhoCliente.className = 'cabecalhoSelecionado'
+        this.cabecalhoCliente.className = 'selected-header'
+        this.textoCabecalhoCliente.className = 'selected-header'
 
         let clientes = this.criptografiaService.descriptografar(localStorage.getItem('clientes'))
-        if(clientes){
-            this.clientesLista =JSON.parse(clientes)
+        if (clientes) {
+            this.clientesLista = JSON.parse(clientes)
         }
 
         let empresas = this.criptografiaService.descriptografar(localStorage.getItem('empresas'))
-        if(empresas){
+        if (empresas) {
             this.empresasLista = JSON.parse(empresas)
         }
     }
 
-    selecionarCadastroEmpresa():void{
+    selecionarCadastroEmpresa(): void {
 
-        if(this.cadastrandoCliente){
+        if (this.cadastrandoCliente) {
             this.limparCampos()
         }
 
-        this.cadastrandoCliente=false
-        
-        this.cabecalhoEmpresa.className = 'cabecalhoSelecionado'
-        this.textoCabecalhoEmpresa.className = "cabecalhoSelecionado"
+        this.cadastrandoCliente = false
 
-        this.cabecalhoCliente.className = 'cabecalhoNaoSelecionado'
-        this.textoCabecalhoCliente.className = 'cabecalhoNaoSelecionado'
+        this.cabecalhoEmpresa.className = 'selected-header'
+        this.textoCabecalhoEmpresa.className = "selected-header"
+
+        this.cabecalhoCliente.className = 'unselected-header'
+        this.textoCabecalhoCliente.className = 'unselected-header'
     }
 
-    selecionarCadastroCliente():void{
+    selecionarCadastroCliente(): void {
 
-        if(!this.cadastrandoCliente){
+        if (!this.cadastrandoCliente) {
             this.limparCampos()
         }
-        this.cadastrandoCliente=true
+        this.cadastrandoCliente = true
 
-        this.cabecalhoCliente.className = 'cabecalhoSelecionado'
-        this.textoCabecalhoCliente.className = 'cabecalhoSelecionado'
+        this.cabecalhoCliente.className = 'selected-header'
+        this.textoCabecalhoCliente.className = 'selected-header'
 
-        this.cabecalhoEmpresa.className = 'cabecalhoNaoSelecionado'
-        this.textoCabecalhoEmpresa.className = 'cabecalhoNaoSelecionado'
+        this.cabecalhoEmpresa.className = 'unselected-header'
+        this.textoCabecalhoEmpresa.className = 'unselected-header'
     }
 
-    verificarEmpresaCadastravel():boolean{
-        for (let i=0; i<this.empresasLista.length;i++){
-            if (this.empresasLista.length>=1){
-                if (this.empresasLista[i].cnpj == this.cnpj){
-                    return false 
+    verificarEmpresaCadastravel(): boolean {
+        for (let i = 0; i < this.empresasLista.length; i++) {
+            if (this.empresasLista.length >= 1) {
+                if (this.empresasLista[i].cnpj == this.cnpj) {
+                    return false
                 }
-                if (this.empresasLista[i].email == this.email){
+                if (this.empresasLista[i].email == this.email) {
                     return false
                 }
             }
-            for(let cliente of this.clientesLista){
-                if(cliente.email == this.email){
+            for (let cliente of this.clientesLista) {
+                if (cliente.email == this.email) {
                     return false
                 }
             }
@@ -159,23 +153,23 @@ export class CadastroComponent implements OnInit{
         return true
     }
 
-    cadastrarEmpresa():void{
+    cadastrarEmpresa(): void {
 
-        if (this.verificarEmpresaCadastravel()){
-            
-            if(this.verificarCamposPreenchidosEmpresa()){
-                if(this.verificarSenhaConfirmada(this.senha, this.confirmacaoSenha)){
+        if (this.verificarEmpresaCadastravel()) {
 
-                    let empresaCadastrada:Empresa = {
-                        
-                        nome:this.nome,
-                        email:this.email,
-                        telefone:this.telefone,
-                        senha:this.senha,
-                        cnpj:this.cnpj,
-                        numeroContaBancaria:this.numeroContaBancaria,
-                        agencia:this.agencia,
-                        nomeDoResponsavel:this.nomeDoResponsavelDaEmpresa
+            if (this.verificarCamposPreenchidosEmpresa()) {
+                if (this.verificarSenhaConfirmada(this.senha, this.confirmacaoSenha)) {
+
+                    let empresaCadastrada: Empresa = {
+
+                        nome: this.nome,
+                        email: this.email,
+                        telefone: this.telefone,
+                        senha: this.senha,
+                        cnpj: this.cnpj,
+                        numeroContaBancaria: this.numeroContaBancaria,
+                        agencia: this.agencia,
+                        nomeDoResponsavel: this.nomeDoResponsavelDaEmpresa
                     }
 
                     this.empresasLista.push(empresaCadastrada)
@@ -189,36 +183,36 @@ export class CadastroComponent implements OnInit{
 
                     window.location.replace("http://localhost:4200/Login")
 
-                }else{
+                } else {
                     this.preenchido = true;
                     this.confirmaSenha = false;
                     this.confirmacaoSenha = ""
                 }
-            }else{
-            this.preenchido = false;
-            alert('Preencha todos os campos!')
+            } else {
+                this.preenchido = false;
+                alert('Preencha todos os campos!')
             }
-    } else {
-        this.cnpj = ''
-        this.email = ''
-        alert('CPF ou Email já foram cadastrados.')
+        } else {
+            this.cnpj = ''
+            this.email = ''
+            alert('CPF ou Email já foram cadastrados.')
+        }
     }
-}
-  
-    cadastrarCliente():void{
 
-        if (this.verificarClienteCadastravel()){
-            if(this.verificarCamposPreenchidosCliente()){
-                if(this.verificarSenhaConfirmada(this.senha,this.confirmacaoSenha)){
-                    
-                    let clienteCadastrado:Cliente = {
+    cadastrarCliente(): void {
 
-                        nome:this.nome,
-                        email:this.email,
-                        telefone:this.telefone,
-                        cpf:this.cpf,
-                        senha:this.senha,
-                        endereco:this.Endereco,
+        if (this.verificarClienteCadastravel()) {
+            if (this.verificarCamposPreenchidosCliente()) {
+                if (this.verificarSenhaConfirmada(this.senha, this.confirmacaoSenha)) {
+
+                    let clienteCadastrado: Cliente = {
+
+                        nome: this.nome,
+                        email: this.email,
+                        telefone: this.telefone,
+                        cpf: this.cpf,
+                        senha: this.senha,
+                        endereco: this.Endereco,
                         historico: []
                     }
 
@@ -232,12 +226,12 @@ export class CadastroComponent implements OnInit{
                     this.preenchido = true;
                     window.location.replace("http://localhost:4200/Login")
 
-                }else{
+                } else {
                     this.preenchido = true;
                     this.confirmaSenha = false;
                     this.confirmacaoSenha = ""
                 }
-            }else{
+            } else {
                 this.preenchido = false;
             }
         } else {
@@ -246,32 +240,31 @@ export class CadastroComponent implements OnInit{
             alert('CPF ou Email já foram cadastrados')
         }
     }
-    
-    verificarClienteCadastravel():boolean{
-        for (let i=0; i<this.clientesLista.length;i++){
-           if (this.clientesLista.length>=1){
-                if (this.clientesLista[i].cpf == this.cpf){
+
+    verificarClienteCadastravel(): boolean {
+        for (let i = 0; i < this.clientesLista.length; i++) {
+            if (this.clientesLista.length >= 1) {
+                if (this.clientesLista[i].cpf == this.cpf) {
                     return false
                 }
                 //console.log(this.clientesLista[i].email)
-                if (this.clientesLista[i].email == this.email){
+                if (this.clientesLista[i].email == this.email) {
                     return false
                 }
-        } 
-         for (let empresa of this.empresasLista){
-            if(empresa.email == this.email){
-                return false
             }
-         }
+            for (let empresa of this.empresasLista) {
+                if (empresa.email == this.email) {
+                    return false
+                }
+            }
         }
         return true
     }
 
-    limparCampos(){
+    limparCampos() {
         this.cpf = ""
         this.confirmacaoSenha = ""
         this.Endereco = ""
-
         this.nome = ""
         this.email = ""
         this.telefone = ""
@@ -282,39 +275,39 @@ export class CadastroComponent implements OnInit{
         this.nomeDoResponsavelDaEmpresa = ""
     }
 
-    verificarCamposPreenchidosCliente():boolean{
+    verificarCamposPreenchidosCliente(): boolean {
 
-        if(this.nome == "" || this.email == "" || this.telefone == "" ||
+        if (this.nome == "" || this.email == "" || this.telefone == "" ||
             this.cpf == "" || this.senha == "" || this.confirmacaoSenha == "" ||
-            this.Endereco == ""){
-                
+            this.Endereco == "") {
+
             return false
         }
         return true
     }
-    verificarCamposPreenchidosEmpresa():boolean{
-        if(this.nome == "" || this.email == "" || this.telefone == "" ||
-        this.cnpj == "" || this.senha == "" || this.confirmacaoSenha == "" ||
-        this.numeroContaBancaria == "" || this.agencia == "" || this.nomeDoResponsavelDaEmpresa == ""){
+    verificarCamposPreenchidosEmpresa(): boolean {
+        if (this.nome == "" || this.email == "" || this.telefone == "" ||
+            this.cnpj == "" || this.senha == "" || this.confirmacaoSenha == "" ||
+            this.numeroContaBancaria == "" || this.agencia == "" || this.nomeDoResponsavelDaEmpresa == "") {
             return false
         }
         return true
     }
 
-    verificarSenhaConfirmada(senha:string, confirmacao:string):boolean{//talve receber parametro
-        if(senha === confirmacao){
+    verificarSenhaConfirmada(senha: string, confirmacao: string): boolean {//talve receber parametro
+        if (senha === confirmacao) {
             return true
         }
         return false
     }
 
-    redirecionarParaLogin(){
+    redirecionarParaLogin() {
         window.location.replace('http://localhost:4200/Login')
     }
-    redirecionarParaCardapio(){
+    redirecionarParaCardapio() {
         window.location.replace('http://localhost:4200/Cardapio')
     }
-    redirecionarParaEmpresa(){
+    redirecionarParaEmpresa() {
         window.location.replace('http://localhost:4200/Empresa')
     }
 

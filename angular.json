@@ -72,7 +72,10 @@
             "tsConfig": "src/tsconfig.spec.json",
             "karmaConfig": "src/karma.conf.js",
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "src/cadastro/cadastro.component.css",
+              "src/login/login.component.css",
+              "src/cardapio/cardapio.component.css"
             ],
             "scripts": [],
             "assets": [

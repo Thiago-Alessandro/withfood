@@ -1,79 +1,76 @@
-
-<div style="background-color: #EFEFE9;">
-<div>
-    <h1 class="titleCadastro">Criar conta</h1>
-</div>
-<div id="bodyCadastro">
-
-    <div class="cabecalhoDoFormulario" style="display: flex;">
-        <div (click)="selecionarCadastroEmpresa()" #cabecalhoEmpresa>
-            <p>
-                Empresa
-            </p>
+<div class="all-content">
+    <div>
+        <h1 class="title-cadastro">Criar conta</h1>
+    </div>
+    <div>
+        <!-- Mecanismo de troca de cabeçalho -->
+        <div class="forms-header">
+            <div (click)="selecionarCadastroEmpresa()" #cabecalhoEmpresa>
+                <p>Empresa</p>
+            </div>
+            <div (click)="selecionarCadastroCliente()" #cabecalhoCliente>
+                <p>Cliente</p>
+            </div>
         </div>
-        <div (click)="selecionarCadastroCliente()" #cabecalhoCliente>
-            <p>
-                Cliente
-            </p>
+        <!-- Aba que serve para registrar um Cliente -->
+        <div class="client-register" *ngIf="cadastrandoCliente">
+            <div *ngIf="!preenchido">
+                <p>Por favor preencha todos os campos.</p>
+            </div>
+            <div *ngIf="!confirmaSenha">
+                <p>Sua confirmação de senha não confere.</p>
+            </div>
+            <!-- Lado esquerdo dos inputs -->
+            <div class="left-side">
+                <input class="input-register" type="text" placeholder="Nome" [(ngModel)]="nome">
+                <input class="input-register" type="text" placeholder="telefone" [(ngModel)]="telefone">
+                <input class="input-register" type="password" placeholder="Senha" [(ngModel)]="senha">
+                <input class="input-register" type="text" placeholder="Endereco" [(ngModel)]="Endereco">
+            </div>
+            <!-- Lado direito dos inputs -->
+            <div class="right-side">
+                <input class="input-register" type="text" placeholder="Email" [(ngModel)]="email">
+                <input class="input-register" type="text" placeholder="Cpf" [(ngModel)]="cpf">
+                <input class="input-register agenciaInput" type="password" placeholder="Confirmar Senha"
+                    [(ngModel)]="confirmacaoSenha">
+                <br>
+                <button class="register-button" (click)="cadastrarCliente()">Confirmar</button>
+            </div>
+
+            <div>
+            </div>
+        </div>
+        <!-- Aba que serve para registrar uma Empresa -->
+        <div class="enterprise-register" *ngIf="!cadastrandoCliente">
+            <div *ngIf="incadastravelEmpresa">
+                <p>CPF ou Email já foram cadastrados.</p>
+            </div>
+            <div *ngIf="!preenchido">
+                <p>Por favor preencha todos os campos.</p>
+            </div>
+            <div *ngIf="!confirmaSenha">
+                <p>Sua confirmação de senha não confere.</p>
+            </div>
+            <!-- Lado esquerdo dos inputs -->
+            <div class="left-side">
+                <input class="input-register" type="text" placeholder="Nome" [(ngModel)]="nome">
+                <input class="input-register" type="text" placeholder="telefone" [(ngModel)]="telefone">
+                <input class="input-register" type="password" placeholder="Senha" [(ngModel)]="senha">
+                <input class="input-register" type="text" placeholder="Numero da conta Bancária"
+                    [(ngModel)]="numeroContaBancaria">
+                <input class="input-register" type="text" placeholder="Nome do responsável"
+                    [(ngModel)]="nomeDoResponsavelDaEmpresa">
+            </div>
+            <!-- Lado direito dos inputs -->
+            <div class="right-side">
+                <input class="input-register" type="text" placeholder="Email" [(ngModel)]="email">
+                <input class="input-register" type="text" placeholder="Cnpj" [(ngModel)]="cnpj">
+                <input class="input-register" type="password" placeholder="Confirmar Senha"
+                    [(ngModel)]="confirmacaoSenha">
+                <input class="input-register agency-input" type="text" placeholder="Agencia" [(ngModel)]="agencia">
+                <br>
+                <button class="register-button" (click)="cadastrarEmpresa()">Confirmar</button>
+            </div>
         </div>
     </div>
-
-    <div class="mainCadastroCliente" *ngIf="cadastrandoCliente">
-        <!-- <div *ngIf="incadastravelCliente">
-<p>CPF ou Email já foram cadastrados.</p> -->
-        <!-- </div> -->
-        <div *ngIf="!preenchido">
-<p>Por favor preencha todos os campos.</p>
-        </div>
-        <div *ngIf="!confirmaSenha">
-<p>Sua confirmação de senha não confere.</p>
-        </div>
-        <div class="leftInputs">
-            <input class="inputCliente" type="text" placeholder="Nome" [(ngModel)]="nome">
-            <input class="inputCliente" type="text" placeholder="telefone" [(ngModel)]="telefone">
-            <input class="inputCliente" type="password" placeholder="Senha" [(ngModel)]="senha">
-            <input class="inputCliente" type="text" placeholder="Endereco" [(ngModel)]="Endereco">
-
-        </div>
-        <div class="rightInputs">
-            <input class="inputCliente" type="text" placeholder="Email" [(ngModel)]="email">
-            <input class="inputCliente" type="text" placeholder="Cpf" [(ngModel)]="cpf">
-            <input class="inputCliente agenciaInput" type="password" placeholder="Confirmar Senha" [(ngModel)]="confirmacaoSenha">
-            <br>
-            <button class="buttonCadastro" (click)="cadastrarCliente()">Confirmar</button>
-        </div>
-
-        <div>
-        </div>
-    </div>
-    <div class="mainCadastroEmpresa" *ngIf="!cadastrandoCliente">
-        <div *ngIf="incadastravelEmpresa">
-            <p>CPF ou Email já foram cadastrados.</p>
-                    </div>
-                    <div *ngIf="!preenchido">
-            <p>Por favor preencha todos os campos.</p>
-                    </div>
-                    <div *ngIf="!confirmaSenha">
-            <p>Sua confirmação de senha não confere.</p>
-                    </div>
-        <div class="leftInputs">
-
-            <input class="inputEmpresa" type="text" placeholder="Nome" [(ngModel)]="nome">
-            <input class="inputEmpresa" type="text" placeholder="telefone" [(ngModel)]="telefone">
-            <input class="inputEmpresa" type="password" placeholder="Senha" [(ngModel)]="senha">
-            <input class="inputEmpresa" type="text" placeholder="Numero da conta Bancária"
-                [(ngModel)]="numeroContaBancaria">
-            <input class="inputEmpresa" type="text" placeholder="Nome do responsável"
-                [(ngModel)]="nomeDoResponsavelDaEmpresa">
-        </div>
-        <div class="rightInputs">
-            <input class="inputEmpresa" type="text" placeholder="Email" [(ngModel)]="email">
-            <input class="inputEmpresa" type="text" placeholder="Cnpj" [(ngModel)]="cnpj">
-            <input class="inputEmpresa" type="password" placeholder="Confirmar Senha" [(ngModel)]="confirmacaoSenha">
-            <input class="inputEmpresa agenciaInput" type="text" placeholder="Agencia" [(ngModel)]="agencia">
-            <br>
-            <button class="buttonCadastro" (click)="cadastrarEmpresa()">Confirmar</button>
-        </div>
-    </div>
-</div>
 </div>

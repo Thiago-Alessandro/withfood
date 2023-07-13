@@ -1,6 +1,6 @@
 <body>
-
-    <div class="openPedido" *ngIf="aberto">
+<!-- Parte que possuí apenas o pedido -->
+    <div class="open-order" *ngIf="aberto">
         <div style="display: flex;justify-content: end;">
             <button class="escondePedido" (click)="escondePedido()">X</button>
         </div>
@@ -24,9 +24,11 @@
                 R$ {{calculaPreco(itensPedido)}} </b></p>
 
         <div style="display: flex; justify-content: center;">
-            <button *ngIf="itensPedido.length>0" class="btn-pedido cursor-pointer" (click)="cadastraPedido()"><b>Confirmar pedido</b></button>
+            <button *ngIf="itensPedido.length>0" class="btn-pedido cursor-pointer"
+                (click)="cadastraPedido()"><b>Confirmar pedido</b></button>
         </div>
     </div>
+    <!-- Parte destinada para o cabeçalho desta página -->
     <div class="inicioCardapio">
         <div style="display: flex;align-items: center;">
             <h6 style="margin-right: 4px;">Filtrar por</h6>
@@ -44,7 +46,8 @@
             </select>
         </div>
         <div>
-            <button *ngIf="usuarioLogadoCliente" class="btn-search cursor-pointer" (click)="mostraPedido()">Mostrar Carrinho</button>
+            <button *ngIf="usuarioLogadoCliente" class="btn-search cursor-pointer" (click)="mostraPedido()">Mostrar
+                Carrinho</button>
         </div>
         <div style="display: flex; align-items: center;flex-direction: row; justify-content: center;">
             <input placeholder="Encontre sua empresa favorita"
@@ -54,6 +57,7 @@
         </div>
 
     </div>
+    <!-- Parte em que ficam os cardápios em si -->
     <div class="mainCardapio" *ngIf="!modoPesquisa">
         <div *ngFor="let cardapio of cardapiosLista;index as indice" class="leftMainCardapio">
             <!-- <div *ngFor="let cardapio of cardapios"> -->
@@ -119,6 +123,7 @@
             </div>
         </div>
     </div>
+    <!-- Parte destinada a mostrar empresa por busca -->
     <div *ngIf="modoPesquisa" style="background-color: #EFEFE9; height: 100vh;">
         <div *ngFor="let cardapio of cardapiosLista;index as indice">
             <div *ngIf="cardapio.nomeEmpresa == pesquisa"
