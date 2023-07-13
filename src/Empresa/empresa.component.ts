@@ -1,46 +1,16 @@
 import { Component, OnInit } from "@angular/core";
+import { Cardapio } from "src/models/Cardapio";
+import { Empresa } from "src/models/Empresa";
+import { Item } from "src/models/Item";
+import { Pedido } from "src/models/Pedido";
 import { CriptografiaService } from "src/services/criptografia.service";
-
-interface Cardapio {
-    nomeEmpresa: string;
-    itensCardapio:Item[];
-    categoria: string;
-    mediaAvaliacao:number;
-    listaAvaliacao: number[];
-}
-
-interface Pedido {
-    itens: Item[];
-    endereco: string;
-    nomeCliente: string;
-    //nomeEmpresa: string;
-    status:string;
-    precoTotal:number;
-    horaAtual:Date;
-}
-interface Item {
-    nomeItem:string;
-    precoItem:number;
-    nomeEmpresa:string
-}
-interface Empresa {
-    nome: string,
-    email: string,
-    telefone: string,
-    cnpj: string,
-    senha: string,
-    numeroContaBancaria: string,
-    agencia: string,
-    nomeDoResponsavel: string
-    //cardapio    :Cardapio
-}
+import { LocalStorageService } from "src/services/local-storage.service";
 
 @Component({
     selector: "app-empresa",
     templateUrl: "./empresa.component.html",
     //styleUrls: ["./empresa.component.css"]
 })
-
 
 export class EmpresaComponent implements OnInit {
     logoLaranja: string;
@@ -70,22 +40,19 @@ export class EmpresaComponent implements OnInit {
     precoItemAMudar: number;
 
     constructor(
-        private criptografiaService: CriptografiaService
+        private criptografiaService: CriptografiaService,
+        private localStorageService:LocalStorageService
     ){}
 
     ngOnInit(): void {
         
-        this.logoLaranja = "./assets/imagens/logoLaranja.png"
+        this.logoLaranja = this.localStorageService.getLogoLaranja();
         //console.log(this.recuperarCardapio())
-        let cardapios:Cardapio[]=[]
-        console.log(localStorage.getItem('cardapios'))
-        cardapios = JSON.parse(this.criptografiaService.descriptografar(localStorage.getItem('cardapios')))
-        if (cardapios) {
-            this.cardapiosLista = cardapios
-        }
-        if (JSON.parse(this.criptografiaService.descriptografar(localStorage.getItem('logado')))) {
-            this.empresaLogada = JSON.parse(this.criptografiaService.descriptografar(localStorage.getItem('logado')))
 
+        this.cardapiosLista = this.localStorageService.getCardapios()
+        
+        this.empresaLogada = this.localStorageService.getEmpresaLogada();
+        if(this.empresaLogada){
             this.cardapioEmpresa = {
                 nomeEmpresa: this.empresaLogada.nome,
                 itensCardapio: [],

@@ -10,6 +10,7 @@ import { CardapioModule } from 'src/Cardapio/cardapio.module';
 import { EmpresaModule } from 'src/Empresa/empresa.module';
 import { AuthguardService } from 'src/services/auth-guard.service';
 import { CriptografiaService } from 'src/services/criptografia.service';
+import { LocalStorageService } from 'src/services/local-storage.service';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { CriptografiaService } from 'src/services/criptografia.service';
   ],
   providers: [
     AuthguardService,
-    CriptografiaService
+    CriptografiaService,
+    LocalStorageService
   ],
   bootstrap: [AppComponent]
 })

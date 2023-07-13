@@ -1,69 +1,53 @@
 import { Component, OnInit } from '@angular/core';
+import { Cliente } from 'src/models/Cliente';
+import { Empresa } from 'src/models/Empresa';
 import { CriptografiaService } from 'src/services/criptografia.service';
-interface Cliente{
-  nome:string,
-  email:string,
-  telefone:string,
-  cpf:string,
-  senha:string,
-  endereco:string
-}
+import { LocalStorageService } from 'src/services/local-storage.service';
 
-interface Empresa{
-  nome:string,
-  email:string,
-  telefone:string,
-  cnpj:string,
-  senha:string,
-  numeroContaBancaria:string,
-  agencia:string,
-  nomeDoResponsavel:string
-}
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent implements OnInit {
 
-
   title = 'withfood';
-  logoLaranja:string;
-    logoPequena:string;
-    email:string;
-    logado:Empresa|Cliente = null;
-    abreLogout: boolean = false;
+  logoLaranja: string;
+  logoPequena: string;
+  email: string;
+  logado: Empresa | Cliente = null;
+  abreLogout: boolean = false;
 
   constructor(
-    private criptografarService:CriptografiaService
-  ){}
+    private criptografarService: CriptografiaService,
+    private localStorageService: LocalStorageService
+  ) { }
 
   ngOnInit(): void {
-      this.logoLaranja = "./assets/imagens/logoLaranja.png"
-      this.logoPequena = './assets/imagens/logoPequena.svg'
-      this.email = "./assets/imagens/email.svg"
-      let login = this.criptografarService.descriptografar( localStorage.getItem('logado'));
-      if(login){
-        this.logado = JSON.parse(login);  
-      }
-      // this.logado = JSON.parse(login);
+    this.logoLaranja = this.localStorageService.getLogoLaranja()
+    this.logoPequena = this.localStorageService.getLogoPequena()
+    this.email = this.localStorageService.getImagemEmail()
+
+    this.logado = this.localStorageService.getUsuarioLogado()
   }
-sair(){
-  localStorage.removeItem('logado')
-this.logado= null;
-this.abreLogout = false;
-window.location.replace('http://localhost:4200/Home')
-}
-  redirecionarParaLogin(){
-    window.location.replace('http://localhost:4200/Login')
-}
-redirecionarParaHome(){
+  
+  sair() {
+    localStorage.removeItem('logado')
+    this.logado = null;
+    this.abreLogout = false;
     window.location.replace('http://localhost:4200/Home')
-}
-redirecionarParaCardapio(){
+  }
+  redirecionarParaLogin() {
+    window.location.replace('http://localhost:4200/Login')
+  }
+  redirecionarParaHome() {
+    window.location.replace('http://localhost:4200/Home')
+  }
+  redirecionarParaCardapio() {
     window.location.replace('http://localhost:4200/Cardapio')
-}
-redirecionarParaEmpresa(){
+  }
+  redirecionarParaEmpresa() {
     window.location.replace('http://localhost:4200/Empresa')
-}
+  }
 }

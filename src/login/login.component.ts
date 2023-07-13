@@ -1,42 +1,7 @@
-
-import { JsonPipe } from "@angular/common";
 import { Component, Input, OnInit } from "@angular/core";
+import { Cliente } from "src/models/Cliente";
+import { Empresa } from "src/models/Empresa";
 import { CriptografiaService } from "src/services/criptografia.service";
-interface Pedido {
-    itens: Item[];
-    endereco: string;
-    nomeCliente: string;
-    //nomeEmpresa: string;
-    status:string;
-    precoTotal:number;
-    horaAtual:Date;
-}
-interface Item {
-    nomeItem:string;
-    precoItem:number;
-    nomeEmpresa:string
-}
-
-interface Cliente{
-    nome:string,
-    email:string,
-    telefone:string,
-    cpf:string,
-    senha:string,
-    endereco:string,
-    historico: Pedido[];
-}
-
-interface Empresa{
-    nome:string,
-    email:string,
-    telefone:string,
-    cnpj:string,
-    senha:string,
-    numeroContaBancaria:string,
-    agencia:string,
-    nomeDoResponsavel:string
-}
 
 @Component({
     selector:'app-login',

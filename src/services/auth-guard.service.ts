@@ -1,44 +1,7 @@
 import { Injectable } from "@angular/core";
 import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot } from "@angular/router";
-import { Observable } from "rxjs";
-
-interface Pedido {
-    itens: Item[];
-    endereco: string
-    nomeCliente: string
-    nomeEmpresa: string
-    status: string
-    precoTotal: number
-    horaAtual: Date;
-}
-
-
-interface Item {
-    nomeItem: string;
-    precoItem: number;
-}
-
-interface Cliente{
-    nome:string,
-    email:string,
-    telefone:string,
-    cpf:string,
-    senha:string,
-    endereco:string,
-    historico: Pedido[];
-}
-
-interface Empresa {
-    nome: string,
-    email: string,
-    telefone: string,
-    cnpj: string,
-    senha: string,
-    numeroContaBancaria: string,
-    agencia: string,
-    nomeDoResponsavel: string
-    //cardapio    :Cardapio
-}
+import { Cliente } from "src/models/Cliente";
+import { Empresa } from "src/models/Empresa";
 
 @Injectable()
 export class AuthguardService implements CanActivate {

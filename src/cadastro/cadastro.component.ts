@@ -1,41 +1,8 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
+import { Cliente } from "src/models/Cliente";
+import { Empresa } from "src/models/Empresa";
 import { CriptografiaService } from "src/services/criptografia.service";
-//import { Console } from "console";
-interface Pedido {
-    itens: Item[];
-    endereco: string;
-    nomeCliente: string;
-    //nomeEmpresa: string;
-    status:string;
-    precoTotal:number;
-    horaAtual:Date;
-}
-interface Item {
-    nomeItem:string;
-    precoItem:number;
-    nomeEmpresa:string
-}
-
-interface Cliente{
-    nome:string,
-    email:string,
-    telefone:string,
-    cpf:string,
-    senha:string,
-    endereco:string,
-    historico: Pedido[];
-}
-
-interface Empresa{
-    nome:string,
-    email:string,
-    telefone:string,
-    cnpj:string,
-    senha:string,
-    numeroContaBancaria:string,
-    agencia:string,
-    nomeDoResponsavel:string
-}
+import { LocalStorageService } from "src/services/local-storage.service";
 
 @Component({
     selector: "app-cadastro",
@@ -46,7 +13,8 @@ interface Empresa{
 export class CadastroComponent implements OnInit{
 
     constructor(
-        private criptografiaService:CriptografiaService
+        private criptografiaService:CriptografiaService,
+        private localStorageService:LocalStorageService
     ){}
 
     clientesLista:Cliente[]=[]
@@ -100,15 +68,9 @@ export class CadastroComponent implements OnInit{
         this.cabecalhoCliente.className = 'cabecalhoSelecionado'
         this.textoCabecalhoCliente.className = 'cabecalhoSelecionado'
 
-        let clientes = this.criptografiaService.descriptografar(localStorage.getItem('clientes'))
-        if(clientes){
-            this.clientesLista =JSON.parse(clientes)
-        }
+        this.clientesLista = this.localStorageService.getClientes();
 
-        let empresas = this.criptografiaService.descriptografar(localStorage.getItem('empresas'))
-        if(empresas){
-            this.empresasLista = JSON.parse(empresas)
-        }
+        this.empresasLista = this.localStorageService.getEmpresas()
     }
 
     selecionarCadastroEmpresa():void{
